@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barbieri Tech | Especialistas Apple & Wearables Premium</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Encontre iPhones, Smartwatches, fones de ouvido e smartbands com o melhor preço e qualidade. Frete grátis para todo o Brasil e avaliação 5.0 no Google!">
+  <meta name="keywords" content="Apple, iPhone, Smartwatch, Fones, Smartbands, Barbieri Tech, Relógios Inteligentes, Frete Grátis">
+  <meta name="author" content="Barbieri Tech">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://barbieritech.com.br/">
+  <meta property="og:title" content="Barbieri Tech | Especialistas Apple & Wearables Premium">
+  <meta property="og:description" content="Seja bem-vindo ao mundo BarbieriTech. Somos uma loja especializada em produtos Apple, fones, smartbands, relógios inteligentes e celulares. Frete Grátis para todo o Brasil.">
+  <meta property="og:image" content="assets/smartwatch.png">
+
+  <!-- Icons & Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/5519991101326" class="whatsapp-float" target="_blank" rel="noopener noreferrer" id="btn-whatsapp-float" aria-label="Fale conosco no WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- HEADER -->
+  <header id="main-header">
+    <div class="container navbar">
+      <a href="#" class="logo" id="nav-logo">
+        <i class="fab fa-apple"></i> Barbieri <span>Tech</span>
+      </a>
+      
+      <nav class="nav-links" id="nav-menu">
+        <a href="#inicio" id="link-inicio">Início</a>
+        <a href="#produtos" id="link-produtos">Catálogo</a>
+        <a href="#sobre" id="link-sobre">Sobre Nós</a>
+        <a href="#contato" id="link-contato">Contato</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="cart-icon-btn" id="btn-cart-toggle" aria-label="Abrir carrinho de compras">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-count" id="cart-counter">0</span>
+        </button>
+        <a href="https://wa.me/5519991101326" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="btn-header-cta" style="padding: 0.6rem 1.3rem; font-size: 0.85rem;">
+          <i class="fab fa-whatsapp"></i> Falar no WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="inicio" style="background-image: linear-gradient(rgba(8, 8, 10, 0.9), rgba(8, 8, 10, 0.95)), url('assets/hero_bg.png'); background-size: cover; background-position: center;">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge-container">
+          <span class="badge badge-shipping" id="hero-badge-shipping">
+            <i class="fas fa-truck-moving"></i> Frete Grátis para todo o Brasil
+          </span>
+          <span class="badge badge-success" id="hero-badge-rating">
+            <i class="fas fa-star star-rating"></i> 5.0 no Google (270+ reviews)
+          </span>
+        </div>
+        <h1 class="hero-title" id="hero-heading">Conecte-se ao Futuro com a <span>Barbieri Tech</span></h1>
+        <p class="hero-desc" id="hero-paragraph">
+          Seja bem-vindo ao mundo BarbieriTech. Somos uma loja especializada em produtos Apple, fones, smartbands, relógios inteligentes e celulares de alta performance. Garanta o seu wearable com a maior autoridade do mercado.
+        </p>
+        <div class="hero-ctas">
+          <a href="#produtos" class="btn btn-primary" id="btn-hero-catalog">
+            <i class="fas fa-shopping-cart"></i> Ver Catálogo
+          </a>
+          <a href="https://wa.me/5519991101326" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="btn-hero-whatsapp">
+            <i class="fab fa-whatsapp"></i> Falar no WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="hero-image-wrapper">
+        <div class="hero-image-glow"></div>
+        <img src="assets/smartwatch.png" alt="Smartwatch Premium Barbieri Tech" class="hero-image" id="hero-img-display">
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF & STATS -->
+  <section class="social-proof" id="beneficios">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card" id="stat-rating">
+          <div class="stat-icon"><i class="fas fa-star-half-alt"></i></div>
+          <div class="stat-num">5.0 / 5.0</div>
+          <div class="stat-label">Google Avaliações (270+ clientes satisfeitos)</div>
+        </div>
+        <div class="stat-card" id="stat-shipping">
+          <div class="stat-icon"><i class="fas fa-truck"></i></div>
+          <div class="stat-num">R$ 0,00</div>
+          <div class="stat-label">Frete Grátis para todo o Brasil em todos os produtos</div>
+        </div>
+        <div class="stat-card" id="stat-support">
+          <div class="stat-icon"><i class="fas fa-headset"></i></div>
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Garantia oficial e suporte pós-venda humanizado</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS SECTION -->
+  <section class="products" id="produtos">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge badge-shipping" style="margin-bottom: 0.5rem;" id="catalog-badge">Nossos Destaques</span>
+        <h2 class="section-title" id="catalog-title">Tecnologia de Alta Performance</h2>
+        <p class="section-subtitle" id="catalog-subtitle">Escolha o seu novo parceiro de produtividade e treino. Clique no botão para adicionar ao carrinho.</p>
+      </div>
+
+      <div class="products-grid" id="catalog-grid">
+        <!-- Product 1: Smartwatch -->
+        <div class="product-card" id="prod-smartwatch">
+          <div class="product-img-container">
+            <span class="badge badge-shipping product-badge">Mais Vendido</span>
+            <img src="assets/smartwatch.png" alt="Smartwatch Ultra Premium" class="product-img">
+          </div>
+          <div class="product-info">
+            <span class="product-category">Smartwatches</span>
+            <h3 class="product-title">Smartwatch Ultra 9</h3>
+            <p class="product-desc">Monitoramento cardíaco, oxímetro, múltiplos modos de treino, notificações inteligentes e design esportivo impecável de titânio.</p>
+            <div class="product-price-row">
+              <span class="product-price-label">À vista ou Pix</span>
+              <div>
+                <span class="product-price original">R$ 599,00</span>
+                <span class="product-price">R$ 399,00</span>
+              </div>
+            </div>
+            <button class="btn btn-primary product-btn add-to-cart-btn" data-id="smartwatch-ultra-9" data-name="Smartwatch Ultra 9" data-price="399.00" data-img="assets/smartwatch.png">
+              <i class="fas fa-cart-plus"></i> Comprar Agora
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 2: iPhone -->
+        <div class="product-card" id="prod-iphone">
+          <div class="product-img-container">
+            <span class="badge badge-success product-badge" style="background-color: rgba(0, 113, 227, 0.1); color: var(--accent); border-color: rgba(0, 113, 227, 0.2);">Novidade</span>
+            <img src="assets/iphone.png" alt="iPhone 15 Pro Max Titanium" class="product-img">
+          </div>
+          <div class="product-info">
+            <span class="product-category">Celulares</span>
+            <h3 class="product-title">iPhone 15 Pro Max</h3>
+            <p class="product-desc">Estrutura em titânio azul espacial, chip A17 Pro de alto desempenho, câmera principal de 48MP e zoom óptico incrível de 5x.</p>
+            <div class="product-price-row">
+              <span class="product-price-label">À vista ou Pix</span>
+              <div>
+                <span class="product-price original">R$ 9.999,00</span>
+                <span class="product-price">R$ 8.499,00</span>
+              </div>
+            </div>
+            <button class="btn btn-primary product-btn add-to-cart-btn" data-id="iphone-15-pro-max" data-name="iPhone 15 Pro Max" data-price="8499.00" data-img="assets/iphone.png">
+              <i class="fas fa-cart-plus"></i> Comprar Agora
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 3: AirPods -->
+        <div class="product-card" id="prod-airpods">
+          <div class="product-img-container">
+            <img src="assets/airpods.png" alt="AirPods Max Premium" class="product-img">
+          </div>
+          <div class="product-info">
+            <span class="product-category">Fones de Ouvido</span>
+            <h3 class="product-title">AirPods Max Pro</h3>
+            <p class="product-desc">Áudio espacial dinâmico com rastreamento de cabeça, Cancelamento Ativo de Ruído (ANC) e almofadas de malha respirável de luxo.</p>
+            <div class="product-price-row">
+              <span class="product-price-label">À vista ou Pix</span>
+              <div>
+                <span class="product-price original">R$ 2.499,00</span>
+                <span class="product-price">R$ 1.899,00</span>
+              </div>
+            </div>
+            <button class="btn btn-primary product-btn add-to-cart-btn" data-id="airpods-max-pro" data-name="AirPods Max Pro" data-price="1899.00" data-img="assets/airpods.png">
+              <i class="fas fa-cart-plus"></i> Comprar Agora
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 4: Smartband -->
+        <div class="product-card" id="prod-smartband">
+          <div class="product-img-container">
+            <img src="assets/smartband.png" alt="Smartband Horizon" class="product-img">
+          </div>
+          <div class="product-info">
+            <span class="product-category">Wearables</span>
+            <h3 class="product-title">Smartband Horizon</h3>
+            <p class="product-desc">Pulseira inteligente ultraleve, bateria que dura até 14 dias, monitor de sono avançado e rastreamento de mais de 100 esportes.</p>
+            <div class="product-price-row">
+              <span class="product-price-label">À vista ou Pix</span>
+              <div>
+                <span class="product-price original">R$ 299,00</span>
+                <span class="product-price">R$ 199,00</span>
+              </div>
+            </div>
+            <button class="btn btn-primary product-btn add-to-cart-btn" data-id="smartband-horizon" data-name="Smartband Horizon" data-price="199.00" data-img="assets/smartband.png">
+              <i class="fas fa-cart-plus"></i> Comprar Agora
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT US & TESTIMONIALS -->
+  <section class="about" id="sobre">
+    <div class="container about-grid">
+      <div class="about-content">
+        <h2 id="about-heading">Sobre a Barbieri Tech</h2>
+        <p id="about-p1">
+          Nascida com a missão de aproximar os entusiastas de tecnologia dos melhores gadgets do mercado, a <strong>Barbieri Tech</strong> consolidou-se como referência na comercialização de produtos Apple, fones de ouvido e wearables premium.
+        </p>
+        <p id="about-p2">
+          Prezamos pela transparência, rapidez no envio e, acima de tudo, o suporte diferenciado. Com frete gratuito para todo o Brasil, levamos inovação e conveniência diretamente para a sua residência ou empresa, assegurando satisfação máxima de ponta a ponta.
+        </p>
+        
+        <div class="about-features">
+          <div class="about-feature-item" id="about-feat-shipping">
+            <div class="about-feature-icon"><i class="fas fa-truck-fast"></i></div>
+            <h3 class="about-feature-title">Envio Imediato</h3>
+            <p class="about-feature-desc">Seu pedido despachado com código de rastreamento no mesmo dia.</p>
+          </div>
+          <div class="about-feature-item" id="about-feat-stars">
+            <div class="about-feature-icon"><i class="fas fa-award"></i></div>
+            <h3 class="about-feature-title">Nota Máxima 5.0</h3>
+            <p class="about-feature-desc">Reconhecimento contínuo no Google por nossa honestidade e suporte.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-reviews-slider" id="about-reviews-container">
+        <div class="review-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="review-text" id="review-content">
+          "Atendimento espetacular da Barbieri Tech! O Smartwatch chegou super rápido aqui no RS, muito bem embalado e com frete totalmente grátis. A equipe respondeu todas as dúvidas no WhatsApp. Recomendo muito!"
+        </p>
+        <div class="review-author">
+          <div class="review-avatar" id="review-avatar-letters">TF</div>
+          <div class="review-author-info">
+            <h4 id="review-author-name">Thiago F.</h4>
+            <p id="review-author-meta">Cliente Verificado • Há 2 semanas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER & CONTACT -->
+  <footer id="contato">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo" style="margin-bottom: 1.5rem;">
+          <i class="fab fa-apple"></i> Barbieri <span>Tech</span>
+        </a>
+        <p class="footer-desc">
+          Especializada em produtos Apple, fones, smartbands, relógios inteligentes e celulares de alto padrão. Tecnologia com frete grátis nacional.
+        </p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="footer-social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="footer-social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-links-col">
+        <h3>Links Úteis</h3>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#produtos">Catálogo de Produtos</a></li>
+          <li><a href="#sobre">Sobre Nós</a></li>
+          <li><a href="https://wa.me/5519991101326" target="_blank" rel="noopener noreferrer">Fale Conosco</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col" style="display: flex; flex-direction: column;">
+        <h3>Contato & Horários</h3>
+        <div class="footer-status-badge">
+          <span id="status-badge" class="badge">
+            <span class="pulse-dot"></span> Verificando horário...
+          </span>
+        </div>
+        <div class="footer-contact-info">
+          <div class="footer-contact-item" id="contact-whatsapp">
+            <i class="fab fa-whatsapp footer-contact-icon"></i>
+            <div class="footer-contact-text">
+              <h4>WhatsApp</h4>
+              <p>(19) 99110-1326</p>
+            </div>
+          </div>
+          <div class="footer-contact-item" id="contact-hours">
+            <i class="far fa-clock footer-contact-icon"></i>
+            <div class="footer-contact-text">
+              <h4>Horário de Funcionamento</h4>
+              <p>Terça a Sábado: 09:00 às 18:00</p>
+            </div>
+          </div>
+          <div class="footer-contact-item" id="contact-email">
+            <i class="far fa-envelope footer-contact-icon"></i>
+            <div class="footer-contact-text">
+              <h4>E-mail Suporte</h4>
+              <p>contato@barbieritech.com.br</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p id="copyright-text">&copy; 2026 Barbieri Tech. Todos os direitos reservados. CNPJ: 00.000.000/0001-00</p>
+      <div class="footer-bottom-links">
+        <a href="#">Políticas de Privacidade</a>
+        <a href="#">Termos de Serviço</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART SIDEBAR DRAWER -->
+  <div class="cart-overlay" id="cart-bg-overlay"></div>
+  <div class="cart-drawer" id="cart-panel">
+    <div class="cart-header">
+      <h3><i class="fas fa-shopping-bag"></i> Seu Carrinho</h3>
+      <button class="cart-close-btn" id="btn-cart-close" aria-label="Fechar carrinho">&times;</button>
+    </div>
+    
+    <div class="cart-items-container" id="cart-list">
+      <!-- Dynamic Items will be rendered here -->
+      <div class="cart-empty-message">
+        <i class="fas fa-shopping-basket cart-empty-icon"></i>
+        <p>Seu carrinho está vazio.</p>
+        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Adicione produtos para finalizar seu pedido.</p>
+      </div>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-summary-row">
+        <span>Subtotal</span>
+        <span id="cart-subtotal">R$ 0,00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Frete</span>
+        <span class="badge badge-shipping" style="font-size: 0.7rem;">Grátis</span>
+      </div>
+      <div class="cart-summary-row total">
+        <span>Total</span>
+        <span id="cart-total-value">R$ 0,00</span>
+      </div>
+      <button class="btn btn-accent cart-checkout-btn" id="btn-cart-checkout">
+        <i class="fab fa-whatsapp"></i> Finalizar no WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -117,14 +117,143 @@
       <div class="section-header">
         <span class="badge badge-shipping" style="margin-bottom: 0.5rem;" id="catalog-badge">Nossos Destaques</span>
         <h2 class="section-title" id="catalog-title">Tecnologia de Alta Performance</h2>
-        <p class="section-subtitle" id="catalog-subtitle">Escolha o seu novo parceiro de produtividade e treino. Clique no botão para adicionar ao carrinho.</p>
+        <p class="section-subtitle" id="catalog-subtitle">Escolha a sua categoria premium. Clique em Configurar para escolher o modelo e finalizar no WhatsApp.</p>
       </div>
 
       <div class="products-grid" id="catalog-grid">
-        <!-- Os produtos serão renderizados dinamicamente pelo script.js -->
-        <div style="text-align: center; grid-column: 1 / -1; padding: 3rem; color: var(--text-secondary);">
-          <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent);"></i>
-          <p>Carregando catálogo premium...</p>
+        <!-- Card 1: Linha iPhone 17 -->
+        <div class="product-card" id="card-iphone">
+          <div class="product-img-container">
+            <span class="product-card-badge">Último Lançamento</span>
+            <img src="assets/iphone.png" alt="Linha iPhone 17" class="product-img">
+          </div>
+          <div class="product-info">
+            <span class="product-category">Celulares</span>
+            <h3 class="product-title">Linha iPhone 17</h3>
+            <p class="product-desc">O máximo em performance e design. Processador A19 Pro, estrutura em titânio e sistema de câmeras avançado.</p>
+            <div class="product-price-row">
+              <span class="product-price-label">A partir de</span>
+              <div>
+                <span class="product-price original">R$ 7.999,00</span>
+                <span class="product-price">R$ 6.999,00</span>
+              </div>
+            </div>
+            <div class="product-card-trust-lines">
+              <div class="trust-line-item"><i class="fas fa-shipping-fast"></i> <span>Frete Grátis para todo o Brasil</span></div>
+              <div class="trust-line-item"><i class="fas fa-gift"></i> <span>Brinde Exclusivo Barbieri Tech</span></div>
+            </div>
+            <button class="btn btn-primary product-btn" onclick="abrirModal('modal-iphone')">
+              <i class="fas fa-sliders-h"></i> Configurar e Comprar
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2: Linha iPad Pro -->
+        <div class="product-card" id="card-ipad">
+          <div class="product-img-container">
+            <span class="badge badge-shipping product-badge">Ultra Fino</span>
+            <img src="assets/ipad.png" alt="Linha iPad Pro" class="product-img">
+          </div>
+          <div class="product-info">
+            <span class="product-category">iPads</span>
+            <h3 class="product-title">Linha iPad Pro</h3>
+            <p class="product-desc">O design mais fino já criado com o poder absurdo do chip M4. Tela Ultra Retina XDR espetacular.</p>
+            <div class="product-price-row">
+              <span class="product-price-label">A partir de</span>
+              <div>
+                <span class="product-price original">R$ 9.499,00</span>
+                <span class="product-price">R$ 7.999,00</span>
+              </div>
+            </div>
+            <div class="product-card-trust-lines">
+              <div class="trust-line-item"><i class="fas fa-shipping-fast"></i> <span>Frete Grátis para todo o Brasil</span></div>
+              <div class="trust-line-item"><i class="fas fa-gift"></i> <span>Brinde Exclusivo Barbieri Tech</span></div>
+            </div>
+            <button class="btn btn-primary product-btn" onclick="abrirModal('modal-ipad')">
+              <i class="fas fa-sliders-h"></i> Configurar e Comprar
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 3: Linha MacBook Pro -->
+        <div class="product-card" id="card-macbook">
+          <div class="product-img-container">
+            <span class="badge badge-shipping product-badge">Máximo Poder</span>
+            <img src="assets/macbook.png" alt="Linha MacBook Pro" class="product-img">
+          </div>
+          <div class="product-info">
+            <span class="product-category">MacBooks</span>
+            <h3 class="product-title">Linha MacBook Pro</h3>
+            <p class="product-desc">Desempenho monstruoso para quem trabalha pesado. Bateria para o dia todo e tela Liquid Retina XDR.</p>
+            <div class="product-price-row">
+              <span class="product-price-label">A partir de</span>
+              <div>
+                <span class="product-price original">R$ 12.999,00</span>
+                <span class="product-price">R$ 10.999,00</span>
+              </div>
+            </div>
+            <div class="product-card-trust-lines">
+              <div class="trust-line-item"><i class="fas fa-shipping-fast"></i> <span>Frete Grátis para todo o Brasil</span></div>
+              <div class="trust-line-item"><i class="fas fa-gift"></i> <span>Brinde Exclusivo Barbieri Tech</span></div>
+            </div>
+            <button class="btn btn-primary product-btn" onclick="abrirModal('modal-macbook')">
+              <i class="fas fa-sliders-h"></i> Configurar e Comprar
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 4: Linha Apple Watch -->
+        <div class="product-card" id="card-watch">
+          <div class="product-img-container">
+            <span class="badge badge-shipping product-badge">Saúde e Esporte</span>
+            <img src="assets/smartwatch.png" alt="Linha Apple Watch" class="product-img">
+          </div>
+          <div class="product-info">
+            <span class="product-category">Smartwatches</span>
+            <h3 class="product-title">Linha Apple Watch</h3>
+            <p class="product-desc">O parceiro definitivo para monitorar sua saúde e superar limites. Resistência extrema.</p>
+            <div class="product-price-row">
+              <span class="product-price-label">A partir de</span>
+              <div>
+                <span class="product-price original">R$ 4.299,00</span>
+                <span class="product-price">R$ 3.599,00</span>
+              </div>
+            </div>
+            <div class="product-card-trust-lines">
+              <div class="trust-line-item"><i class="fas fa-shipping-fast"></i> <span>Frete Grátis para todo o Brasil</span></div>
+              <div class="trust-line-item"><i class="fas fa-gift"></i> <span>Brinde Exclusivo Barbieri Tech</span></div>
+            </div>
+            <button class="btn btn-primary product-btn" onclick="abrirModal('modal-watch')">
+              <i class="fas fa-sliders-h"></i> Configurar e Comprar
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 5: Linha AirPods -->
+        <div class="product-card" id="card-airpods">
+          <div class="product-img-container">
+            <span class="badge badge-shipping product-badge">Áudio Imersivo</span>
+            <img src="assets/airpods.png" alt="Linha AirPods" class="product-img">
+          </div>
+          <div class="product-info">
+            <span class="product-category">Fones de Ouvido</span>
+            <h3 class="product-title">Linha AirPods</h3>
+            <p class="product-desc">Som de altíssima fidelidade, cancelamento ativo de ruído superior e bateria de longa duração.</p>
+            <div class="product-price-row">
+              <span class="product-price-label">A partir de</span>
+              <div>
+                <span class="product-price original">R$ 1.599,00</span>
+                <span class="product-price">R$ 1.299,00</span>
+              </div>
+            </div>
+            <div class="product-card-trust-lines">
+              <div class="trust-line-item"><i class="fas fa-shipping-fast"></i> <span>Frete Grátis para todo o Brasil</span></div>
+              <div class="trust-line-item"><i class="fas fa-gift"></i> <span>Brinde Exclusivo Barbieri Tech</span></div>
+            </div>
+            <button class="btn btn-primary product-btn" onclick="abrirModal('modal-airpods')">
+              <i class="fas fa-sliders-h"></i> Configurar e Comprar
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -279,104 +408,427 @@
     </div>
   </div>
 
-  <!-- PRODUCT DETAIL MODAL -->
-  <div class="modal-overlay" id="product-modal-overlay">
-    <div class="modal-container" id="product-modal-container">
-      <button class="modal-close-btn" id="btn-modal-close" aria-label="Fechar modal">&times;</button>
-      
+  <!-- PRODUCT DETAIL MODALS (STATIC DECLARATIONS) -->
+
+  <!-- Modal 1: iPhone -->
+  <div class="modal-overlay" id="modal-iphone">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="fecharModal('modal-iphone')" aria-label="Fechar modal">&times;</button>
       <div class="modal-content-grid">
-        <!-- Image & Trust Badges -->
         <div class="modal-image-column">
           <div class="modal-img-wrapper">
-            <img src="" alt="" id="modal-product-img">
+            <img src="assets/iphone.png" alt="Linha iPhone 17" id="img-destaque-iphone">
           </div>
           <div class="modal-trust-info">
-            <div class="trust-item">
-              <i class="fas fa-shipping-fast"></i> <span>Frete Grátis em todo o Brasil</span>
-            </div>
-            <div class="trust-item">
-              <i class="fas fa-star text-gold"></i> <span>5.0 no Google (Nota Máxima)</span>
-            </div>
-            <div class="trust-item active-pulse-gift">
-              <i class="fas fa-gift"></i> <span>Incluso Brinde Exclusivo</span>
-            </div>
+            <div class="trust-item"><i class="fas fa-shipping-fast"></i> <span>Frete Grátis para todo o Brasil</span></div>
+            <div class="trust-item"><i class="fas fa-star text-gold"></i> <span>5.0 no Google (Nota Máxima)</span></div>
+            <div class="trust-item active-pulse-gift"><i class="fas fa-gift"></i> <span>Incluso Brinde Exclusivo</span></div>
           </div>
         </div>
-        
-        <!-- Info & Config Selectors -->
         <div class="modal-info-column">
-          <span class="modal-category" id="modal-product-category"></span>
-          <h2 class="modal-title" id="modal-product-title"></h2>
-          <p class="modal-desc" id="modal-product-desc"></p>
+          <span class="modal-category">Celulares</span>
+          <h2 class="modal-title">Linha iPhone 17</h2>
+          <p class="modal-desc">O máximo em performance e design. Processador A19 Pro, estrutura em titânio e sistema de câmeras avançado.</p>
           
-          <!-- Technical Specs Quick Grid -->
-          <div class="modal-specs-grid" id="modal-product-specs">
-            <!-- Dynamic specs here -->
+          <div class="modal-specs-grid">
+            <div class="spec-item"><span class="spec-label">Processador</span><span class="spec-value">A19 Pro Neural Core</span></div>
+            <div class="spec-item"><span class="spec-label">Câmera</span><span class="spec-value">48MP Fusion principal</span></div>
+            <div class="spec-item"><span class="spec-label">Tela</span><span class="spec-value">Super Retina XDR</span></div>
+            <div class="spec-item"><span class="spec-label">Construção</span><span class="spec-value">Titânio Aeroespacial</span></div>
           </div>
 
-          <!-- Selectors -->
           <div class="modal-selectors">
-            <!-- Model -->
-            <div class="selector-group" id="group-model">
+            <div class="selector-group">
               <label class="selector-label">Escolha o Modelo:</label>
-              <div class="selector-options" id="options-model"></div>
+              <div class="selector-options">
+                <button class="selector-btn selected" onclick="selectModel('iphone', 'iPhone 17', 6999, 'https://images.unsplash.com/photo-1696446701796-da61225697cc?q=80&w=800&auto=format&fit=crop', this)">iPhone 17</button>
+                <button class="selector-btn" onclick="selectModel('iphone', 'iPhone 17 Plus', 7599, 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop', this)">iPhone 17 Plus</button>
+                <button class="selector-btn" onclick="selectModel('iphone', 'iPhone 17 Pro', 8599, 'https://images.unsplash.com/photo-1726058428469-8041065f02bc?q=80&w=800&auto=format&fit=crop', this)">iPhone 17 Pro</button>
+                <button class="selector-btn" onclick="selectModel('iphone', 'iPhone 17 Pro Max', 9399, 'assets/iphone.png', this)">iPhone 17 Pro Max</button>
+              </div>
             </div>
             
-            <!-- MacBook specific: Screen Size -->
-            <div class="selector-group" id="group-screen">
-              <label class="selector-label">Tamanho de Tela:</label>
-              <div class="selector-options" id="options-screen"></div>
+            <div class="selector-group">
+              <label class="selector-label">Cor: <span class="selected-color-name" id="color-label-iphone">Titânio Deserto</span></label>
+              <div class="color-options-grid">
+                <button class="color-circle-btn selected" onclick="selectColor('iphone', 'Titânio Deserto', this)" title="Titânio Deserto"><span class="color-inner" style="background-color: #c2b29f"></span></button>
+                <button class="color-circle-btn" onclick="selectColor('iphone', 'Titânio Concreto', this)" title="Titânio Concreto"><span class="color-inner" style="background-color: #8c8d90"></span></button>
+                <button class="color-circle-btn" onclick="selectColor('iphone', 'Preto Espacial', this)" title="Preto Espacial"><span class="color-inner" style="background-color: #1c1d21"></span></button>
+                <button class="color-circle-btn" onclick="selectColor('iphone', 'Prata', this)" title="Prata"><span class="color-inner" style="background-color: #e3e4e5"></span></button>
+              </div>
             </div>
 
-            <!-- Apple Watch specific: Case Size -->
-            <div class="selector-group" id="group-case">
-              <label class="selector-label">Tamanho de Caixa:</label>
-              <div class="selector-options" id="options-case"></div>
-            </div>
-
-            <!-- Apple Watch specific: Strap Type -->
-            <div class="selector-group" id="group-strap">
-              <label class="selector-label">Tipo de Pulseira:</label>
-              <div class="selector-options" id="options-strap"></div>
-            </div>
-
-            <!-- Colors -->
-            <div class="selector-group" id="group-color">
-              <label class="selector-label">Cor: <span class="selected-color-name" id="selected-color-label"></span></label>
-              <div class="color-options-grid" id="options-color"></div>
-            </div>
-
-            <!-- Storage -->
-            <div class="selector-group" id="group-storage">
-              <label class="selector-label">Armazenamento / Capacidade:</label>
-              <div class="selector-options" id="options-storage"></div>
+            <div class="selector-group">
+              <label class="selector-label">Armazenamento:</label>
+              <div class="selector-options">
+                <button class="selector-btn selected" onclick="selectStorage('iphone', '128GB', 0, this)">128GB</button>
+                <button class="selector-btn" onclick="selectStorage('iphone', '256GB', 600, this)">256GB</button>
+                <button class="selector-btn" onclick="selectStorage('iphone', '512GB', 1400, this)">512GB</button>
+                <button class="selector-btn" onclick="selectStorage('iphone', '1TB', 2600, this)">1TB</button>
+              </div>
             </div>
           </div>
 
-          <!-- Box Info & Gift -->
           <div class="modal-box-info">
             <h4 class="box-info-title"><i class="fas fa-box-open"></i> O que vem na caixa:</h4>
-            <ul class="box-items-list" id="modal-box-items">
-              <!-- Dynamic list -->
+            <ul class="box-items-list">
+              <li>iPhone com iOS 19</li>
+              <li>Cabo USB-C Premium trançado (1m)</li>
+              <li>Manuais de Instrução</li>
             </ul>
-            
             <div class="gift-banner">
-              <div class="gift-banner-header">
-                <i class="fas fa-gift"></i>
-                <span>Brinde Especial Barbieri Tech</span>
-              </div>
-              <p class="gift-banner-text" id="modal-gift-text"></p>
+              <div class="gift-banner-header"><i class="fas fa-gift"></i> <span>Brinde Especial Barbieri Tech</span></div>
+              <p class="gift-banner-text">Capa Protetora MagSafe Slim Clear + Película de Privacidade em Cerâmica Aplicada</p>
             </div>
           </div>
 
-          <!-- Price & Checkout Row -->
           <div class="modal-footer-row">
             <div class="modal-price-box">
-              <span class="price-original" id="modal-price-original"></span>
-              <span class="price-current" id="modal-price-current"></span>
+              <span class="price-original" id="price-orig-iphone">R$ 8.048,85</span>
+              <span class="price-current" id="price-curr-iphone">R$ 6.999,00</span>
               <span class="price-subtext">À vista no Pix (Frete Grátis)</span>
             </div>
-            <button class="btn btn-whatsapp-checkout modal-action-btn" id="btn-modal-checkout">
+            <button class="btn btn-whatsapp-checkout modal-action-btn" onclick="checkoutWhatsApp('iphone')">
+              <i class="fab fa-whatsapp"></i> Finalizar no WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: iPad -->
+  <div class="modal-overlay" id="modal-ipad">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="fecharModal('modal-ipad')" aria-label="Fechar modal">&times;</button>
+      <div class="modal-content-grid">
+        <div class="modal-image-column">
+          <div class="modal-img-wrapper">
+            <img src="assets/ipad.png" alt="Linha iPad Pro" id="img-destaque-ipad">
+          </div>
+          <div class="modal-trust-info">
+            <div class="trust-item"><i class="fas fa-shipping-fast"></i> <span>Frete Grátis para todo o Brasil</span></div>
+            <div class="trust-item"><i class="fas fa-star text-gold"></i> <span>5.0 no Google (Nota Máxima)</span></div>
+            <div class="trust-item active-pulse-gift"><i class="fas fa-gift"></i> <span>Incluso Brinde Exclusivo</span></div>
+          </div>
+        </div>
+        <div class="modal-info-column">
+          <span class="modal-category">iPads</span>
+          <h2 class="modal-title">Linha iPad Pro</h2>
+          <p class="modal-desc">O design mais fino já criado com o poder absurdo do chip M4. Tela Ultra Retina XDR espetacular.</p>
+          
+          <div class="modal-specs-grid">
+            <div class="spec-item"><span class="spec-label">Processador</span><span class="spec-value">Apple M4 (Até 10 núcleos)</span></div>
+            <div class="spec-item"><span class="spec-label">Tela</span><span class="spec-value">Tandem OLED Liquid Retina XDR</span></div>
+            <div class="spec-item"><span class="spec-label">Gráficos</span><span class="spec-value">GPU de 10 núcleos</span></div>
+          </div>
+
+          <div class="modal-selectors">
+            <div class="selector-group">
+              <label class="selector-label">Escolha o Modelo:</label>
+              <div class="selector-options">
+                <button class="selector-btn selected" onclick="selectModel('ipad', 'iPad Air M2', 5499, 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=800&auto=format&fit=crop', this)">iPad Air M2</button>
+                <button class="selector-btn" onclick="selectModel('ipad', 'iPad Pro M4', 7999, 'assets/ipad.png', this)">iPad Pro M4</button>
+              </div>
+            </div>
+            
+            <div class="selector-group">
+              <label class="selector-label">Cor: <span class="selected-color-name" id="color-label-ipad">Cinza Espacial</span></label>
+              <div class="color-options-grid">
+                <button class="color-circle-btn selected" onclick="selectColor('ipad', 'Cinza Espacial', this)" title="Cinza Espacial"><span class="color-inner" style="background-color: #4b4c4e"></span></button>
+                <button class="color-circle-btn" onclick="selectColor('ipad', 'Estelar', this)" title="Estelar"><span class="color-inner" style="background-color: #dfdcd4"></span></button>
+                <button class="color-circle-btn" onclick="selectColor('ipad', 'Prata', this)" title="Prata"><span class="color-inner" style="background-color: #e3e4e5"></span></button>
+              </div>
+            </div>
+
+            <div class="selector-group">
+              <label class="selector-label">Armazenamento:</label>
+              <div class="selector-options">
+                <button class="selector-btn selected" onclick="selectStorage('ipad', '128GB', 0, this)">128GB</button>
+                <button class="selector-btn" onclick="selectStorage('ipad', '256GB', 600, this)">256GB</button>
+                <button class="selector-btn" onclick="selectStorage('ipad', '512GB', 1400, this)">512GB</button>
+                <button class="selector-btn" onclick="selectStorage('ipad', '1TB', 2600, this)">1TB</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-box-info">
+            <h4 class="box-info-title"><i class="fas fa-box-open"></i> O que vem na caixa:</h4>
+            <ul class="box-items-list">
+              <li>iPad com iPadOS</li>
+              <li>Cabo de carregamento USB-C (1m)</li>
+              <li>Manuais</li>
+            </ul>
+            <div class="gift-banner">
+              <div class="gift-banner-header"><i class="fas fa-gift"></i> <span>Brinde Especial Barbieri Tech</span></div>
+              <p class="gift-banner-text">Capa Magnética Smart Folio com imagem inteligente + Película Protetora Fosca</p>
+            </div>
+          </div>
+
+          <div class="modal-footer-row">
+            <div class="modal-price-box">
+              <span class="price-original" id="price-orig-ipad">R$ 6.323,85</span>
+              <span class="price-current" id="price-curr-ipad">R$ 5.499,00</span>
+              <span class="price-subtext">À vista no Pix (Frete Grátis)</span>
+            </div>
+            <button class="btn btn-whatsapp-checkout modal-action-btn" onclick="checkoutWhatsApp('ipad')">
+              <i class="fab fa-whatsapp"></i> Finalizar no WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: MacBook -->
+  <div class="modal-overlay" id="modal-macbook">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="fecharModal('modal-macbook')" aria-label="Fechar modal">&times;</button>
+      <div class="modal-content-grid">
+        <div class="modal-image-column">
+          <div class="modal-img-wrapper">
+            <img src="assets/macbook.png" alt="Linha MacBook Pro" id="img-destaque-macbook">
+          </div>
+          <div class="modal-trust-info">
+            <div class="trust-item"><i class="fas fa-shipping-fast"></i> <span>Frete Grátis para todo o Brasil</span></div>
+            <div class="trust-item"><i class="fas fa-star text-gold"></i> <span>5.0 no Google (Nota Máxima)</span></div>
+            <div class="trust-item active-pulse-gift"><i class="fas fa-gift"></i> <span>Incluso Brinde Exclusivo</span></div>
+          </div>
+        </div>
+        <div class="modal-info-column">
+          <span class="modal-category">MacBooks</span>
+          <h2 class="modal-title">Linha MacBook Pro</h2>
+          <p class="modal-desc">Desempenho monstruoso para quem trabalha pesado. Bateria para o dia todo e tela Liquid Retina XDR.</p>
+          
+          <div class="modal-specs-grid">
+            <div class="spec-item"><span class="spec-label">Processador</span><span class="spec-value">Chip Apple M3 ou M4 Pro/Max</span></div>
+            <div class="spec-item"><span class="spec-label">Tela</span><span class="spec-value">13.6\" ou 15.3\" Liquid Retina</span></div>
+            <div class="spec-item"><span class="spec-label">Bateria</span><span class="spec-value">Até 22 horas de autonomia</span></div>
+          </div>
+
+          <div class="modal-selectors">
+            <div class="selector-group">
+              <label class="selector-label">Escolha o Modelo:</label>
+              <div class="selector-options">
+                <button class="selector-btn selected" onclick="selectModel('macbook', 'MacBook Air M3', 10999, 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop', this)">MacBook Air M3</button>
+                <button class="selector-btn" onclick="selectModel('macbook', 'MacBook Pro M4', 14999, 'assets/macbook.png', this)">MacBook Pro M4</button>
+              </div>
+            </div>
+
+            <div class="selector-group">
+              <label class="selector-label">Tamanho de Tela:</label>
+              <div class="selector-options">
+                <button class="selector-btn selected" onclick="selectScreenSize('macbook', '13\"', 0, this)">13.6\"</button>
+                <button class="selector-btn" onclick="selectScreenSize('macbook', '15\"', 1500, this)">15.3\"</button>
+              </div>
+            </div>
+            
+            <div class="selector-group">
+              <label class="selector-label">Cor: <span class="selected-color-name" id="color-label-macbook">Preto Espacial</span></label>
+              <div class="color-options-grid">
+                <button class="color-circle-btn selected" onclick="selectColor('macbook', 'Preto Espacial', this)" title="Preto Espacial"><span class="color-inner" style="background-color: #1d1e22"></span></button>
+                <button class="color-circle-btn" onclick="selectColor('macbook', 'Prata', this)" title="Prata"><span class="color-inner" style="background-color: #e3e4e5"></span></button>
+                <button class="color-circle-btn" onclick="selectColor('macbook', 'Cinza Espacial', this)" title="Cinza Espacial"><span class="color-inner" style="background-color: #4b4c4e"></span></button>
+              </div>
+            </div>
+
+            <div class="selector-group">
+              <label class="selector-label">Armazenamento:</label>
+              <div class="selector-options">
+                <button class="selector-btn selected" onclick="selectStorage('macbook', '256GB', 0, this)">256GB</button>
+                <button class="selector-btn" onclick="selectStorage('macbook', '512GB', 1200, this)">512GB</button>
+                <button class="selector-btn" onclick="selectStorage('macbook', '1TB', 2400, this)">1TB</button>
+                <button class="selector-btn" onclick="selectStorage('macbook', '2TB', 4400, this)">2TB</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-box-info">
+            <h4 class="box-info-title"><i class="fas fa-box-open"></i> O que vem na caixa:</h4>
+            <ul class="box-items-list">
+              <li>MacBook Pro</li>
+              <li>Cabo MagSafe 3 (2m)</li>
+              <li>Adaptador de energia USB-C</li>
+              <li>Manuais</li>
+            </ul>
+            <div class="gift-banner">
+              <div class="gift-banner-header"><i class="fas fa-gift"></i> <span>Brinde Especial Barbieri Tech</span></div>
+              <p class="gift-banner-text">Hub Adaptador USB-C Multiportas de Alumínio (HDMI, USB 3.0, SD/MicroSD)</p>
+            </div>
+          </div>
+
+          <div class="modal-footer-row">
+            <div class="modal-price-box">
+              <span class="price-original" id="price-orig-macbook">R$ 12.648,85</span>
+              <span class="price-current" id="price-curr-macbook">R$ 10.999,00</span>
+              <span class="price-subtext">À vista no Pix (Frete Grátis)</span>
+            </div>
+            <button class="btn btn-whatsapp-checkout modal-action-btn" onclick="checkoutWhatsApp('macbook')">
+              <i class="fab fa-whatsapp"></i> Finalizar no WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Apple Watch -->
+  <div class="modal-overlay" id="modal-watch">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="fecharModal('modal-watch')" aria-label="Fechar modal">&times;</button>
+      <div class="modal-content-grid">
+        <div class="modal-image-column">
+          <div class="modal-img-wrapper">
+            <img src="assets/smartwatch.png" alt="Linha Apple Watch" id="img-destaque-watch">
+          </div>
+          <div class="modal-trust-info">
+            <div class="trust-item"><i class="fas fa-shipping-fast"></i> <span>Frete Grátis para todo o Brasil</span></div>
+            <div class="trust-item"><i class="fas fa-star text-gold"></i> <span>5.0 no Google (Nota Máxima)</span></div>
+            <div class="trust-item active-pulse-gift"><i class="fas fa-gift"></i> <span>Incluso Brinde Exclusivo</span></div>
+          </div>
+        </div>
+        <div class="modal-info-column">
+          <span class="modal-category">Smartwatches</span>
+          <h2 class="modal-title">Linha Apple Watch</h2>
+          <p class="modal-desc">O parceiro definitivo para monitorar sua saúde e superar limites. Resistência extrema.</p>
+          
+          <div class="modal-specs-grid">
+            <div class="spec-item"><span class="spec-label">Processador</span><span class="spec-value">Chip S9 SiP ou S10</span></div>
+            <div class="spec-item"><span class="spec-label">Sensores</span><span class="spec-value">ECG, Oxigênio e Temperatura</span></div>
+            <div class="spec-item"><span class="spec-label">Construção</span><span class="spec-value">Alumínio ou Titânio Aeroespacial</span></div>
+          </div>
+
+          <div class="modal-selectors">
+            <div class="selector-group">
+              <label class="selector-label">Escolha o Modelo:</label>
+              <div class="selector-options">
+                <button class="selector-btn selected" onclick="selectModel('watch', 'Apple Watch Series 9', 3599, 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?q=80&w=800&auto=format&fit=crop', this)">Series 9</button>
+                <button class="selector-btn" onclick="selectModel('watch', 'Apple Watch Ultra 2', 5999, 'assets/smartwatch.png', this)">Ultra 2</button>
+              </div>
+            </div>
+
+            <div class="selector-group" id="watch-case-size-group">
+              <label class="selector-label">Tamanho de Caixa:</label>
+              <div class="selector-options">
+                <button class="selector-btn selected" id="btn-case-41" onclick="selectCaseSize('watch', '41mm', 0, this)">41mm</button>
+                <button class="selector-btn" id="btn-case-45" onclick="selectCaseSize('watch', '45mm', 400, this)">45mm</button>
+                <button class="selector-btn" id="btn-case-49" style="display:none;" onclick="selectCaseSize('watch', '49mm', 0, this)">49mm</button>
+              </div>
+            </div>
+
+            <div class="selector-group" id="watch-strap-group" style="display:none;">
+              <label class="selector-label">Tipo de Pulseira:</label>
+              <div class="selector-options">
+                <button class="selector-btn selected" onclick="selectStrap('watch', 'Pulseira Esportiva', this)">Esportiva</button>
+                <button class="selector-btn" onclick="selectStrap('watch', 'Pulseira Trail', this)">Trail</button>
+                <button class="selector-btn" onclick="selectStrap('watch', 'Pulseira Oceano', this)">Oceano</button>
+              </div>
+            </div>
+            
+            <div class="selector-group">
+              <label class="selector-label">Cor: <span class="selected-color-name" id="color-label-watch">Estelar</span></label>
+              <div class="color-options-grid">
+                <button class="color-circle-btn selected" onclick="selectColor('watch', 'Estelar', this)" title="Estelar"><span class="color-inner" style="background-color: #dfdcd4"></span></button>
+                <button class="color-circle-btn" onclick="selectColor('watch', 'Preto Espacial', this)" title="Preto Espacial"><span class="color-inner" style="background-color: #232426"></span></button>
+                <button class="color-circle-btn" onclick="selectColor('watch', 'Titânio Natural', this)" title="Titânio Natural"><span class="color-inner" style="background-color: #c2b29f"></span></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-box-info">
+            <h4 class="box-info-title"><i class="fas fa-box-open"></i> O que vem na caixa:</h4>
+            <ul class="box-items-list">
+              <li>Caixa do Apple Watch</li>
+              <li>Pulseira do modelo correspondente</li>
+              <li>Cabo magnético de carregamento rápido USB-C</li>
+            </ul>
+            <div class="gift-banner">
+              <div class="gift-banner-header"><i class="fas fa-gift"></i> <span>Brinde Especial Barbieri Tech</span></div>
+              <p class="gift-banner-text">Pulseira Milanese Metálica Extra de Aço Inoxidável com fecho magnético</p>
+            </div>
+          </div>
+
+          <div class="modal-footer-row">
+            <div class="modal-price-box">
+              <span class="price-original" id="price-orig-watch">R$ 4.138,85</span>
+              <span class="price-current" id="price-curr-watch">R$ 3.599,00</span>
+              <span class="price-subtext">À vista no Pix (Frete Grátis)</span>
+            </div>
+            <button class="btn btn-whatsapp-checkout modal-action-btn" onclick="checkoutWhatsApp('watch')">
+              <i class="fab fa-whatsapp"></i> Finalizar no WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: AirPods -->
+  <div class="modal-overlay" id="modal-airpods">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="fecharModal('modal-airpods')" aria-label="Fechar modal">&times;</button>
+      <div class="modal-content-grid">
+        <div class="modal-image-column">
+          <div class="modal-img-wrapper">
+            <img src="assets/airpods.png" alt="Linha AirPods" id="img-destaque-airpods">
+          </div>
+          <div class="modal-trust-info">
+            <div class="trust-item"><i class="fas fa-shipping-fast"></i> <span>Frete Grátis para todo o Brasil</span></div>
+            <div class="trust-item"><i class="fas fa-star text-gold"></i> <span>5.0 no Google (Nota Máxima)</span></div>
+            <div class="trust-item active-pulse-gift"><i class="fas fa-gift"></i> <span>Incluso Brinde Exclusivo</span></div>
+          </div>
+        </div>
+        <div class="modal-info-column">
+          <span class="modal-category">Fones de Ouvido</span>
+          <h2 class="modal-title">Linha AirPods</h2>
+          <p class="modal-desc">Som de altíssima fidelidade, cancelamento ativo de ruído superior e bateria de longa duração.</p>
+          
+          <div class="modal-specs-grid">
+            <div class="spec-item"><span class="spec-label">Drivers</span><span class="spec-value">Dinâmicos projetados pela Apple</span></div>
+            <div class="spec-item"><span class="spec-label">Cancelamento</span><span class="spec-value">Ativo de Ruído (ANC) / Modo Ambiente</span></div>
+            <div class="spec-item"><span class="spec-label">Processamento</span><span class="spec-value">Chip H1 ou H2 de alta fidelidade</span></div>
+          </div>
+
+          <div class="modal-selectors">
+            <div class="selector-group">
+              <label class="selector-label">Escolha o Modelo:</label>
+              <div class="selector-options">
+                <button class="selector-btn selected" onclick="selectModel('airpods', 'AirPods 3', 1299, 'https://images.unsplash.com/photo-1588449668365-d15e397f6787?q=80&w=800&auto=format&fit=crop', this)">AirPods 3</button>
+                <button class="selector-btn" onclick="selectModel('airpods', 'AirPods Pro 2', 1899, 'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=800&auto=format&fit=crop', this)">AirPods Pro 2</button>
+                <button class="selector-btn" onclick="selectModel('airpods', 'AirPods Max', 5499, 'assets/airpods.png', this)">AirPods Max</button>
+              </div>
+            </div>
+            
+            <div class="selector-group">
+              <label class="selector-label">Cor: <span class="selected-color-name" id="color-label-airpods">Branco Clássico</span></label>
+              <div class="color-options-grid">
+                <button class="color-circle-btn selected" onclick="selectColor('airpods', 'Branco Clássico', this)" title="Branco Clássico"><span class="color-inner" style="background-color: #ffffff"></span></button>
+                <button class="color-circle-btn" onclick="selectColor('airpods', 'Preto Espacial', this)" title="Preto Espacial"><span class="color-inner" style="background-color: #232426"></span></button>
+                <button class="color-circle-btn" onclick="selectColor('airpods', 'Prata', this)" title="Prata"><span class="color-inner" style="background-color: #e3e4e5"></span></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-box-info">
+            <h4 class="box-info-title"><i class="fas fa-box-open"></i> O que vem na caixa:</h4>
+            <ul class="box-items-list">
+              <li>AirPods</li>
+              <li>Estojo de Carga correspondente</li>
+              <li>Cabo de Lightning ou USB-C</li>
+            </ul>
+            <div class="gift-banner">
+              <div class="gift-banner-header"><i class="fas fa-gift"></i> <span>Brinde Especial Barbieri Tech</span></div>
+              <p class="gift-banner-text">Estojo Protetor de Silicone Hipoalergênico com gancho de fixação</p>
+            </div>
+          </div>
+
+          <div class="modal-footer-row">
+            <div class="modal-price-box">
+              <span class="price-original" id="price-orig-airpods">R$ 1.493,85</span>
+              <span class="price-current" id="price-curr-airpods">R$ 1.299,00</span>
+              <span class="price-subtext">À vista no Pix (Frete Grátis)</span>
+            </div>
+            <button class="btn btn-whatsapp-checkout modal-action-btn" onclick="checkoutWhatsApp('airpods')">
               <i class="fab fa-whatsapp"></i> Finalizar no WhatsApp
             </button>
           </div>

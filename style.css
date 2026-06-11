@@ -476,7 +476,7 @@ header.scrolled {
 
 .product-img-container {
   height: 240px;
-  background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, rgba(0,0,0,0) 80%);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1653,5 +1653,19 @@ footer {
   .modal-action-btn {
     max-width: 100%;
   }
+}
+
+/* --- WHATSAPP DIRECT CHECKOUT BUTTON IN MODAL --- */
+.btn-whatsapp-checkout {
+  background-color: #25d366;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+}
+
+.btn-whatsapp-checkout:hover {
+  background-color: #20ba56;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
 }
 

@@ -69,55 +69,53 @@ document.addEventListener('DOMContentLoaded', () => {
   updateBusinessStatus();
   setInterval(updateBusinessStatus, 60000);
 
-  // --- PRODUCTS DATABASE ---
+  // --- 5 CATEGORY LINES DATABASE ---
   const PRODUCTS = [
     {
-      id: "iphone-17-pro-max",
-      name: "iPhone 17 Pro Max",
+      id: "linha-iphone-17",
+      name: "Linha iPhone 17",
       category: "Celulares",
       badge: "ÚLTIMO LANÇAMENTO",
-      desc: "O pináculo da engenharia móvel. Acabamento ultra-resistente em titânio, chip A19 Pro Neural Engine e a maior tela já vista em um iPhone.",
-      basePrice: 9499.00,
-      originalPrice: 10999.00,
+      desc: "O máximo em performance e design. Processador A19 Pro, estrutura em titânio e sistema de câmeras avançado.",
+      basePrice: 6999.00,
+      originalPrice: 7999.00,
       img: "assets/iphone.png",
       specs: {
         "Processador": "A19 Pro Neural Core",
-        "Câmera": "Tripla Ultra-Sensing (48MP + 48MP + 48MP)",
-        "Tela": "6.9 polegadas Super Retina XDR Tandem",
-        "Material": "Titânio Aeroespacial"
+        "Câmera": "48MP Fusion principal",
+        "Tela": "6.1\" até 6.9\" Super Retina XDR",
+        "Construção": "Titânio Aeroespacial"
       },
-      models: ["Plus", "Pro", "Pro Max"],
+      models: ["iPhone 17", "iPhone 17 Plus", "iPhone 17 Pro", "iPhone 17 Pro Max"],
       colors: [
         { name: "Titânio Deserto", hex: "#c2b29f" },
         { name: "Titânio Concreto", hex: "#8c8d90" },
-        { name: "Titânio Preto", hex: "#232426" },
-        { name: "Titânio Branco", hex: "#f2f1ed" }
+        { name: "Preto Espacial", hex: "#1c1d21" },
+        { name: "Prata", hex: "#e3e4e5" }
       ],
       storage: ["128GB", "256GB", "512GB", "1TB"],
       whatsInBox: [
-        "iPhone 17 Pro Max com iOS 19",
-        "Cabo USB-C para USB-C Premium (1m)",
-        "Ferramenta de Ejeção de Chip",
+        "iPhone com iOS 19",
+        "Cabo USB-C Premium (1m)",
         "Manuais de Instrução"
       ],
       gift: "Capa Protetora MagSafe Slim Clear + Película de Privacidade em Cerâmica Aplicada"
     },
     {
-      id: "ipad-pro-m4",
-      name: "iPad Pro M4",
+      id: "linha-ipad-pro",
+      name: "Linha iPad Pro",
       category: "iPads",
-      badge: "O MAIS VENDIDO",
-      desc: "Fininho. Desempenho inimaginável do chip Apple M4 com aceleração gráfica e tela OLED de brilho inacreditável.",
-      basePrice: 7499.00,
-      originalPrice: 8999.00,
-      img: "assets/iphone.png", // Reusing the high-quality phone image styled nicely
+      badge: "ULTRA FINO",
+      desc: "O design mais fino já criado com o poder absurdo do chip M4. Tela Ultra Retina XDR espetacular.",
+      basePrice: 7999.00,
+      originalPrice: 9499.00,
+      img: "assets/ipad.png",
       specs: {
-        "Processador": "Apple M4 de 9 núcleos",
+        "Processador": "Apple M4 (Até 10 núcleos)",
         "Tela": "11\" ou 13\" Tandem OLED Liquid Retina",
-        "Gráficos": "GPU de 10 núcleos com Ray Tracing"
+        "Gráficos": "GPU de 10 núcleos com aceleração por hardware"
       },
-      models: ["iPad Air", "iPad Pro M4"],
-      screenSizes: ["11\"", "13\""],
+      models: ["iPad Air M2", "iPad Pro M4"],
       colors: [
         { name: "Cinza Espacial", hex: "#4b4c4e" },
         { name: "Estelar", hex: "#dfdcd4" },
@@ -127,126 +125,97 @@ document.addEventListener('DOMContentLoaded', () => {
       whatsInBox: [
         "iPad com iPadOS",
         "Cabo de carregamento USB-C (1m)",
-        "Carregador de Parede USB-C Turbo de 20W",
         "Manuais"
       ],
-      gift: "Capa Magnética Smart Folio com fechamento inteligente + Suporte Stylus"
+      gift: "Capa Magnética Smart Folio com fechamento inteligente + Película Protetora Fosca"
     },
     {
-      id: "macbook-pro-m4",
-      name: "MacBook Pro M4",
+      id: "linha-macbook-pro",
+      name: "Linha MacBook Pro",
       category: "MacBooks",
       badge: "MÁXIMO PODER",
-      desc: "Superpotente. Bateria projetada para durar o dia todo e velocidade insuperável do processador de última geração para profissionais exigentes.",
-      basePrice: 11999.00,
-      originalPrice: 13999.00,
-      img: "assets/airpods.png", // Reusing standard catalog imagery styled cleanly
+      desc: "Desempenho monstruoso para quem trabalha pesado. Bateria para o dia todo e tela Liquid Retina XDR.",
+      basePrice: 10999.00,
+      originalPrice: 12999.00,
+      img: "assets/macbook.png",
       specs: {
-        "Processador": "Apple M4 Pro ou Max",
-        "Memória": "Até 36GB de memória unificada",
-        "Bateria": "Até 22 horas de reprodução de vídeo"
+        "Processador": "Chip Apple M3 ou M4 Pro/Max",
+        "Tela": "13.6\" ou 15.3\" Liquid Retina",
+        "Bateria": "Até 22 horas de autonomia"
       },
       models: ["MacBook Air M3", "MacBook Pro M4"],
       screenSizes: ["13\"", "15\""],
       colors: [
         { name: "Preto Espacial", hex: "#1d1e22" },
-        { name: "Prata", hex: "#e3e4e5" }
+        { name: "Prata", hex: "#e3e4e5" },
+        { name: "Cinza Espacial", hex: "#4b4c4e" }
       ],
       storage: ["256GB", "512GB", "1TB", "2TB"],
       whatsInBox: [
         "MacBook Pro",
-        "Carregador de tomada de alta potência 70W/96W USB-C",
-        "Cabo USB-C para MagSafe 3 Trançado (2m)",
+        "Cabo MagSafe 3 (2m)",
+        "Adaptador de energia USB-C",
         "Manuais"
       ],
-      gift: "Hub Adaptador USB-C Multiportas de Alumínio (HDMI, USB 3.0, MicroSD/SD)"
+      gift: "Hub Adaptador USB-C Multiportas de Alumínio (HDMI, USB 3.0, SD/MicroSD)"
     },
     {
-      id: "apple-watch-ultra-2",
-      name: "Apple Watch Ultra 2",
+      id: "linha-apple-watch",
+      name: "Linha Apple Watch",
       category: "Smartwatches",
-      badge: "ESPORTES EXTREMOS",
-      desc: "A caixa de titânio de 49mm une leveza e resistência com a tela Retina Sempre Ativa mais brilhante da história da Apple.",
-      basePrice: 5999.00,
-      originalPrice: 6999.00,
+      badge: "SAÚDE E ESPORTE",
+      desc: "O parceiro definitivo para monitorar sua saúde e superar limites. Resistência extrema.",
+      basePrice: 3599.00,
+      originalPrice: 4299.00,
       img: "assets/smartwatch.png",
       specs: {
-        "Caixa": "Titânio Aeroespacial de 49mm",
-        "Autonomia": "Até 36 horas em uso normal (72h no modo economia)",
-        "Sensores": "GPS de dupla frequência, Sensor de Profundidade e Temperatura da Água"
+        "Processador": "Chip S9 SiP ou S10",
+        "Sensores": "Oxigênio, ECG, Temperatura e Sensor de Quedas",
+        "Construção": "Alumínio ou Titânio Aeroespacial"
       },
-      models: ["Series 9", "Ultra 2"],
+      models: ["Apple Watch Series 9", "Apple Watch Ultra 2"],
       caseSizes: ["41mm", "45mm", "49mm"],
-      strapTypes: ["Pulseira Oceano", "Pulseira Trail", "Pulseira Loop Alpina"],
+      strapTypes: ["Pulseira Esportiva", "Pulseira Trail", "Pulseira Oceano"],
       colors: [
-        { name: "Titânio Natural", hex: "#c2b29f" },
-        { name: "Titânio Preto", hex: "#232426" },
-        { name: "Azul Oceânico", hex: "#1c2e4a" }
+        { name: "Estelar", hex: "#dfdcd4" },
+        { name: "Preto Espacial", hex: "#232426" },
+        { name: "Titânio Natural", hex: "#c2b29f" }
       ],
       whatsInBox: [
-        "Caixa de Titânio do Apple Watch Ultra",
-        "Pulseira Premium Selecionada",
-        "Carregador Magnético Rápido USB-C trançado",
+        "Caixa do Apple Watch",
+        "Pulseira do modelo correspondente",
+        "Cabo magnético de carregamento rápido para USB-C",
         "Manuais"
       ],
-      gift: "Pulseira Loop Milanese Metálica Extra com Fecho Magnético em Aço Inox"
+      gift: "Pulseira Milanese Metálica Extra de Aço Inoxidável com fecho magnético"
     },
     {
-      id: "airpods-max-pro",
-      name: "AirPods Max Pro",
+      id: "linha-airpods",
+      name: "Linha AirPods",
       category: "Fones de Ouvido",
-      badge: "ÁUDIO LUXURY",
-      desc: "Áudio de altíssima fidelidade com Cancelamento Ativo de Ruído de nível profissional e Modo Ambiente inteligente.",
-      basePrice: 1899.00,
-      originalPrice: 2499.00,
+      badge: "ÁUDIO IMERSIVO",
+      desc: "Som de altíssima fidelidade, cancelamento ativo de ruído superior e bateria de longa duração.",
+      basePrice: 1299.00,
+      originalPrice: 1599.00,
       img: "assets/airpods.png",
       specs: {
-        "Drivers": "Dinâmicos projetados pela Apple",
-        "Cancelamento": "Ativo de Ruído com Áudio Espacial Dinâmico",
-        "Conectores": "Chip H1 em cada fone para áudio computacional"
+        "Áudio": "Áudio espacial dinâmico e equalização adaptativa",
+        "Bateria": "Até 30 horas com estojo de recarga",
+        "Conectores": "Chip H1 ou H2 de alta performance"
       },
-      models: ["AirPods Max Standard", "AirPods Max Pro Edition"],
+      models: ["AirPods 3", "AirPods Pro 2", "AirPods Max"],
       colors: [
+        { name: "Branco Clássico", hex: "#ffffff" },
         { name: "Preto Espacial", hex: "#232426" },
-        { name: "Prata", hex: "#e3e4e5" },
-        { name: "Azul Céu", hex: "#b9cce3" },
-        { name: "Verde Menta", hex: "#c1ccc1" }
+        { name: "Prata", hex: "#e3e4e5" }
       ],
       whatsInBox: [
-        "AirPods Max",
-        "Smart Case Flexível correspondente",
-        "Cabo de Lightning para USB-C",
-        "Manuais de Instruções"
+        "AirPods",
+        "Estojo de Carga correspondente",
+        "Cabo Lightning ou USB-C",
+        "Manuais"
       ],
-      gift: "Estojo de Viagem Rígido em EVA com zíper e proteção contra quedas + Cabo Auxiliar de Áudio"
-    },
-    {
-      id: "smartband-horizon",
-      name: "Smartband Horizon",
-      category: "Wearables",
-      badge: "MELHOR CUSTO",
-      desc: "Uma pulseira de fitness inteligente ultra-confortável com tela AMOLED vívida e monitor de sono e batimentos de alta precisão.",
-      basePrice: 199.00,
-      originalPrice: 299.00,
-      img: "assets/smartband.png",
-      specs: {
-        "Tela": "AMOLED Touchscreen de 1.62\"",
-        "Bateria": "Até 14 dias de duração com carregamento magnético",
-        "Esportes": "Rastreia mais de 110 modalidades físicas"
-      },
-      models: ["Horizon Fit Lite", "Horizon Sport Pro"],
-      colors: [
-        { name: "Preto Obsidiana", hex: "#1c1d21" },
-        { name: "Cinza Titanium", hex: "#5a5c61" },
-        { name: "Azul Noturno", hex: "#2b4c7e" }
-      ],
-      whatsInBox: [
-        "Smartband Horizon",
-        "Pulseira de Silicone Hipoalergênica",
-        "Cabo de Carregamento Magnético USB",
-        "Manuais do Usuário"
-      ],
-      gift: "Pulseira de Nylon Respirável Extra com Ajuste em Velcro + Película 3D Protetora de Tela"
+      gift: "Estojo Protetor de Silicone Hipoalergênico com gancho de fixação"
     }
   ];
 
@@ -262,10 +231,9 @@ document.addEventListener('DOMContentLoaded', () => {
       card.className = 'product-card';
       card.id = `prod-${product.id}`;
 
-      // Highlight Flagship and categories
       let badgeHTML = '';
       if (product.badge) {
-        if (product.id === 'iphone-17-pro-max') {
+        if (product.id === 'linha-iphone-17') {
           badgeHTML = `<span class="product-card-badge">${product.badge}</span>`;
         } else {
           badgeHTML = `<span class="badge badge-shipping product-badge" style="z-index: 3;">${product.badge}</span>`;
@@ -283,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <p class="product-desc">${product.desc}</p>
           
           <div class="product-price-row">
-            <span class="product-price-label">À vista ou Pix</span>
+            <span class="product-price-label">A partir de</span>
             <div>
               <span class="product-price original">R$ ${product.originalPrice.toFixed(2).replace('.', ',')}</span>
               <span class="product-price">R$ ${product.basePrice.toFixed(2).replace('.', ',')}</span>
@@ -293,15 +261,15 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- Trust Badges Line -->
           <div class="product-card-trust-lines">
             <div class="trust-line-item">
-              <i class="fas fa-shipping-fast"></i> <span>Frete Grátis Nacional</span>
+              <i class="fas fa-shipping-fast"></i> <span>Frete Grátis em todo o Brasil</span>
             </div>
             <div class="trust-line-item">
-              <i class="fas fa-gift"></i> <span>Brinde Exclusivo Barbieri</span>
+              <i class="fas fa-gift"></i> <span>Brinde Exclusivo Barbieri Tech</span>
             </div>
           </div>
 
           <button class="btn btn-primary product-btn open-details-btn" data-id="${product.id}">
-            <i class="fas fa-cog"></i> Configurar e Comprar
+            <i class="fas fa-sliders-h"></i> Configurar e Comprar
           </button>
         </div>
       `;
@@ -380,47 +348,53 @@ document.addEventListener('DOMContentLoaded', () => {
     let price = activeProduct.basePrice;
 
     // Adjust price by model selected
-    if (activeProduct.id === "iphone-17-pro-max") {
-      if (configSelection.model === "Plus") price = 7499.00;
-      else if (configSelection.model === "Pro") price = 8699.00;
-      else if (configSelection.model === "Pro Max") price = 9499.00;
-    } else if (activeProduct.id === "ipad-pro-m4") {
-      if (configSelection.model === "iPad Air") price = 5499.00;
+    if (activeProduct.id === "linha-iphone-17") {
+      if (configSelection.model === "iPhone 17") price = 6999.00;
+      else if (configSelection.model === "iPhone 17 Plus") price = 7599.00;
+      else if (configSelection.model === "iPhone 17 Pro") price = 8599.00;
+      else if (configSelection.model === "iPhone 17 Pro Max") price = 9399.00;
+    } else if (activeProduct.id === "linha-ipad-pro") {
+      if (configSelection.model === "iPad Air M2") price = 5499.00;
       else if (configSelection.model === "iPad Pro M4") price = 7999.00;
-    } else if (activeProduct.id === "macbook-pro-m4") {
-      if (configSelection.model === "MacBook Air M3") price = 10499.00;
+    } else if (activeProduct.id === "linha-macbook-pro") {
+      if (configSelection.model === "MacBook Air M3") price = 10999.00;
       else if (configSelection.model === "MacBook Pro M4") price = 14999.00;
-    } else if (activeProduct.id === "apple-watch-ultra-2") {
-      if (configSelection.model === "Series 9") price = 3799.00;
-      else if (configSelection.model === "Ultra 2") price = 5999.00;
+    } else if (activeProduct.id === "linha-apple-watch") {
+      if (configSelection.model === "Apple Watch Series 9") price = 3599.00;
+      else if (configSelection.model === "Apple Watch Ultra 2") price = 5999.00;
+    } else if (activeProduct.id === "linha-airpods") {
+      if (configSelection.model === "AirPods 3") price = 1299.00;
+      else if (configSelection.model === "AirPods Pro 2") price = 1899.00;
+      else if (configSelection.model === "AirPods Max") price = 5499.00;
     }
 
-    // Screen adjustments
-    if (configSelection.screenSize === "13\"" && activeProduct.id === "ipad-pro-m4" && configSelection.model === "iPad Pro M4") {
-      price += 2500;
-    } else if (configSelection.screenSize === "15\"" && activeProduct.id === "macbook-pro-m4") {
-      price += 1800;
+    // Screen size adjustments
+    if (configSelection.screenSize === "15\"" && activeProduct.id === "linha-macbook-pro") {
+      price += 1500;
     }
 
     // Case sizes adjustments
-    if (configSelection.caseSize === "45mm" && configSelection.model === "Series 9") {
+    if (configSelection.caseSize === "45mm" && configSelection.model === "Apple Watch Series 9") {
       price += 400;
-    } else if (configSelection.caseSize === "49mm" && configSelection.model === "Series 9") {
-      // Series 9 does not have 49mm, switch model to Ultra 2
-      configSelection.model = "Ultra 2";
+    } else if (configSelection.caseSize === "49mm" && configSelection.model === "Apple Watch Series 9") {
+      // Switch model to Ultra 2
+      configSelection.model = "Apple Watch Ultra 2";
+      configSelection.caseSize = "49mm";
       updateModalSelectors();
       return;
     }
 
     // Storage increments
-    if (configSelection.storage === "256GB") {
-      price += 600;
-    } else if (configSelection.storage === "512GB") {
-      price += 1400;
-    } else if (configSelection.storage === "1TB") {
-      price += 2600;
-    } else if (configSelection.storage === "2TB") {
-      price += 4500;
+    if (activeProduct.id !== "linha-airpods") {
+      if (configSelection.storage === "256GB") {
+        price += 600;
+      } else if (configSelection.storage === "512GB") {
+        price += 1400;
+      } else if (configSelection.storage === "1TB") {
+        price += 2600;
+      } else if (configSelection.storage === "2TB") {
+        price += 4400;
+      }
     }
 
     return price;
@@ -456,10 +430,14 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.innerText = model;
         btn.addEventListener('click', () => {
           configSelection.model = model;
+          
           // Adapt default dependencies based on selected model
-          if (activeProduct.id === "apple-watch-ultra-2") {
-            if (model === "Ultra 2") configSelection.caseSize = "49mm";
-            else if (model === "Series 9") configSelection.caseSize = "45mm";
+          if (activeProduct.id === "linha-apple-watch") {
+            if (model === "Apple Watch Ultra 2") {
+              configSelection.caseSize = "49mm";
+            } else if (model === "Apple Watch Series 9") {
+              configSelection.caseSize = "45mm";
+            }
           }
           updateModalSelectors();
         });
@@ -469,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
       groupModel.style.display = 'none';
     }
 
-    // Handle Screen Sizes
+    // Handle Screen Sizes (MacBooks)
     if (activeProduct.screenSizes && activeProduct.screenSizes.length > 0) {
       groupScreen.style.display = 'flex';
       optionsScreen.innerHTML = '';
@@ -488,12 +466,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Handle Case Sizes (Watches)
-    if (activeProduct.caseSizes && activeProduct.caseSizes.length > 0 && configSelection.model !== "Ultra 2") {
+    if (activeProduct.caseSizes && activeProduct.caseSizes.length > 0 && configSelection.model !== "Apple Watch Ultra 2") {
       groupCase.style.display = 'flex';
       optionsCase.innerHTML = '';
       activeProduct.caseSizes.filter(size => {
-        // Ultra is 49mm only, Series 9 is 41/45
-        if (configSelection.model === "Series 9" && size === "49mm") return false;
+        if (configSelection.model === "Apple Watch Series 9" && size === "49mm") return false;
         return true;
       }).forEach(size => {
         const btn = document.createElement('button');
@@ -509,8 +486,8 @@ document.addEventListener('DOMContentLoaded', () => {
       groupCase.style.display = 'none';
     }
 
-    // Handle Strap Types
-    if (activeProduct.strapTypes && activeProduct.strapTypes.length > 0 && configSelection.model === "Ultra 2") {
+    // Handle Strap Types (Watches)
+    if (activeProduct.strapTypes && activeProduct.strapTypes.length > 0 && configSelection.model === "Apple Watch Ultra 2") {
       groupStrap.style.display = 'flex';
       optionsStrap.innerHTML = '';
       activeProduct.strapTypes.forEach(strap => {
@@ -549,7 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Handle Storage Selector
-    if (activeProduct.storage && activeProduct.storage.length > 0 && activeProduct.storage[0] !== "N/A") {
+    if (activeProduct.storage && activeProduct.storage.length > 0 && activeProduct.id !== "linha-airpods") {
       groupStorage.style.display = 'flex';
       optionsStorage.innerHTML = '';
       activeProduct.storage.forEach(cap => {
@@ -590,7 +567,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set defaults
     configSelection.model = product.models ? product.models[0] : '';
     configSelection.screenSize = product.screenSizes ? product.screenSizes[0] : '';
-    configSelection.caseSize = product.caseSizes ? (product.id === "apple-watch-ultra-2" ? "49mm" : product.caseSizes[0]) : '';
+    configSelection.caseSize = product.caseSizes ? (product.id === "linha-apple-watch" && product.models[0] === "Apple Watch Ultra 2" ? "49mm" : product.caseSizes[0]) : '';
     configSelection.strapType = product.strapTypes ? product.strapTypes[0] : '';
     configSelection.colorName = product.colors ? product.colors[0].name : '';
     configSelection.storage = product.storage ? product.storage[0] : '';
@@ -608,28 +585,39 @@ document.addEventListener('DOMContentLoaded', () => {
     modalOverlay.classList.add('active');
   }
 
-  // Add configured product from modal to Cart
+  // Direct checkout via WhatsApp from Modal
   btnModalCheckout.addEventListener('click', () => {
     if (!activeProduct) return;
 
-    // Compile title with selections
-    let detailsLabel = [];
-    if (configSelection.model) detailsLabel.push(configSelection.model);
-    if (configSelection.screenSize) detailsLabel.push(configSelection.screenSize);
-    if (configSelection.caseSize && activeProduct.id === "apple-watch-ultra-2") detailsLabel.push(configSelection.caseSize);
-    if (configSelection.strapType && activeProduct.id === "apple-watch-ultra-2" && configSelection.model === "Ultra 2") detailsLabel.push(configSelection.strapType);
-    if (configSelection.colorName) detailsLabel.push(configSelection.colorName);
-    if (configSelection.storage && configSelection.storage !== "N/A") detailsLabel.push(configSelection.storage);
+    const phoneNumber = '5519991101326';
+    let message = `Olá, Barbieri Tech! Gostaria de encomendar um item da categoria:\n`;
+    message += `*${activeProduct.name}*\n\n`;
+    
+    // Add chosen configurations
+    if (configSelection.model) message += `- *Modelo:* ${configSelection.model}\n`;
+    if (configSelection.screenSize && activeProduct.id === "linha-macbook-pro") message += `- *Tamanho de Tela:* ${configSelection.screenSize}\n`;
+    if (configSelection.caseSize && activeProduct.id === "linha-apple-watch") message += `- *Tamanho da Caixa:* ${configSelection.caseSize}\n`;
+    if (configSelection.strapType && activeProduct.id === "linha-apple-watch" && configSelection.model === "Apple Watch Ultra 2") message += `- *Pulseira:* ${configSelection.strapType}\n`;
+    if (configSelection.colorName) message += `- *Cor:* ${configSelection.colorName}\n`;
+    if (configSelection.storage && activeProduct.id !== "linha-airpods") message += `- *Armazenamento:* ${configSelection.storage}\n`;
+    
+    const finalPrice = calculateCurrentPrice();
+    message += `\n*Preço:* R$ ${finalPrice.toFixed(2).replace('.', ',')}\n`;
+    message += `*Frete:* Grátis para todo o Brasil 🇧🇷 (Cortesia)\n`;
+    message += `*Brinde Incluso:* ${activeProduct.gift}\n\n`;
+    message += `Por favor, verifique a disponibilidade e me envie o link de pagamento.`;
 
-    const fullConfigTitle = `${activeProduct.name} (${detailsLabel.join(' / ')})`;
-    const price = calculateCurrentPrice();
-    const uniqueId = `${activeProduct.id}-${detailsLabel.join('-').toLowerCase().replace(/\s+/g, '')}`;
-
-    addToCart(uniqueId, fullConfigTitle, price, activeProduct.img);
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank');
+    
+    // Close modal
     closeModal();
   });
 
-  // --- SHOPPING CART LOGIC ---
+  // --- SHOPPING CART LOGIC (FALLBACK/DORMANT) ---
   let cart = [];
 
   if (localStorage.getItem('barbieri_tech_cart')) {
@@ -650,14 +638,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const cartTotalValue = document.getElementById('cart-total-value');
   const btnCartCheckout = document.getElementById('btn-cart-checkout');
 
-  function toggleCart() {
-    cartPanel.classList.toggle('active');
-    cartOverlay.classList.toggle('active');
-  }
+  if (btnCartToggle && cartPanel && cartOverlay) {
+    function toggleCart() {
+      cartPanel.classList.toggle('active');
+      cartOverlay.classList.toggle('active');
+    }
 
-  btnCartToggle.addEventListener('click', toggleCart);
-  btnCartClose.addEventListener('click', toggleCart);
-  cartOverlay.addEventListener('click', toggleCart);
+    btnCartToggle.addEventListener('click', toggleCart);
+    if (btnCartClose) btnCartClose.addEventListener('click', toggleCart);
+    cartOverlay.addEventListener('click', toggleCart);
+  }
 
   function saveCart() {
     localStorage.setItem('barbieri_tech_cart', JSON.stringify(cart));
@@ -665,6 +655,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateCartUI() {
+    if (!cartCounter || !cartList) return;
     const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
     cartCounter.innerText = totalItems;
     if (totalItems > 0) {
@@ -678,20 +669,12 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="cart-empty-message">
           <i class="fas fa-shopping-basket cart-empty-icon"></i>
           <p>Seu carrinho está vazio.</p>
-          <p style="font-size: 0.85rem; margin-top: 0.5rem; color: var(--text-muted)">Adicione produtos para finalizar seu pedido.</p>
         </div>
       `;
-      cartSubtotal.innerText = 'R$ 0,00';
-      cartTotalValue.innerText = 'R$ 0,00';
-      btnCartCheckout.disabled = true;
-      btnCartCheckout.style.opacity = '0.5';
-      btnCartCheckout.style.cursor = 'not-allowed';
+      if (cartSubtotal) cartSubtotal.innerText = 'R$ 0,00';
+      if (cartTotalValue) cartTotalValue.innerText = 'R$ 0,00';
       return;
     }
-
-    btnCartCheckout.disabled = false;
-    btnCartCheckout.style.opacity = '1';
-    btnCartCheckout.style.cursor = 'pointer';
 
     cartList.innerHTML = '';
     let subtotal = 0;
@@ -708,18 +691,8 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="cart-item-details">
           <div>
-            <h4 class="cart-item-title" style="font-size: 0.85rem; line-height: 1.3;">${item.name}</h4>
-            <div class="cart-item-price" style="font-size: 0.9rem; margin-top: 0.15rem;">R$ ${item.price.toFixed(2).replace('.', ',')}</div>
-          </div>
-          <div class="cart-item-actions">
-            <div class="quantity-control">
-              <button class="qty-btn dec-qty" data-id="${item.id}">-</button>
-              <span class="qty-val">${item.qty}</span>
-              <button class="qty-btn inc-qty" data-id="${item.id}">+</button>
-            </div>
-            <button class="remove-item-btn" data-id="${item.id}">
-              <i class="far fa-trash-alt"></i> Remover
-            </button>
+            <h4 class="cart-item-title">${item.name}</h4>
+            <div class="cart-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}</div>
           </div>
         </div>
       `;
@@ -727,84 +700,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const formattedSubtotal = 'R$ ' + subtotal.toFixed(2).replace('.', ',');
-    cartSubtotal.innerText = formattedSubtotal;
-    cartTotalValue.innerText = formattedSubtotal;
-
-    document.querySelectorAll('.dec-qty').forEach(btn => {
-      btn.addEventListener('click', (e) => adjustQty(e.target.dataset.id, -1));
-    });
-    document.querySelectorAll('.inc-qty').forEach(btn => {
-      btn.addEventListener('click', (e) => adjustQty(e.target.dataset.id, 1));
-    });
-    document.querySelectorAll('.remove-item-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const id = e.target.closest('.remove-item-btn').dataset.id;
-        removeItem(id);
-      });
-    });
+    if (cartSubtotal) cartSubtotal.innerText = formattedSubtotal;
+    if (cartTotalValue) cartTotalValue.innerText = formattedSubtotal;
   }
-
-  function addToCart(id, name, price, img) {
-    const existingItem = cart.find(item => item.id === id);
-    if (existingItem) {
-      existingItem.qty += 1;
-    } else {
-      cart.push({
-        id,
-        name,
-        price: parseFloat(price),
-        img,
-        qty: 1
-      });
-    }
-    saveCart();
-    
-    if (!cartPanel.classList.contains('active')) {
-      toggleCart();
-    }
-  }
-
-  function adjustQty(id, change) {
-    const item = cart.find(item => item.id === id);
-    if (!item) return;
-
-    item.qty += change;
-    if (item.qty <= 0) {
-      removeItem(id);
-    } else {
-      saveCart();
-    }
-  }
-
-  function removeItem(id) {
-    cart = cart.filter(item => item.id !== id);
-    saveCart();
-  }
-
-  // --- WHATSAPP CHECKOUT ---
-  btnCartCheckout.addEventListener('click', () => {
-    if (cart.length === 0) return;
-
-    const phoneNumber = '5519991101326';
-    let message = 'Olá, Barbieri Tech! Gostaria de fazer o seguinte pedido de compra:\n\n';
-    
-    let total = 0;
-    cart.forEach((item, index) => {
-      const itemTotal = item.price * item.qty;
-      total += itemTotal;
-      message += `${index + 1}. *${item.name}*\n   Qtd: ${item.qty} x R$ ${item.price.toFixed(2).replace('.', ',')} un.\n\n`;
-    });
-
-    message += `*Subtotal:* R$ ${total.toFixed(2).replace('.', ',')}`;
-    message += `\n*Frete:* Grátis para todo o Brasil 🇧🇷 (Cortesia)`;
-    message += `\n*Total:* R$ ${total.toFixed(2).replace('.', ',')}`;
-    message += `\n\nPor favor, confirme a disponibilidade e me envie o link de pagamento.`;
-
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-    
-    window.open(whatsappUrl, '_blank');
-  });
 
   // Render the dynamic catalog on load
   renderCatalog();

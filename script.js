@@ -87,6 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
         "Construção": "Titânio Aeroespacial"
       },
       models: ["iPhone 17", "iPhone 17 Plus", "iPhone 17 Pro", "iPhone 17 Pro Max"],
+      modelImages: {
+        "iPhone 17": "https://images.unsplash.com/photo-1696446701796-da61225697cc?q=80&w=800&auto=format&fit=crop",
+        "iPhone 17 Plus": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop",
+        "iPhone 17 Pro": "https://images.unsplash.com/photo-1726058428469-8041065f02bc?q=80&w=800&auto=format&fit=crop",
+        "iPhone 17 Pro Max": "assets/iphone.png"
+      },
       colors: [
         { name: "Titânio Deserto", hex: "#c2b29f" },
         { name: "Titânio Concreto", hex: "#8c8d90" },
@@ -116,6 +122,10 @@ document.addEventListener('DOMContentLoaded', () => {
         "Gráficos": "GPU de 10 núcleos com aceleração por hardware"
       },
       models: ["iPad Air M2", "iPad Pro M4"],
+      modelImages: {
+        "iPad Air M2": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=800&auto=format&fit=crop",
+        "iPad Pro M4": "assets/ipad.png"
+      },
       colors: [
         { name: "Cinza Espacial", hex: "#4b4c4e" },
         { name: "Estelar", hex: "#dfdcd4" },
@@ -127,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Cabo de carregamento USB-C (1m)",
         "Manuais"
       ],
-      gift: "Capa Magnética Smart Folio com fechamento inteligente + Película Protetora Fosca"
+      gift: "Capa Magnética Smart Folio com imagem inteligente + Película Protetora Fosca"
     },
     {
       id: "linha-macbook-pro",
@@ -144,6 +154,10 @@ document.addEventListener('DOMContentLoaded', () => {
         "Bateria": "Até 22 horas de autonomia"
       },
       models: ["MacBook Air M3", "MacBook Pro M4"],
+      modelImages: {
+        "MacBook Air M3": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop",
+        "MacBook Pro M4": "assets/macbook.png"
+      },
       screenSizes: ["13\"", "15\""],
       colors: [
         { name: "Preto Espacial", hex: "#1d1e22" },
@@ -174,6 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
         "Construção": "Alumínio ou Titânio Aeroespacial"
       },
       models: ["Apple Watch Series 9", "Apple Watch Ultra 2"],
+      modelImages: {
+        "Apple Watch Series 9": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?q=80&w=800&auto=format&fit=crop",
+        "Apple Watch Ultra 2": "assets/smartwatch.png"
+      },
       caseSizes: ["41mm", "45mm", "49mm"],
       strapTypes: ["Pulseira Esportiva", "Pulseira Trail", "Pulseira Oceano"],
       colors: [
@@ -204,6 +222,11 @@ document.addEventListener('DOMContentLoaded', () => {
         "Conectores": "Chip H1 ou H2 de alta performance"
       },
       models: ["AirPods 3", "AirPods Pro 2", "AirPods Max"],
+      modelImages: {
+        "AirPods 3": "https://images.unsplash.com/photo-1588449668365-d15e397f6787?q=80&w=800&auto=format&fit=crop",
+        "AirPods Pro 2": "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=800&auto=format&fit=crop",
+        "AirPods Max": "assets/airpods.png"
+      },
       colors: [
         { name: "Branco Clássico", hex: "#ffffff" },
         { name: "Preto Espacial", hex: "#232426" },
@@ -407,9 +430,30 @@ document.addEventListener('DOMContentLoaded', () => {
     modalPriceCurrent.innerText = `R$ ${currentPrice.toFixed(2).replace('.', ',')}`;
   }
 
+  // Dynamic smooth image fade switch
+  function changeModalImage(newSrc) {
+    if (modalImg.getAttribute('src') === newSrc) return;
+    modalImg.classList.add('fade-out');
+    setTimeout(() => {
+      modalImg.src = newSrc;
+      modalImg.onload = () => {
+        modalImg.classList.remove('fade-out');
+      };
+      // fallback in case onload doesn't trigger immediately
+      setTimeout(() => {
+        modalImg.classList.remove('fade-out');
+      }, 350);
+    }, 200);
+  }
+
   // Update modal selectors dynamically depending on selected options
   function updateModalSelectors() {
     if (!activeProduct) return;
+
+    // Change image based on selected model
+    const currentModelImg = (activeProduct.modelImages && activeProduct.modelImages[configSelection.model]) 
+                            || activeProduct.img;
+    changeModalImage(currentModelImg);
 
     // Render Specs
     modalSpecs.innerHTML = '';

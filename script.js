@@ -1,15 +1,16 @@
 // ==========================================
 // CONFIGURAÇÃO DO FIREBASE (CLIENT-SIDE PUBLIC CONFIG)
-// Substitua pelos valores do seu Firebase Console
 // ==========================================
 const firebaseConfig = {
-  apiKey: "SEU_API_KEY",
-  authDomain: "SEU_AUTH_DOMAIN",
-  projectId: "SEU_PROJECT_ID",
-  storageBucket: "SEU_STORAGE_BUCKET",
-  messagingSenderId: "SEU_MESSAGING_SENDER_ID",
-  appId: "SEU_APP_ID"
+  apiKey: "AIzaSyAyumwb9Lhr5mnGRHeoJsRu-9q1yqWnPUM",
+  authDomain: "barbieri-tech.firebaseapp.com",
+  projectId: "barbieri-tech",
+  storageBucket: "barbieri-tech.firebasestorage.app",
+  messagingSenderId: "350451948154",
+  appId: "1:350451948154:web:64b4670a8f5d66ff3a79c3",
+  measurementId: "G-4J3MJ6J28Z"
 };
+
 
 // Inicializar Firebase
 let db = null;

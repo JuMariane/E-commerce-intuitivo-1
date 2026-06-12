@@ -863,6 +863,17 @@
     // ==========================================
     const ENCRYPTED_CONFIG = "U2FsdGVkX18PkbN5R1Y3ZvU00iNosj2CD/GMwuuGKb+HeR4tYz0D1QHJWcJgBaP6U5AbYHiMnEZSfoylqQasqpmw8RWVZydRs/9XA9yp7pTCCBZ8KCCfi7PfGBilDaSXLps6n1iSqaWm51QcUmh+xA==";
 
+    // CONFIGURAÇÃO DO FIREBASE (CLIENT-SIDE PUBLIC CONFIG)
+    const firebaseConfig = {
+      apiKey: "AIzaSyAyumwb9Lhr5mnGRHeoJsRu-9q1yqWnPUM",
+      authDomain: "barbieri-tech.firebaseapp.com",
+      projectId: "barbieri-tech",
+      storageBucket: "barbieri-tech.firebasestorage.app",
+      messagingSenderId: "350451948154",
+      appId: "1:350451948154:web:64b4670a8f5d66ff3a79c3",
+      measurementId: "G-4J3MJ6J28Z"
+    };
+
     let decryptedConfig = null;
     let products = [];
     let activeProductId = null;
@@ -1156,11 +1167,11 @@
     function initAdminDashboard() {
       document.getElementById('login-container').style.display = 'none';
 
-      // Inicializa o Firebase no admin usando a chave descriptografada
-      if (decryptedConfig && typeof firebase !== 'undefined') {
+      // Inicializa o Firebase no admin usando a chave pública do Firebase
+      if (typeof firebase !== 'undefined') {
         try {
           if (firebase.apps.length === 0) {
-            firebase.initializeApp(decryptedConfig);
+            firebase.initializeApp(firebaseConfig);
           }
           db = firebase.firestore();
           storage = firebase.storage();

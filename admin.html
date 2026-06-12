@@ -529,6 +529,59 @@
         grid-column: span 1;
       }
     }
+
+    /* --- TABS --- */
+    .admin-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 2rem;
+      padding-bottom: 0.5rem;
+      width: 100%;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .tab-btn:hover {
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .tab-btn.active {
+      color: var(--accent-neon);
+      background-color: rgba(0, 229, 255, 0.05);
+    }
+
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -0.55rem;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--accent-neon);
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    .tab-content {
+      display: none;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
@@ -613,9 +666,12 @@
     </div>
     
     <div class="sidebar-section-title">Categorias</div>
-    <ul class="sidebar-menu" id="sidebar-products-list">
+    <ul class="sidebar-menu" id="sidebar-products-list" style="margin-bottom: 1rem;">
       <!-- Dynamic menu items will load here -->
     </ul>
+    <button class="btn-add-row" onclick="createNewProduct()" style="margin-top: 0; margin-bottom: 2.5rem; border-style: solid; background: rgba(0, 229, 255, 0.05); border-color: rgba(0, 229, 255, 0.2); color: var(--accent-neon); width: 100%;">
+      <i class="fas fa-plus"></i> Nova Categoria
+    </button>
     
     <!-- LOGOUT FOOTER -->
     <div style="margin-top: auto; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
@@ -629,7 +685,12 @@
   <main class="admin-main">
     <div class="editor-header">
       <div class="editor-title-box">
-        <h1 id="active-product-title">Carregando painel...</h1>
+        <h1 style="display: flex; align-items: center; gap: 0.75rem;">
+          <span id="active-product-title">Carregando painel...</span>
+          <button class="btn-icon-danger" id="btn-delete-product" onclick="deleteActiveProduct()" title="Excluir esta categoria" style="width: 2rem; height: 2rem; border-radius: 8px; display: none; font-size: 0.8rem; align-items: center; justify-content: center;">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </h1>
         <p id="active-product-subtitle">Selecione uma categoria ao lado para gerenciar especificações e preços.</p>
       </div>
       
@@ -643,140 +704,160 @@
       </div>
     </div>
 
+    <!-- Tab Navigation Bar -->
+    <div class="admin-tabs" id="editor-tabs" style="display: none;">
+      <button class="tab-btn active" onclick="switchTab('geral', this)"><i class="fas fa-info-circle"></i> Informações Gerais</button>
+      <button class="tab-btn" onclick="switchTab('conteudo', this)"><i class="fas fa-box-open"></i> Caixa & Specs</button>
+      <button class="tab-btn" onclick="switchTab('modelos', this)"><i class="fas fa-tags"></i> Modelos & Preços</button>
+      <button class="tab-btn" onclick="switchTab('opcoes', this)"><i class="fas fa-sliders-h"></i> Cores & Opções</button>
+    </div>
+
     <!-- DYNAMIC EDITOR FORM GRID -->
-    <div class="editor-grid" id="editor-form-grid" style="display: none;">
+    <div class="editor-grid" id="editor-form-grid" style="display: none; grid-template-columns: 1fr; gap: 0;">
       
-      <!-- CARD 1: GENERAL INFO -->
-      <section class="editor-card">
-        <h3 class="card-title"><i class="fas fa-info-circle"></i> Informações Gerais</h3>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="p-title">Título do Bloco</label>
-            <input type="text" id="p-title" class="input-field" oninput="updateGeneralField('title', this.value)">
+      <!-- TAB 1: GERAL -->
+      <div id="tab-geral" class="tab-content" style="display: block;">
+        <!-- CARD 1: GENERAL INFO -->
+        <section class="editor-card">
+          <h3 class="card-title"><i class="fas fa-info-circle"></i> Informações Gerais</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="p-title">Título do Bloco</label>
+              <input type="text" id="p-title" class="input-field" oninput="updateGeneralField('title', this.value)">
+            </div>
+            <div class="form-group">
+              <label for="p-badge">Badge de Destaque</label>
+              <input type="text" id="p-badge" class="input-field" oninput="updateGeneralField('badge', this.value)">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="p-badge">Badge de Destaque</label>
-            <input type="text" id="p-badge" class="input-field" oninput="updateGeneralField('badge', this.value)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="p-category">Nome da Categoria</label>
+              <input type="text" id="p-category" class="input-field" oninput="updateGeneralField('category', this.value)">
+            </div>
+            <div class="form-group">
+              <label for="p-img">Imagem Principal Fallback (Caminho ou URL)</label>
+              <input type="text" id="p-img" class="input-field" oninput="updateGeneralField('img', this.value)">
+            </div>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="p-category">Nome da Categoria</label>
-            <input type="text" id="p-category" class="input-field" oninput="updateGeneralField('category', this.value)">
+          <div class="form-group full-width" style="margin-bottom: 1.5rem;">
+            <label for="p-desc">Descrição Principal</label>
+            <textarea id="p-desc" class="input-field" oninput="updateGeneralField('desc', this.value)"></textarea>
           </div>
-          <div class="form-group">
-            <label for="p-img">Imagem Principal Fallback (Caminho ou URL)</label>
-            <input type="text" id="p-img" class="input-field" oninput="updateGeneralField('img', this.value)">
+          <div class="form-group full-width">
+            <label for="p-gift">Brinde Exclusivo Barbieri Tech</label>
+            <input type="text" id="p-gift" class="input-field" oninput="updateGeneralField('gift', this.value)">
           </div>
-        </div>
-        <div class="form-group full-width" style="margin-bottom: 1.5rem;">
-          <label for="p-desc">Descrição Principal</label>
-          <textarea id="p-desc" class="input-field" oninput="updateGeneralField('desc', this.value)"></textarea>
-        </div>
-        <div class="form-group full-width">
-          <label for="p-gift">Brinde Exclusivo Barbieri Tech</label>
-          <input type="text" id="p-gift" class="input-field" oninput="updateGeneralField('gift', this.value)">
-        </div>
-      </section>
+        </section>
+      </div>
 
-      <!-- CARD 2: BOX ITEMS -->
-      <section class="editor-card">
-        <h3 class="card-title"><i class="fas fa-box-open"></i> Conteúdo da Caixa</h3>
-        <div class="row-editor-list" id="box-items-editor">
-          <!-- Rendered dynamically -->
-        </div>
-        <button class="btn-add-row" onclick="addBoxItemRow()">
-          <i class="fas fa-plus"></i> Adicionar Item na Caixa
-        </button>
-      </section>
-
-      <!-- CARD 3: SPECS -->
-      <section class="editor-card">
-        <h3 class="card-title"><i class="fas fa-microchip"></i> Especificações Técnicas</h3>
-        <div class="row-editor-list" id="specs-editor">
-          <!-- Rendered dynamically -->
-        </div>
-        <button class="btn-add-row" onclick="addSpecRow()">
-          <i class="fas fa-plus"></i> Adicionar Especificação
-        </button>
-      </section>
-
-      <!-- CARD 4: MODELS & PRICES -->
-      <section class="editor-card">
-        <h3 class="card-title"><i class="fas fa-tags"></i> Modelos & Preços Base</h3>
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th style="width: 35%;">Nome do Modelo</th>
-              <th style="width: 20%;">Preço (R$)</th>
-              <th style="width: 35%;">URL Imagem (Opcional)</th>
-              <th style="width: 10%;">Ações</th>
-            </tr>
-          </thead>
-          <tbody id="models-editor-body">
+      <!-- TAB 2: CAIXA & SPECS -->
+      <div id="tab-conteudo" class="tab-content" style="display: none;">
+        <!-- CARD 2: BOX ITEMS -->
+        <section class="editor-card" style="margin-bottom: 2rem;">
+          <h3 class="card-title"><i class="fas fa-box-open"></i> Conteúdo da Caixa</h3>
+          <div class="row-editor-list" id="box-items-editor">
             <!-- Rendered dynamically -->
-          </tbody>
-        </table>
-        <button class="btn-add-row" onclick="addModelRow()">
-          <i class="fas fa-plus"></i> Adicionar Novo Modelo
-        </button>
-      </section>
+          </div>
+          <button class="btn-add-row" onclick="addBoxItemRow()">
+            <i class="fas fa-plus"></i> Adicionar Item na Caixa
+          </button>
+        </section>
 
-      <!-- CARD 5: COLORS -->
-      <section class="editor-card">
-        <h3 class="card-title"><i class="fas fa-palette"></i> Cores Disponíveis</h3>
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th style="width: 45%;">Nome da Cor</th>
-              <th style="width: 45%;">Código Hex / Cor</th>
-              <th style="width: 10%;">Ações</th>
-            </tr>
-          </thead>
-          <tbody id="colors-editor-body">
+        <!-- CARD 3: SPECS -->
+        <section class="editor-card">
+          <h3 class="card-title"><i class="fas fa-microchip"></i> Especificações Técnicas</h3>
+          <div class="row-editor-list" id="specs-editor">
             <!-- Rendered dynamically -->
-          </tbody>
-        </table>
-        <button class="btn-add-row" onclick="addColorRow()">
-          <i class="fas fa-plus"></i> Adicionar Nova Cor
-        </button>
-      </section>
+          </div>
+          <button class="btn-add-row" onclick="addSpecRow()">
+            <i class="fas fa-plus"></i> Adicionar Especificação
+          </button>
+        </section>
+      </div>
 
-      <!-- CARD 6: STORAGE CAPACITIES -->
-      <section class="editor-card">
-        <h3 class="card-title"><i class="fas fa-hdd"></i> Capacidades de Armazenamento / Memória</h3>
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th style="width: 45%;">Capacidade (Ex: 128GB, 8GB Ram)</th>
-              <th style="width: 45%;">Acréscimo de Preço (Offset R$)</th>
-              <th style="width: 10%;">Ações</th>
-            </tr>
-          </thead>
-          <tbody id="storages-editor-body">
-            <!-- Rendered dynamically -->
-          </tbody>
-        </table>
-        <button class="btn-add-row" onclick="addStorageRow()">
-          <i class="fas fa-plus"></i> Adicionar Armazenamento
-        </button>
-      </section>
+      <!-- TAB 3: MODELOS & PRECOS -->
+      <div id="tab-modelos" class="tab-content" style="display: none;">
+        <!-- CARD 4: MODELS & PRICES -->
+        <section class="editor-card">
+          <h3 class="card-title"><i class="fas fa-tags"></i> Modelos & Preços Base</h3>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th style="width: 35%;">Nome do Modelo</th>
+                <th style="width: 20%;">Preço (R$)</th>
+                <th style="width: 35%;">URL Imagem (Opcional)</th>
+                <th style="width: 10%;">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="models-editor-body">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+          <button class="btn-add-row" onclick="addModelRow()">
+            <i class="fas fa-plus"></i> Adicionar Novo Modelo
+          </button>
+        </section>
+      </div>
 
-      <!-- CARD 7: EXTRA SELECTION OPTIONS (DYNAMIC BY SCHEMA) -->
-      <section class="editor-card" id="extra-options-card" style="display: none;">
-        <h3 class="card-title" id="extra-card-title"><i class="fas fa-sliders-h"></i> Opções Adicionais</h3>
-        <table class="admin-table">
-          <thead id="extra-table-header">
+      <!-- TAB 4: CORES & OPCOES -->
+      <div id="tab-opcoes" class="tab-content" style="display: none;">
+        <!-- CARD 5: COLORS -->
+        <section class="editor-card" style="margin-bottom: 2rem;">
+          <h3 class="card-title"><i class="fas fa-palette"></i> Cores Disponíveis</h3>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th style="width: 45%;">Nome da Cor</th>
+                <th style="width: 45%;">Código Hex / Cor</th>
+                <th style="width: 10%;">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="colors-editor-body">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+          <button class="btn-add-row" onclick="addColorRow()">
+            <i class="fas fa-plus"></i> Adicionar Nova Cor
+          </button>
+        </section>
+
+        <!-- CARD 6: STORAGE CAPACITIES -->
+        <section class="editor-card" style="margin-bottom: 2rem;">
+          <h3 class="card-title"><i class="fas fa-hdd"></i> Capacidades de Armazenamento / Memória</h3>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th style="width: 45%;">Capacidade (Ex: 128GB, 8GB Ram)</th>
+                <th style="width: 45%;">Acréscimo de Preço (Offset R$)</th>
+                <th style="width: 10%;">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="storages-editor-body">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+          <button class="btn-add-row" onclick="addStorageRow()">
+            <i class="fas fa-plus"></i> Adicionar Armazenamento
+          </button>
+        </section>
+
+        <!-- CARD 7: EXTRA SELECTION OPTIONS (DYNAMIC BY SCHEMA) -->
+        <section class="editor-card" id="extra-options-card" style="display: none;">
+          <h3 class="card-title" id="extra-card-title"><i class="fas fa-sliders-h"></i> Opções Adicionais</h3>
+          <table class="admin-table">
+            <thead id="extra-table-header">
+              <!-- Rendered dynamically -->
+            </thead>
+            <tbody id="extra-editor-body">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+          <button class="btn-add-row" id="btn-add-extra" onclick="addExtraRow()">
             <!-- Rendered dynamically -->
-          </thead>
-          <tbody id="extra-editor-body">
-            <!-- Rendered dynamically -->
-          </tbody>
-        </table>
-        <button class="btn-add-row" id="btn-add-extra" onclick="addExtraRow()">
-          <!-- Rendered dynamically -->
-        </button>
-      </section>
+          </button>
+        </section>
+      </div>
 
     </div>
   </main>
@@ -1093,6 +1174,91 @@
       window.location.reload();
     }
 
+    // --- PORTAL TABS SWITCHER ---
+    window.switchTab = function(tabId, btnEl) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.style.display = 'none';
+      });
+      
+      // Show selected tab
+      const selectedTab = document.getElementById('tab-' + tabId);
+      if (selectedTab) {
+        selectedTab.style.display = 'block';
+      }
+      
+      // Update active tab button styles
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      if (btnEl) {
+        btnEl.classList.add('active');
+      } else {
+        // Fallback to select first button if click element was not provided
+        const firstBtn = document.querySelector(`.tab-btn[onclick*="${tabId}"]`);
+        if (firstBtn) firstBtn.classList.add('active');
+      }
+    };
+
+    // --- CREATE NEW PRODUCT CATEGORY ---
+    window.createNewProduct = function() {
+      const newId = 'categoria-' + Date.now();
+      const newProduct = {
+        "id": newId,
+        "title": "Nova Categoria",
+        "category": "Geral",
+        "badge": "NOVIDADE",
+        "desc": "Edite a descrição desta nova categoria de produtos.",
+        "img": "assets/categorias/placeholder.png",
+        "specs": {
+          "Especificação 1": "Valor 1",
+          "Especificação 2": "Valor 2"
+        },
+        "boxItems": [
+          "Item de Caixa 1",
+          "Item de Caixa 2"
+        ],
+        "gift": "Brinde Padrão da Loja",
+        "models": [
+          { "name": "Modelo Padrão", "price": 499, "img": "" }
+        ],
+        "colors": [
+          { "name": "Preto", "hex": "#000000" }
+        ],
+        "storages": [
+          { "name": "Padrão", "offset": 0 }
+        ]
+      };
+      
+      products.push(newProduct);
+      renderSidebar();
+      selectProduct(newId);
+      showToast('Nova categoria criada! Edite os detalhes e lembre-se de clicar em Salvar Alterações.', 'info');
+    };
+
+    // --- DELETE ACTIVE PRODUCT CATEGORY ---
+    window.deleteActiveProduct = function() {
+      if (products.length <= 1) {
+        alert('A loja precisa possuir pelo menos 1 categoria de produto cadastrada.');
+        return;
+      }
+      
+      const product = products.find(p => p.id === activeProductId);
+      if (!product) return;
+      
+      if (!confirm(`Tem certeza que deseja excluir permanentemente a categoria "${product.title}"?`)) {
+        return;
+      }
+      
+      const idx = products.findIndex(p => p.id === activeProductId);
+      if (idx !== -1) {
+        products.splice(idx, 1);
+        renderSidebar();
+        selectProduct(products[0].id);
+        showToast('Categoria removida. Lembre-se de clicar em Salvar Alterações para atualizar o site oficial.', 'success');
+      }
+    };
+
     // --- TOAST NOTIFICATIONS ---
     function showToast(message, type = 'info', persist = false) {
       const toast = document.getElementById('toast-overlay');
@@ -1194,8 +1360,15 @@
       renderStorages();
       renderExtraOptions();
 
+      // Show the tab navigation and delete button
+      document.getElementById('editor-tabs').style.display = 'flex';
+      document.getElementById('btn-delete-product').style.display = 'inline-flex';
+
+      // Reset active tab to first tab on product selection
+      switchTab('geral', document.querySelector('.tab-btn'));
+
       // Show the editor grid
-      document.getElementById('editor-form-grid').style.display = 'grid';
+      document.getElementById('editor-form-grid').style.display = 'block';
     }
 
     // --- SYNC FIELD INPUTS WITH DATA STATE ---

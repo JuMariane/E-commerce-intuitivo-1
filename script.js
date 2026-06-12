@@ -651,48 +651,48 @@ window.checkoutDynamicWhatsApp = function(productId) {
 
 // --- UPDATE INDEX PAGE CARDS DYNAMICALLY ---
 function updateCatalogUI() {
+  const grid = document.getElementById('catalog-grid');
+  if (!grid) return;
+  
+  grid.innerHTML = ''; // Clear fallback cards to dynamically support additions/deletions
+  
   products.forEach(p => {
-    const card = document.getElementById('card-' + p.id);
-    if (!card) return;
-    
-    // Update badge
-    const badge = card.querySelector('.product-card-badge, .product-badge');
-    if (badge && p.badge) {
-      badge.textContent = p.badge;
-    }
-    
-    // Update image
-    const img = card.querySelector('.product-img');
-    if (img && p.img) {
-      img.src = p.img;
-      img.alt = p.title;
-    }
-    
-    // Update title
-    const title = card.querySelector('.product-title');
-    if (title && p.title) {
-      title.textContent = p.title;
-    }
-    
-    // Update description
-    const desc = card.querySelector('.product-desc');
-    if (desc && p.desc) {
-      desc.textContent = p.desc;
-    }
-    
-    // Update starting price (minimum price of models)
     const startPrice = p.basePrice || (p.models && p.models.length > 0 ? p.models[0].price : 0);
     const originalPrice = p.originalPrice || (startPrice * 1.15);
     
-    const priceEl = card.querySelector('.product-price:not(.original)');
-    if (priceEl) {
-      priceEl.textContent = startPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    }
+    // Apple-style badge wrapper if badge exists
+    const badgeHTML = p.badge ? `<span class="product-card-badge">${p.badge}</span>` : '';
     
-    const originalPriceEl = card.querySelector('.product-price.original');
-    if (originalPriceEl) {
-      originalPriceEl.textContent = originalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    }
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.id = 'card-' + p.id;
+    
+    card.innerHTML = `
+      <div class="product-img-container">
+        ${badgeHTML}
+        <img src="${p.img}" alt="${p.title}" class="product-img">
+      </div>
+      <div class="product-info">
+        <span class="product-category">${p.category}</span>
+        <h3 class="product-title">${p.title}</h3>
+        <p class="product-desc">${p.desc}</p>
+        <div class="product-price-row">
+          <span class="product-price-label">A partir de</span>
+          <div>
+            <span class="product-price original">${originalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+            <span class="product-price">${startPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+          </div>
+        </div>
+        <div class="product-card-trust-lines">
+          <div class="trust-line-item"><i class="fas fa-shipping-fast"></i> <span>Frete Grátis para todo o Brasil</span></div>
+          <div class="trust-line-item"><i class="fas fa-gift"></i> <span>Brinde Exclusivo Barbieri Tech</span></div>
+        </div>
+        <button class="btn btn-primary product-btn" onclick="abrirConfigModal('${p.id}')">
+          <i class="fas fa-sliders-h"></i> Configurar e Comprar
+        </button>
+      </div>
+    `;
+    grid.appendChild(card);
   });
 }
 

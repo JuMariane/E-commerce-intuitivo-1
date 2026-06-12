@@ -4,36 +4,36 @@ let products = [];
 const fallbackProducts = [
   {
     "id": "iphone",
-    "title": "Linha iPhone 17",
+    "title": "Linha iPhone",
     "category": "Celulares",
     "badge": "ÚLTIMO LANÇAMENTO",
-    "desc": "O máximo em performance e design. Processador A19 Pro, estrutura em titânio e sistema de câmeras avançado.",
-    "originalPrice": 8048.85,
-    "basePrice": 6999.00,
+    "desc": "Performance e design excepcionais. Câmera avançada, processamento de ponta e bateria de longa duração.",
+    "originalPrice": 6323.85,
+    "basePrice": 5499.00,
     "img": "assets/categorias/iphone.png",
     "specs": {
-      "Processador": "A19 Pro Neural Core",
+      "Processador": "A18 ou A18 Pro Bionic",
       "Câmera": "48MP Fusion principal",
-      "Tela": "Super Retina XDR",
-      "Construção": "Titânio Aeroespacial"
+      "Tela": "Super Retina XDR OLED",
+      "Construção": "Alumínio ou Titânio Aeroespacial"
     },
     "boxItems": [
-      "iPhone com iOS 19",
+      "iPhone com iOS 18",
       "Cabo USB-C Premium trançado (1m)",
       "Manuais de Instrução"
     ],
     "gift": "Capa Protetora MagSafe Slim Clear + Película de Privacidade em Cerâmica Aplicada",
     "models": [
-      { "name": "iPhone 17", "price": 6999, "img": "https://images.unsplash.com/photo-1696446701796-da61225697cc?q=80&w=800&auto=format&fit=crop" },
-      { "name": "iPhone 17 Plus", "price": 7599, "img": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop" },
-      { "name": "iPhone 17 Pro", "price": 8599, "img": "https://images.unsplash.com/photo-1726058428469-8041065f02bc?q=80&w=800&auto=format&fit=crop" },
-      { "name": "iPhone 17 Pro Max", "price": 9399, "img": "assets/categorias/iphone.png" }
+      { "name": "iPhone 16", "price": 5499, "img": "https://images.unsplash.com/photo-1696446701796-da61225697cc?q=80&w=800&auto=format&fit=crop" },
+      { "name": "iPhone 16 Plus", "price": 6099, "img": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop" },
+      { "name": "iPhone 16 Pro", "price": 7299, "img": "https://images.unsplash.com/photo-1726058428469-8041065f02bc?q=80&w=800&auto=format&fit=crop" },
+      { "name": "iPhone 16 Pro Max", "price": 8299, "img": "assets/categorias/iphone.png" }
     ],
     "colors": [
-      { "name": "Titânio Deserto", "hex": "#c2b29f" },
-      { "name": "Titânio Concreto", "hex": "#8c8d90" },
-      { "name": "Preto Espacial", "hex": "#1c1d21" },
-      { "name": "Prata", "hex": "#e3e4e5" }
+      { "name": "Preto Titânio / Escuro", "hex": "#1c1d21" },
+      { "name": "Branco Titânio / Claro", "hex": "#e3e4e5" },
+      { "name": "Titânio Natural", "hex": "#c2b29f" },
+      { "name": "Azul Ultramarino", "hex": "#2c3e50" }
     ],
     "storages": [
       { "name": "128GB", "offset": 0 },
@@ -402,13 +402,14 @@ window.renderDynamicSelectors = function(productId) {
     group.className = 'selector-group';
     group.innerHTML = `<h4 class="selector-label">Modelo</h4>`;
     const optionsDiv = document.createElement('div');
-    optionsDiv.className = 'selector-options';
+    optionsDiv.className = 'selector-options full-width-grid';
     
     product.models.forEach((model, index) => {
       const active = selections[productId].model === model.name;
       optionsDiv.innerHTML += `
         <button class="selector-btn ${active ? 'selected' : ''}" onclick="selectDynamicModel('${productId}', ${index}, this)">
-          ${model.name}
+          <span>${model.name}</span>
+          <span class="option-price-tag">${model.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 })}</span>
         </button>
       `;
     });
@@ -426,9 +427,11 @@ window.renderDynamicSelectors = function(productId) {
     
     product.screens.forEach((screen, index) => {
       const active = selections[productId].screenSize === screen.name;
+      const offsetText = screen.offset > 0 ? `+ ${screen.offset.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 })}` : 'Incluso';
       optionsDiv.innerHTML += `
         <button class="selector-btn ${active ? 'selected' : ''}" onclick="selectDynamicScreen('${productId}', ${index}, this)">
-          ${screen.name}
+          <span>${screen.name}</span>
+          <span class="option-price-tag">${offsetText}</span>
         </button>
       `;
     });
@@ -450,9 +453,11 @@ window.renderDynamicSelectors = function(productId) {
       const isUltraCase = c.name === '49mm';
       if ((isUltra && isUltraCase) || (!isUltra && !isUltraCase)) {
         const active = selections[productId].caseSize === c.name;
+        const offsetText = c.offset > 0 ? `+ ${c.offset.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 })}` : 'Incluso';
         optionsDiv.innerHTML += `
           <button class="selector-btn ${active ? 'selected' : ''}" onclick="selectDynamicCase('${productId}', ${index}, this)">
-            ${c.name}
+            <span>${c.name}</span>
+            <span class="option-price-tag">${offsetText}</span>
           </button>
         `;
       }
@@ -475,7 +480,8 @@ window.renderDynamicSelectors = function(productId) {
       const active = selections[productId].strap === strap.name;
       optionsDiv.innerHTML += `
         <button class="selector-btn ${active ? 'selected' : ''}" onclick="selectDynamicStrap('${productId}', ${index}, this)">
-          ${strap.name}
+          <span>${strap.name}</span>
+          <span class="option-price-tag">Incluso</span>
         </button>
       `;
     });
@@ -513,9 +519,11 @@ window.renderDynamicSelectors = function(productId) {
     
     product.storages.forEach((storage, index) => {
       const active = selections[productId].storage === storage.name;
+      const offsetText = storage.offset > 0 ? `+ ${storage.offset.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 })}` : 'Incluso';
       optionsDiv.innerHTML += `
         <button class="selector-btn ${active ? 'selected' : ''}" onclick="selectDynamicStorage('${productId}', ${index}, this)">
-          ${storage.name}
+          <span>${storage.name}</span>
+          <span class="option-price-tag">${offsetText}</span>
         </button>
       `;
     });

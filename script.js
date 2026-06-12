@@ -1,3 +1,30 @@
+// ==========================================
+// CONFIGURAÇÃO DO FIREBASE (CLIENT-SIDE PUBLIC CONFIG)
+// Substitua pelos valores do seu Firebase Console
+// ==========================================
+const firebaseConfig = {
+  apiKey: "SEU_API_KEY",
+  authDomain: "SEU_AUTH_DOMAIN",
+  projectId: "SEU_PROJECT_ID",
+  storageBucket: "SEU_STORAGE_BUCKET",
+  messagingSenderId: "SEU_MESSAGING_SENDER_ID",
+  appId: "SEU_APP_ID"
+};
+
+// Inicializar Firebase
+let db = null;
+const isFirebaseConfigured = firebaseConfig.apiKey && firebaseConfig.apiKey !== "SEU_API_KEY";
+
+if (isFirebaseConfigured && typeof firebase !== 'undefined') {
+  try {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    console.log('Firebase inicializado com sucesso na vitrine.');
+  } catch (e) {
+    console.error('Erro ao inicializar Firebase na vitrine:', e);
+  }
+}
+
 // --- PRODUCT DATA STATE ---
 let products = [];
 
@@ -698,13 +725,29 @@ function updateCatalogUI() {
 
 // --- FETCH PRODUCTS JSON DATABASE ---
 async function loadProducts() {
-  try {
-    const res = await fetch('products.json');
-    if (!res.ok) throw new Error('Falha ao obter base de produtos.');
-    products = await res.json();
-    console.log('Catálogo de produtos carregado da base local.');
-  } catch (err) {
-    console.warn('Erro ao ler products.json remoto, carregando fallback local:', err);
+  if (db) {
+    try {
+      console.log('Carregando catálogo do Firestore...');
+      const snapshot = await db.collection('produtos').get();
+      const loadedProducts = [];
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        loadedProducts.push({ id: doc.id, ...data });
+      });
+      
+      if (loadedProducts.length > 0) {
+        products = loadedProducts;
+        console.log('Catálogo de produtos carregado do Firestore com sucesso!');
+      } else {
+        console.warn('Coleção "produtos" vazia no Firestore. Carregando dados locais.');
+        products = fallbackProducts;
+      }
+    } catch (err) {
+      console.error('Erro ao ler produtos do Firestore, utilizando fallback local:', err);
+      products = fallbackProducts;
+    }
+  } else {
+    console.log('Firebase não configurado ou CDN indisponível. Carregando dados de fallback local.');
     products = fallbackProducts;
   }
   

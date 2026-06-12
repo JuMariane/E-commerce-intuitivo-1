@@ -12,6 +12,11 @@
   <!-- Symmetric Encryption Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   
+  <!-- Firebase Compat CDNs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+  
   <style>
     :root {
       --bg-primary: #08080a;
@@ -611,33 +616,46 @@
     </div>
 
     <!-- Developer Setup Tool (Shown if ENCRYPTED_CONFIG is blank) -->
-    <div id="setup-card" class="login-card" style="display: none; width: 460px;">
+    <div id="setup-card" class="login-card" style="display: none; width: 480px;">
       <div class="logo" style="justify-content: center; margin-bottom: 1.25rem;">
         <i class="fas fa-tools"></i> Developer <span>Setup</span>
       </div>
-      <p class="login-subtitle">Gerador de Configuração Criptografada</p>
+      <p class="login-subtitle">Gerador de Configuração Criptografada (Firebase)</p>
       <p style="font-size: 0.8rem; color: var(--text-secondary); text-align: center; margin-bottom: 1.5rem; line-height: 1.4;">
-        Preencha os dados do repositório GitHub da loja e defina a senha de acesso do seu cliente. Clique em gerar e copie a chave gerada para colar no código-fonte.
+        Preencha os dados de configuração do Firebase do seu cliente e crie a senha de acesso dele. Clique em gerar e cole o código no topo do script do <code>admin.html</code>.
       </p>
       
-      <div class="form-group-sm">
-        <label for="setup-owner">Dono do Repositório (Username GitHub)</label>
-        <input type="text" id="setup-owner" class="input-sm" placeholder="Ex: JuMariane">
+      <div class="form-row" style="margin-bottom: 0.85rem; grid-template-columns: repeat(2, 1fr);">
+        <div class="form-group-sm">
+          <label for="setup-apiKey">Firebase API Key</label>
+          <input type="text" id="setup-apiKey" class="input-sm" placeholder="AIzaSy...">
+        </div>
+        <div class="form-group-sm">
+          <label for="setup-authDomain">Auth Domain</label>
+          <input type="text" id="setup-authDomain" class="input-sm" placeholder="proj.firebaseapp.com">
+        </div>
       </div>
       
-      <div class="form-group-sm">
-        <label for="setup-repo">Nome do Repositório</label>
-        <input type="text" id="setup-repo" class="input-sm" placeholder="Ex: E-commerce-intuitivo-1">
+      <div class="form-row" style="margin-bottom: 0.85rem; grid-template-columns: repeat(2, 1fr);">
+        <div class="form-group-sm">
+          <label for="setup-projectId">Project ID</label>
+          <input type="text" id="setup-projectId" class="input-sm" placeholder="proj-123">
+        </div>
+        <div class="form-group-sm">
+          <label for="setup-storageBucket">Storage Bucket</label>
+          <input type="text" id="setup-storageBucket" class="input-sm" placeholder="proj.appspot.com">
+        </div>
       </div>
-      
-      <div class="form-group-sm">
-        <label for="setup-branch">Branch Principal</label>
-        <input type="text" id="setup-branch" class="input-sm" value="main">
-      </div>
-      
-      <div class="form-group-sm">
-        <label for="setup-token">Personal Access Token (PAT GitHub)</label>
-        <input type="password" id="setup-token" class="input-sm" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+
+      <div class="form-row" style="margin-bottom: 0.85rem; grid-template-columns: repeat(2, 1fr);">
+        <div class="form-group-sm">
+          <label for="setup-senderId">Messaging Sender ID</label>
+          <input type="text" id="setup-senderId" class="input-sm" placeholder="123456789">
+        </div>
+        <div class="form-group-sm">
+          <label for="setup-appId">App ID</label>
+          <input type="text" id="setup-appId" class="input-sm" placeholder="1:123:web:abc">
+        </div>
       </div>
       
       <div class="form-group-sm" style="margin-bottom: 1.5rem;">
@@ -653,7 +671,7 @@
         <label for="setup-code-output">Configuração Criptografada (Cole no topo do admin.html):</label>
         <textarea id="setup-code-output" class="input-field" style="width: 100%; height: 80px; font-size: 0.75rem; font-family: monospace; margin-top: 0.5rem; word-break: break-all;" readonly onclick="this.select(); document.execCommand('copy'); alert('Copiado!')"></textarea>
         <p style="font-size: 0.75rem; color: var(--success); margin-top: 0.5rem; font-weight: 500;">
-          <i class="fas fa-check-circle"></i> Gerado e Copiado! Substitua o valor da constante <code>ENCRYPTED_CONFIG</code> na linha 613 deste arquivo por este código.
+          <i class="fas fa-check-circle"></i> Gerado e Copiado! Substitua o valor da constante <code>ENCRYPTED_CONFIG</code> na linha 878 por este código.
         </p>
       </div>
     </div>
@@ -706,10 +724,9 @@
 
     <!-- Tab Navigation Bar -->
     <div class="admin-tabs" id="editor-tabs" style="display: none;">
-      <button class="tab-btn active" onclick="switchTab('geral', this)"><i class="fas fa-info-circle"></i> Informações Gerais</button>
-      <button class="tab-btn" onclick="switchTab('conteudo', this)"><i class="fas fa-box-open"></i> Caixa & Specs</button>
+      <button class="tab-btn active" onclick="switchTab('geral', this)"><i class="fas fa-info-circle"></i> Informações do Produto</button>
       <button class="tab-btn" onclick="switchTab('modelos', this)"><i class="fas fa-tags"></i> Modelos & Preços</button>
-      <button class="tab-btn" onclick="switchTab('opcoes', this)"><i class="fas fa-sliders-h"></i> Cores & Opções</button>
+      <button class="tab-btn" onclick="switchTab('opcoes', this)"><i class="fas fa-sliders-h"></i> Cores & Armazenamento</button>
     </div>
 
     <!-- DYNAMIC EDITOR FORM GRID -->
@@ -718,8 +735,8 @@
       <!-- TAB 1: GERAL -->
       <div id="tab-geral" class="tab-content" style="display: block;">
         <!-- CARD 1: GENERAL INFO -->
-        <section class="editor-card">
-          <h3 class="card-title"><i class="fas fa-info-circle"></i> Informações Gerais</h3>
+        <section class="editor-card" style="margin-bottom: 2rem;">
+          <h3 class="card-title"><i class="fas fa-info-circle"></i> Informações do Produto</h3>
           <div class="form-row">
             <div class="form-group">
               <label for="p-title">Título do Bloco</label>
@@ -737,7 +754,13 @@
             </div>
             <div class="form-group">
               <label for="p-img">Imagem Principal Fallback (Caminho ou URL)</label>
-              <input type="text" id="p-img" class="input-field" oninput="updateGeneralField('img', this.value)">
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <input type="text" id="p-img" class="input-field" style="flex-grow: 1;" oninput="updateGeneralField('img', this.value)">
+                <label class="btn-action btn-secondary" style="padding: 0.75rem 1rem; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; height: 100%; margin: 0; min-height: 42px;">
+                  <i class="fas fa-upload"></i>
+                  <input type="file" accept="image/*" style="display: none;" onchange="uploadProductMainImage(this)">
+                </label>
+              </div>
             </div>
           </div>
           <div class="form-group full-width" style="margin-bottom: 1.5rem;">
@@ -749,13 +772,10 @@
             <input type="text" id="p-gift" class="input-field" oninput="updateGeneralField('gift', this.value)">
           </div>
         </section>
-      </div>
 
-      <!-- TAB 2: CAIXA & SPECS -->
-      <div id="tab-conteudo" class="tab-content" style="display: none;">
         <!-- CARD 2: BOX ITEMS -->
         <section class="editor-card" style="margin-bottom: 2rem;">
-          <h3 class="card-title"><i class="fas fa-box-open"></i> Conteúdo da Caixa</h3>
+          <h3 class="card-title"><i class="fas fa-box-open"></i> Conteúdo da Caixa (O que acompanha)</h3>
           <div class="row-editor-list" id="box-items-editor">
             <!-- Rendered dynamically -->
           </div>
@@ -765,7 +785,7 @@
         </section>
 
         <!-- CARD 3: SPECS -->
-        <section class="editor-card">
+        <section class="editor-card" style="margin-bottom: 2rem;">
           <h3 class="card-title"><i class="fas fa-microchip"></i> Especificações Técnicas</h3>
           <div class="row-editor-list" id="specs-editor">
             <!-- Rendered dynamically -->
@@ -776,47 +796,28 @@
         </section>
       </div>
 
-      <!-- TAB 3: MODELOS & PRECOS -->
+      <!-- TAB 2: MODELOS & PRECOS -->
       <div id="tab-modelos" class="tab-content" style="display: none;">
         <!-- CARD 4: MODELS & PRICES -->
-        <section class="editor-card">
+        <section class="editor-card" style="margin-bottom: 2rem;">
           <h3 class="card-title"><i class="fas fa-tags"></i> Modelos & Preços Base</h3>
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th style="width: 35%;">Nome do Modelo</th>
-                <th style="width: 20%;">Preço (R$)</th>
-                <th style="width: 35%;">URL Imagem (Opcional)</th>
-                <th style="width: 10%;">Ações</th>
-              </tr>
-            </thead>
-            <tbody id="models-editor-body">
-              <!-- Rendered dynamically -->
-            </tbody>
-          </table>
+          <div class="row-editor-list" id="models-editor-list">
+            <!-- Rendered dynamically -->
+          </div>
           <button class="btn-add-row" onclick="addModelRow()">
             <i class="fas fa-plus"></i> Adicionar Novo Modelo
           </button>
         </section>
       </div>
 
-      <!-- TAB 4: CORES & OPCOES -->
+      <!-- TAB 3: CORES & OPCOES -->
       <div id="tab-opcoes" class="tab-content" style="display: none;">
         <!-- CARD 5: COLORS -->
         <section class="editor-card" style="margin-bottom: 2rem;">
           <h3 class="card-title"><i class="fas fa-palette"></i> Cores Disponíveis</h3>
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th style="width: 45%;">Nome da Cor</th>
-                <th style="width: 45%;">Código Hex / Cor</th>
-                <th style="width: 10%;">Ações</th>
-              </tr>
-            </thead>
-            <tbody id="colors-editor-body">
-              <!-- Rendered dynamically -->
-            </tbody>
-          </table>
+          <div class="row-editor-list" id="colors-editor-list">
+            <!-- Rendered dynamically -->
+          </div>
           <button class="btn-add-row" onclick="addColorRow()">
             <i class="fas fa-plus"></i> Adicionar Nova Cor
           </button>
@@ -825,40 +826,25 @@
         <!-- CARD 6: STORAGE CAPACITIES -->
         <section class="editor-card" style="margin-bottom: 2rem;">
           <h3 class="card-title"><i class="fas fa-hdd"></i> Capacidades de Armazenamento / Memória</h3>
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th style="width: 45%;">Capacidade (Ex: 128GB, 8GB Ram)</th>
-                <th style="width: 45%;">Acréscimo de Preço (Offset R$)</th>
-                <th style="width: 10%;">Ações</th>
-              </tr>
-            </thead>
-            <tbody id="storages-editor-body">
-              <!-- Rendered dynamically -->
-            </tbody>
-          </table>
+          <div class="row-editor-list" id="storages-editor-list">
+            <!-- Rendered dynamically -->
+          </div>
           <button class="btn-add-row" onclick="addStorageRow()">
             <i class="fas fa-plus"></i> Adicionar Armazenamento
           </button>
         </section>
 
         <!-- CARD 7: EXTRA SELECTION OPTIONS (DYNAMIC BY SCHEMA) -->
-        <section class="editor-card" id="extra-options-card" style="display: none;">
+        <section class="editor-card" id="extra-options-card" style="display: none; margin-bottom: 2rem;">
           <h3 class="card-title" id="extra-card-title"><i class="fas fa-sliders-h"></i> Opções Adicionais</h3>
-          <table class="admin-table">
-            <thead id="extra-table-header">
-              <!-- Rendered dynamically -->
-            </thead>
-            <tbody id="extra-editor-body">
-              <!-- Rendered dynamically -->
-            </tbody>
-          </table>
+          <div class="row-editor-list" id="extra-editor-list">
+            <!-- Rendered dynamically -->
+          </div>
           <button class="btn-add-row" id="btn-add-extra" onclick="addExtraRow()">
             <!-- Rendered dynamically -->
           </button>
         </section>
       </div>
-
     </div>
   </main>
 
@@ -880,40 +866,42 @@
     let decryptedConfig = null;
     let products = [];
     let activeProductId = null;
+    let db = null;
+    let storage = null;
 
     const fallbackProducts = [
       {
         "id": "iphone",
-        "title": "Linha iPhone 17",
+        "title": "Linha iPhone",
         "category": "Celulares",
         "badge": "ÚLTIMO LANÇAMENTO",
-        "desc": "O máximo em performance e design. Processador A19 Pro, estrutura em titânio e sistema de câmeras avançado.",
-        "originalPrice": 8048.85,
-        "basePrice": 6999.00,
+        "desc": "Performance e design excepcionais. Câmera avançada, processamento de ponta e bateria de longa duração.",
+        "originalPrice": 6323.85,
+        "basePrice": 5499.00,
         "img": "assets/categorias/iphone.png",
         "specs": {
-          "Processador": "A19 Pro Neural Core",
+          "Processador": "A18 ou A18 Pro Bionic",
           "Câmera": "48MP Fusion principal",
-          "Tela": "Super Retina XDR",
-          "Construção": "Titânio Aeroespacial"
+          "Tela": "Super Retina XDR OLED",
+          "Construção": "Alumínio ou Titânio Aeroespacial"
         },
         "boxItems": [
-          "iPhone com iOS 19",
+          "iPhone com iOS 18",
           "Cabo USB-C Premium trançado (1m)",
           "Manuais de Instrução"
         ],
         "gift": "Capa Protetora MagSafe Slim Clear + Película de Privacidade em Cerâmica Aplicada",
         "models": [
-          { "name": "iPhone 17", "price": 6999, "img": "https://images.unsplash.com/photo-1696446701796-da61225697cc?q=80&w=800&auto=format&fit=crop" },
-          { "name": "iPhone 17 Plus", "price": 7599, "img": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop" },
-          { "name": "iPhone 17 Pro", "price": 8599, "img": "https://images.unsplash.com/photo-1726058428469-8041065f02bc?q=80&w=800&auto=format&fit=crop" },
-          { "name": "iPhone 17 Pro Max", "price": 9399, "img": "assets/categorias/iphone.png" }
+          { "name": "iPhone 16", "price": 5499, "img": "https://images.unsplash.com/photo-1696446701796-da61225697cc?q=80&w=800&auto=format&fit=crop" },
+          { "name": "iPhone 16 Plus", "price": 6099, "img": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop" },
+          { "name": "iPhone 16 Pro", "price": 7299, "img": "https://images.unsplash.com/photo-1726058428469-8041065f02bc?q=80&w=800&auto=format&fit=crop" },
+          { "name": "iPhone 16 Pro Max", "price": 8299, "img": "assets/categorias/iphone.png" }
         ],
         "colors": [
-          { "name": "Titânio Deserto", "hex": "#c2b29f" },
-          { "name": "Titânio Concreto", "hex": "#8c8d90" },
-          { "name": "Preto Espacial", "hex": "#1c1d21" },
-          { "name": "Prata", "hex": "#e3e4e5" }
+          { "name": "Preto Titânio / Escuro", "hex": "#1c1d21" },
+          { "name": "Branco Titânio / Claro", "hex": "#e3e4e5" },
+          { "name": "Titânio Natural", "hex": "#c2b29f" },
+          { "name": "Azul Ultramarino", "hex": "#2c3e50" }
         ],
         "storages": [
           { "name": "128GB", "offset": 0 },
@@ -1103,18 +1091,20 @@
 
     // --- DEVELOPER: GENERATE ENCRYPTED KEY ---
     function generateEncryptedConfig() {
-      const owner = document.getElementById('setup-owner').value.trim();
-      const repo = document.getElementById('setup-repo').value.trim();
-      const branch = document.getElementById('setup-branch').value.trim();
-      const token = document.getElementById('setup-token').value.trim();
+      const apiKey = document.getElementById('setup-apiKey').value.trim();
+      const authDomain = document.getElementById('setup-authDomain').value.trim();
+      const projectId = document.getElementById('setup-projectId').value.trim();
+      const storageBucket = document.getElementById('setup-storageBucket').value.trim();
+      const messagingSenderId = document.getElementById('setup-senderId').value.trim();
+      const appId = document.getElementById('setup-appId').value.trim();
       const password = document.getElementById('setup-password').value.trim();
 
-      if (!owner || !repo || !branch || !token || !password) {
+      if (!apiKey || !authDomain || !projectId || !storageBucket || !messagingSenderId || !appId || !password) {
         alert('Por favor, preencha todos os campos do gerador.');
         return;
       }
 
-      const configObject = { owner, repo, branch, token };
+      const configObject = { apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId };
       
       try {
         const encrypted = CryptoJS.AES.encrypt(JSON.stringify(configObject), password).toString();
@@ -1165,6 +1155,22 @@
 
     function initAdminDashboard() {
       document.getElementById('login-container').style.display = 'none';
+
+      // Inicializa o Firebase no admin usando a chave descriptografada
+      if (decryptedConfig && typeof firebase !== 'undefined') {
+        try {
+          if (firebase.apps.length === 0) {
+            firebase.initializeApp(decryptedConfig);
+          }
+          db = firebase.firestore();
+          storage = firebase.storage();
+          console.log('Firebase inicializado no painel do administrador.');
+        } catch (e) {
+          console.error('Erro ao inicializar Firebase no admin:', e);
+          showToast('Erro ao inicializar o Firebase. Verifique suas credenciais.', 'error');
+        }
+      }
+
       fetchCatalog();
     }
 
@@ -1194,9 +1200,79 @@
       if (btnEl) {
         btnEl.classList.add('active');
       } else {
-        // Fallback to select first button if click element was not provided
         const firstBtn = document.querySelector(`.tab-btn[onclick*="${tabId}"]`);
         if (firstBtn) firstBtn.classList.add('active');
+      }
+    };
+
+    // --- UPLOAD IMAGES TO FIREBASE STORAGE ---
+    window.uploadProductMainImage = async function(inputEl) {
+      if (!inputEl.files || !inputEl.files[0]) return;
+      if (!storage) {
+        showToast('Firebase Storage indisponível. Cadastre as chaves no Setup.', 'error');
+        return;
+      }
+      
+      const file = inputEl.files[0];
+      if (file.size > 5 * 1024 * 1024) {
+        alert('A imagem é muito grande! Escolha um arquivo de até 5MB.');
+        return;
+      }
+      
+      showToast('Enviando imagem principal...', 'loading', true);
+      
+      try {
+        const fileExt = file.name.split('.').pop();
+        const fileName = `main_${Date.now()}.${fileExt}`;
+        const filePath = `produtos/${activeProductId}/${fileName}`;
+        const storageRef = storage.ref().child(filePath);
+        
+        const snapshot = await storageRef.put(file);
+        const downloadUrl = await snapshot.ref.getDownloadURL();
+        
+        document.getElementById('p-img').value = downloadUrl;
+        updateGeneralField('img', downloadUrl);
+        showToast('Imagem principal carregada com sucesso!', 'success');
+      } catch (err) {
+        console.error('Erro no upload da imagem:', err);
+        showToast('Erro no upload: ' + err.message, 'error');
+      }
+    };
+
+    window.uploadModelImage = async function(inputEl, idx) {
+      if (!inputEl.files || !inputEl.files[0]) return;
+      if (!storage) {
+        showToast('Firebase Storage indisponível. Cadastre as chaves no Setup.', 'error');
+        return;
+      }
+      
+      const file = inputEl.files[0];
+      if (file.size > 5 * 1024 * 1024) {
+        alert('A imagem é muito grande! Escolha um arquivo de até 5MB.');
+        return;
+      }
+      
+      showToast('Enviando imagem do modelo...', 'loading', true);
+      
+      try {
+        const fileExt = file.name.split('.').pop();
+        const fileName = `model_${idx}_${Date.now()}.${fileExt}`;
+        const filePath = `produtos/${activeProductId}/${fileName}`;
+        const storageRef = storage.ref().child(filePath);
+        
+        const snapshot = await storageRef.put(file);
+        const downloadUrl = await snapshot.ref.getDownloadURL();
+        
+        const product = products.find(p => p.id === activeProductId);
+        if (product && product.models && product.models[idx]) {
+          product.models[idx].img = downloadUrl;
+          const inputField = document.getElementById(`model-img-path-${idx}`);
+          if (inputField) inputField.value = downloadUrl;
+          showToast(`Imagem do modelo ${product.models[idx].name} atualizada!`, 'success');
+        }
+      } catch (err) {
+        console.error('Erro no upload do modelo:', err);
+        showToast('Erro no upload: ' + err.message, 'error');
       }
     };
 
@@ -1211,12 +1287,10 @@
         "desc": "Edite a descrição desta nova categoria de produtos.",
         "img": "assets/categorias/placeholder.png",
         "specs": {
-          "Especificação 1": "Valor 1",
-          "Especificação 2": "Valor 2"
+          "Especificação 1": "Valor 1"
         },
         "boxItems": [
-          "Item de Caixa 1",
-          "Item de Caixa 2"
+          "Item de Caixa 1"
         ],
         "gift": "Brinde Padrão da Loja",
         "models": [
@@ -1226,14 +1300,14 @@
           { "name": "Preto", "hex": "#000000" }
         ],
         "storages": [
-          { "name": "Padrão", "offset": 0 }
+          { "name": "128GB", "offset": 0 }
         ]
       };
       
       products.push(newProduct);
       renderSidebar();
       selectProduct(newId);
-      showToast('Nova categoria criada! Edite os detalhes e lembre-se de clicar em Salvar Alterações.', 'info');
+      showToast('Nova categoria criada! Edite e salve as alterações.', 'info');
     };
 
     // --- DELETE ACTIVE PRODUCT CATEGORY ---
@@ -1255,7 +1329,7 @@
         products.splice(idx, 1);
         renderSidebar();
         selectProduct(products[0].id);
-        showToast('Categoria removida. Lembre-se de clicar em Salvar Alterações para atualizar o site oficial.', 'success');
+        showToast('Categoria removida. Clique em Salvar Alterações para persistir no servidor.', 'success');
       }
     };
 
@@ -1289,15 +1363,38 @@
     // --- FETCH CATALOG DATABASE ---
     async function fetchCatalog() {
       showToast('Carregando catálogo de produtos...', 'loading', true);
-      try {
-        const res = await fetch('products.json');
-        if (!res.ok) throw new Error('Não foi possível ler a base local.');
-        products = await res.json();
-        showToast('Catálogo carregado com sucesso!', 'success');
-      } catch (err) {
-        console.warn('Erro ao ler products.json, carregando fallback local:', err);
-        products = JSON.parse(JSON.stringify(fallbackProducts));
-        showToast('Utilizando base de catálogo padrão offline.', 'info');
+      
+      if (db) {
+        try {
+          const snapshot = await db.collection('produtos').get();
+          const loadedProducts = [];
+          snapshot.forEach(doc => {
+            loadedProducts.push({ id: doc.id, ...doc.data() });
+          });
+          
+          if (loadedProducts.length > 0) {
+            products = loadedProducts;
+            showToast('Catálogo carregado com sucesso do Firestore!', 'success');
+          } else {
+            console.warn('Coleção "produtos" vazia no Firestore. Usando fallback offline.');
+            products = JSON.parse(JSON.stringify(fallbackProducts));
+            showToast('Banco de dados inicializado.', 'info');
+          }
+        } catch (err) {
+          console.warn('Erro ao conectar ao Firestore. Usando fallback local:', err);
+          products = JSON.parse(JSON.stringify(fallbackProducts));
+          showToast('Modo de demonstração offline ativado.', 'info');
+        }
+      } else {
+        try {
+          const res = await fetch('products.json');
+          if (!res.ok) throw new Error();
+          products = await res.json();
+          showToast('Carregado de products.json local.', 'success');
+        } catch (e) {
+          products = JSON.parse(JSON.stringify(fallbackProducts));
+          showToast('Carregado catálogo padrão offline.', 'info');
+        }
       }
 
       renderSidebar();
@@ -1333,18 +1430,14 @@
     // --- SELECT PRODUCT IN EDITOR ---
     function selectProduct(id) {
       activeProductId = id;
-      
-      // Update active highlights
       renderSidebar();
       
       const product = products.find(p => p.id === id);
       if (!product) return;
 
-      // Update header info
       document.getElementById('active-product-title').textContent = product.title;
       document.getElementById('active-product-subtitle').textContent = `Categoria: ${product.category}`;
 
-      // Populate general fields
       document.getElementById('p-title').value = product.title || '';
       document.getElementById('p-badge').value = product.badge || '';
       document.getElementById('p-category').value = product.category || '';
@@ -1352,7 +1445,6 @@
       document.getElementById('p-desc').value = product.desc || '';
       document.getElementById('p-gift').value = product.gift || '';
 
-      // Render other sections
       renderBoxItems();
       renderSpecs();
       renderModels();
@@ -1360,14 +1452,10 @@
       renderStorages();
       renderExtraOptions();
 
-      // Show the tab navigation and delete button
       document.getElementById('editor-tabs').style.display = 'flex';
       document.getElementById('btn-delete-product').style.display = 'inline-flex';
 
-      // Reset active tab to first tab on product selection
       switchTab('geral', document.querySelector('.tab-btn'));
-
-      // Show the editor grid
       document.getElementById('editor-form-grid').style.display = 'block';
     }
 
@@ -1382,7 +1470,6 @@
         product[field] = value;
       }
 
-      // Update active title in header if editing title
       if (field === 'title') {
         document.getElementById('active-product-title').textContent = value;
       }
@@ -1400,6 +1487,7 @@
       product.boxItems.forEach((item, idx) => {
         const row = document.createElement('div');
         row.className = 'row-item';
+        row.style.marginBottom = '0.75rem';
         row.innerHTML = `
           <input type="text" class="input-field" style="flex-grow: 1;" value="${item}" oninput="updateBoxItem(${idx}, this.value)">
           <button class="btn-icon-danger" onclick="deleteBoxItem(${idx})"><i class="fas fa-trash-alt"></i></button>
@@ -1438,9 +1526,10 @@
 
       if (!product.specs) product.specs = {};
 
-      Object.entries(product.specs).forEach(([key, val], idx) => {
+      Object.entries(product.specs).forEach(([key, val]) => {
         const row = document.createElement('div');
         row.className = 'row-item';
+        row.style.marginBottom = '0.75rem';
         row.innerHTML = `
           <input type="text" class="input-field" style="width: 30%;" value="${key}" onchange="renameSpecKey('${key}', this.value)">
           <input type="text" class="input-field" style="flex-grow: 1;" value="${val}" oninput="updateSpecValue('${key}', this.value)">
@@ -1459,7 +1548,6 @@
       renderSpecs();
     }
 
-    // --- TECHNICAL SPECS VALUE ---
     function updateSpecValue(key, val) {
       const product = products.find(p => p.id === activeProductId);
       if (product) product.specs[key] = val;
@@ -1488,24 +1576,40 @@
 
     // --- MODELS & PRICES ---
     function renderModels() {
-      const body = document.getElementById('models-editor-body');
-      body.innerHTML = '';
+      const list = document.getElementById('models-editor-list');
+      list.innerHTML = '';
       const product = products.find(p => p.id === activeProductId);
       if (!product) return;
 
       if (!product.models) product.models = [];
 
       product.models.forEach((m, idx) => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><input type="text" class="input-field" style="width: 95%;" value="${m.name}" oninput="updateModelField(${idx}, 'name', this.value)"></td>
-          <td><input type="number" class="input-field" style="width: 90%;" value="${m.price}" oninput="updateModelField(${idx}, 'price', this.value)"></td>
-          <td><input type="text" class="input-field" style="width: 95%;" value="${m.img || ''}" oninput="updateModelField(${idx}, 'img', this.value)"></td>
-          <td>
-            <button class="btn-icon-danger" onclick="deleteModel(${idx})"><i class="fas fa-trash-alt"></i></button>
-          </td>
+        const row = document.createElement('div');
+        row.className = 'row-item';
+        row.style.marginBottom = '1.25rem';
+        row.style.alignItems = 'flex-end';
+        row.innerHTML = `
+          <div class="form-group" style="flex: 2;">
+            <label>Nome do Modelo</label>
+            <input type="text" class="input-field" value="${m.name}" oninput="updateModelField(${idx}, 'name', this.value)" placeholder="Ex: iPhone 16 Pro">
+          </div>
+          <div class="form-group" style="flex: 1.2;">
+            <label>Preço Base (R$)</label>
+            <input type="number" class="input-field" value="${m.price}" oninput="updateModelField(${idx}, 'price', this.value)" placeholder="Ex: 7999">
+          </div>
+          <div class="form-group" style="flex: 3;">
+            <label>Imagem do Modelo</label>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <input type="text" class="input-field" style="flex-grow: 1;" value="${m.img || ''}" oninput="updateModelField(${idx}, 'img', this.value)" id="model-img-path-${idx}" placeholder="URL ou Upload">
+              <label class="btn-action btn-secondary" style="padding: 0.75rem 1rem; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; height: 100%; margin: 0; min-height: 42px;">
+                <i class="fas fa-upload"></i>
+                <input type="file" accept="image/*" style="display: none;" onchange="uploadModelImage(this, ${idx})">
+              </label>
+            </div>
+          </div>
+          <button class="btn-icon-danger" onclick="deleteModel(${idx})" style="margin-bottom: 2px; height: 42px; width: 42px;"><i class="fas fa-trash-alt"></i></button>
         `;
-        body.appendChild(tr);
+        list.appendChild(row);
       });
     }
 
@@ -1537,28 +1641,33 @@
 
     // --- COLORS ---
     function renderColors() {
-      const body = document.getElementById('colors-editor-body');
-      body.innerHTML = '';
+      const list = document.getElementById('colors-editor-list');
+      list.innerHTML = '';
       const product = products.find(p => p.id === activeProductId);
       if (!product) return;
 
       if (!product.colors) product.colors = [];
 
       product.colors.forEach((c, idx) => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><input type="text" class="input-field" style="width: 90%;" value="${c.name}" oninput="updateColorField(${idx}, 'name', this.value)"></td>
-          <td>
-            <div class="color-picker-box">
-              <input type="color" class="color-picker-input" value="${c.hex}" onchange="updateColorField(${idx}, 'hex', this.value); this.nextElementSibling.value = this.value">
-              <input type="text" class="input-field" style="width: 60%;" value="${c.hex}" oninput="updateColorField(${idx}, 'hex', this.value); this.previousElementSibling.value = this.value">
+        const row = document.createElement('div');
+        row.className = 'row-item';
+        row.style.marginBottom = '1.25rem';
+        row.style.alignItems = 'flex-end';
+        row.innerHTML = `
+          <div class="form-group" style="flex: 2;">
+            <label>Nome da Cor</label>
+            <input type="text" class="input-field" value="${c.name}" oninput="updateColorField(${idx}, 'name', this.value)" placeholder="Ex: Preto Titânio">
+          </div>
+          <div class="form-group" style="flex: 2;">
+            <label>Código Hex / Cor</label>
+            <div class="color-picker-box" style="display: flex; gap: 0.5rem; align-items: center;">
+              <input type="color" class="color-picker-input" value="${c.hex}" onchange="updateColorField(${idx}, 'hex', this.value); this.nextElementSibling.value = this.value" style="width: 42px; height: 42px; border-radius: 50%; cursor: pointer;">
+              <input type="text" class="input-field" style="flex-grow: 1;" value="${c.hex}" oninput="updateColorField(${idx}, 'hex', this.value); this.previousElementSibling.value = this.value" placeholder="#ffffff">
             </div>
-          </td>
-          <td>
-            <button class="btn-icon-danger" onclick="deleteColor(${idx})"><i class="fas fa-trash-alt"></i></button>
-          </td>
+          </div>
+          <button class="btn-icon-danger" onclick="deleteColor(${idx})" style="margin-bottom: 2px; height: 42px; width: 42px;"><i class="fas fa-trash-alt"></i></button>
         `;
-        body.appendChild(tr);
+        list.appendChild(row);
       });
     }
 
@@ -1575,6 +1684,7 @@
       }
     }
 
+    // --- DELETE COLOR ---
     function deleteColor(idx) {
       const product = products.find(p => p.id === activeProductId);
       if (product) {
@@ -1585,23 +1695,30 @@
 
     // --- STORAGE CAPACITIES ---
     function renderStorages() {
-      const body = document.getElementById('storages-editor-body');
-      body.innerHTML = '';
+      const list = document.getElementById('storages-editor-list');
+      list.innerHTML = '';
       const product = products.find(p => p.id === activeProductId);
       if (!product) return;
 
       if (!product.storages) product.storages = [];
 
       product.storages.forEach((s, idx) => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><input type="text" class="input-field" style="width: 90%;" value="${s.name}" oninput="updateStorageField(${idx}, 'name', this.value)"></td>
-          <td><input type="number" class="input-field" style="width: 90%;" value="${s.offset}" oninput="updateStorageField(${idx}, 'offset', this.value)"></td>
-          <td>
-            <button class="btn-icon-danger" onclick="deleteStorage(${idx})"><i class="fas fa-trash-alt"></i></button>
-          </td>
+        const row = document.createElement('div');
+        row.className = 'row-item';
+        row.style.marginBottom = '1.25rem';
+        row.style.alignItems = 'flex-end';
+        row.innerHTML = `
+          <div class="form-group" style="flex: 2;">
+            <label>Capacidade (Ex: 128GB, 8GB Ram)</label>
+            <input type="text" class="input-field" value="${s.name}" oninput="updateStorageField(${idx}, 'name', this.value)" placeholder="Ex: 128GB">
+          </div>
+          <div class="form-group" style="flex: 2;">
+            <label>Acréscimo de Preço (Offset R$)</label>
+            <input type="number" class="input-field" value="${s.offset}" oninput="updateStorageField(${idx}, 'offset', this.value)" placeholder="Ex: 600">
+          </div>
+          <button class="btn-icon-danger" onclick="deleteStorage(${idx})" style="margin-bottom: 2px; height: 42px; width: 42px;"><i class="fas fa-trash-alt"></i></button>
         `;
-        body.appendChild(tr);
+        list.appendChild(row);
       });
     }
 
@@ -1637,45 +1754,23 @@
     function renderExtraOptions() {
       const card = document.getElementById('extra-options-card');
       const title = document.getElementById('extra-card-title');
-      const header = document.getElementById('extra-table-header');
-      const body = document.getElementById('extra-editor-body');
+      const listContainer = document.getElementById('extra-editor-list');
       const btnAdd = document.getElementById('btn-add-extra');
       
       const product = products.find(p => p.id === activeProductId);
       if (!product) return;
 
-      // Determine extra options array by product properties
       if (product.screens) {
         extraType = 'screens';
         title.innerHTML = `<i class="fas fa-desktop"></i> Opções de Tamanhos de Tela`;
-        header.innerHTML = `
-          <tr>
-            <th style="width: 45%;">Tamanho de Tela (Ex: 13.6")</th>
-            <th style="width: 45%;">Acréscimo de Preço (Offset R$)</th>
-            <th style="width: 10%;">Ações</th>
-          </tr>
-        `;
         btnAdd.innerHTML = `<i class="fas fa-plus"></i> Adicionar Tamanho de Tela`;
       } else if (product.cases) {
         extraType = 'cases';
         title.innerHTML = `<i class="fas fa-mobile-alt"></i> Tamanhos da Caixa (Watch)`;
-        header.innerHTML = `
-          <tr>
-            <th style="width: 45%;">Tamanho de Caixa (Ex: 41mm)</th>
-            <th style="width: 45%;">Acréscimo de Preço (Offset R$)</th>
-            <th style="width: 10%;">Ações</th>
-          </tr>
-        `;
         btnAdd.innerHTML = `<i class="fas fa-plus"></i> Adicionar Tamanho de Caixa`;
       } else if (product.straps) {
         extraType = 'straps';
         title.innerHTML = `<i class="fas fa-clock"></i> Opções de Pulseiras`;
-        header.innerHTML = `
-          <tr>
-            <th style="width: 90%;">Nome da Pulseira (Ex: Pulseira Trail)</th>
-            <th style="width: 10%;">Ações</th>
-          </tr>
-        `;
         btnAdd.innerHTML = `<i class="fas fa-plus"></i> Adicionar Pulseira`;
       } else {
         extraType = null;
@@ -1684,28 +1779,36 @@
       }
 
       card.style.display = 'block';
-      body.innerHTML = '';
+      listContainer.innerHTML = '';
 
       const list = product[extraType];
       list.forEach((item, idx) => {
-        const tr = document.createElement('tr');
+        const row = document.createElement('div');
+        row.className = 'row-item';
+        row.style.marginBottom = '1.25rem';
+        row.style.alignItems = 'flex-end';
         if (extraType === 'straps') {
-          tr.innerHTML = `
-            <td><input type="text" class="input-field" style="width: 95%;" value="${item.name}" oninput="updateExtraField(${idx}, 'name', this.value)"></td>
-            <td>
-              <button class="btn-icon-danger" onclick="deleteExtraRow(${idx})"><i class="fas fa-trash-alt"></i></button>
-            </td>
+          row.innerHTML = `
+            <div class="form-group" style="flex: 2;">
+              <label>Nome da Pulseira (Ex: Pulseira Trail)</label>
+              <input type="text" class="input-field" value="${item.name}" oninput="updateExtraField(${idx}, 'name', this.value)" placeholder="Ex: Pulseira Trail">
+            </div>
+            <button class="btn-icon-danger" onclick="deleteExtraRow(${idx})" style="margin-bottom: 2px; height: 42px; width: 42px;"><i class="fas fa-trash-alt"></i></button>
           `;
         } else {
-          tr.innerHTML = `
-            <td><input type="text" class="input-field" style="width: 90%;" value="${item.name}" oninput="updateExtraField(${idx}, 'name', this.value)"></td>
-            <td><input type="number" class="input-field" style="width: 90%;" value="${item.offset}" oninput="updateExtraField(${idx}, 'offset', this.value)"></td>
-            <td>
-              <button class="btn-icon-danger" onclick="deleteExtraRow(${idx})"><i class="fas fa-trash-alt"></i></button>
-            </td>
+          row.innerHTML = `
+            <div class="form-group" style="flex: 2;">
+              <label>${extraType === 'screens' ? 'Tamanho da Tela' : 'Tamanho da Caixa'}</label>
+              <input type="text" class="input-field" value="${item.name}" oninput="updateExtraField(${idx}, 'name', this.value)" placeholder="${extraType === 'screens' ? 'Ex: 13.6\"' : 'Ex: 41mm'}">
+            </div>
+            <div class="form-group" style="flex: 2;">
+              <label>Acréscimo de Preço (Offset R$)</label>
+              <input type="number" class="input-field" value="${item.offset}" oninput="updateExtraField(${idx}, 'offset', this.value)" placeholder="Ex: 400">
+            </div>
+            <button class="btn-icon-danger" onclick="deleteExtraRow(${idx})" style="margin-bottom: 2px; height: 42px; width: 42px;"><i class="fas fa-trash-alt"></i></button>
           `;
         }
-        body.appendChild(tr);
+        listContainer.appendChild(row);
       });
     }
 
@@ -1756,69 +1859,41 @@
       }
     }
 
-    // --- SERVERLESS SAVE CHANGES TO GITHUB VIA REST API ---
-    function utoa(str) {
-      return btoa(unescape(encodeURIComponent(str)));
-    }
-
+    // --- SERVERLESS SAVE CHANGES TO FIREBASE CLOUD FIRESTORE ---
     async function publishCatalogToGitHub() {
-      if (!decryptedConfig) {
-        showToast('Sessão expirada. Por favor, recarregue a página.', 'error');
+      if (!db) {
+        showToast('Firebase Firestore não configurado no setup.', 'error');
         return;
       }
 
-      const { owner, repo, branch, token } = decryptedConfig;
-
-      showToast('Sincronizando com o servidor de dados...', 'loading', true);
-
-      const filePath = 'products.json';
-      const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
-      const headers = {
-        'Authorization': `token ${token}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      };
+      showToast('Sincronizando banco de dados...', 'loading', true);
 
       try {
-        // Step 1: Retrieve the current version hash (SHA)
-        let sha = null;
-        try {
-          const checkRes = await fetch(`${url}?ref=${branch}`, { headers });
-          if (checkRes.ok) {
-            const fileData = await checkRes.json();
-            sha = fileData.sha;
-          } else if (checkRes.status !== 404) {
-            throw new Error(`Erro ao conectar: Código ${checkRes.status}`);
-          }
-        } catch (fetchErr) {
-          console.warn('Conexão inicial falhou. Criando nova base.', fetchErr);
+        // Obter todas as categorias existentes no Firestore
+        const snapshot = await db.collection('produtos').get();
+        const existingIds = [];
+        snapshot.forEach(doc => existingIds.push(doc.id));
+        
+        const currentIds = products.map(p => p.id);
+        const deletedIds = existingIds.filter(id => !currentIds.includes(id));
+        
+        // Excluir produtos que foram removidos no painel
+        for (const id of deletedIds) {
+          await db.collection('produtos').doc(id).delete();
         }
 
-        // Step 2: Push changes using decrypted credentials
-        const payload = {
-          message: 'Update products catalog database',
-          content: utoa(JSON.stringify(products, null, 2)),
-          branch: branch
-        };
-
-        if (sha) {
-          payload.sha = sha;
+        // Gravar e atualizar os produtos existentes no Firestore
+        for (const product of products) {
+          const payload = { ...product };
+          // O id é o nome do documento no Firestore, não precisa ir no corpo do documento
+          delete payload.id;
+          
+          await db.collection('produtos').doc(product.id).set(payload);
         }
 
-        const putRes = await fetch(url, {
-          method: 'PUT',
-          headers: headers,
-          body: JSON.stringify(payload)
-        });
-
-        if (!putRes.ok) {
-          const errData = await putRes.json();
-          throw new Error(errData.message || `Código ${putRes.status}`);
-        }
-
-        showToast('Alterações salvas com sucesso! O catálogo da loja está atualizado.', 'success');
+        showToast('Alterações salvas com sucesso! O site oficial já está atualizado.', 'success');
       } catch (err) {
-        console.error('Falha ao sincronizar alterações:', err);
+        console.error('Falha ao sincronizar alterações com Firebase:', err);
         showToast(`Falha ao salvar: ${err.message}`, 'error');
       }
     }

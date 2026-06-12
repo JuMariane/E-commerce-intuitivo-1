@@ -1,0 +1,190 @@
+[
+  {
+    "id": "iphone",
+    "title": "Linha iPhone 17",
+    "category": "Celulares",
+    "badge": "ÚLTIMO LANÇAMENTO",
+    "desc": "O máximo em performance e design. Processador A19 Pro, estrutura em titânio e sistema de câmeras avançado.",
+    "originalPrice": 8048.85,
+    "basePrice": 6999.00,
+    "img": "assets/categorias/iphone.png",
+    "specs": {
+      "Processador": "A19 Pro Neural Core",
+      "Câmera": "48MP Fusion principal",
+      "Tela": "Super Retina XDR",
+      "Construção": "Titânio Aeroespacial"
+    },
+    "boxItems": [
+      "iPhone com iOS 19",
+      "Cabo USB-C Premium trançado (1m)",
+      "Manuais de Instrução"
+    ],
+    "gift": "Capa Protetora MagSafe Slim Clear + Película de Privacidade em Cerâmica Aplicada",
+    "models": [
+      { "name": "iPhone 17", "price": 6999, "img": "https://images.unsplash.com/photo-1696446701796-da61225697cc?q=80&w=800&auto=format&fit=crop" },
+      { "name": "iPhone 17 Plus", "price": 7599, "img": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop" },
+      { "name": "iPhone 17 Pro", "price": 8599, "img": "https://images.unsplash.com/photo-1726058428469-8041065f02bc?q=80&w=800&auto=format&fit=crop" },
+      { "name": "iPhone 17 Pro Max", "price": 9399, "img": "assets/categorias/iphone.png" }
+    ],
+    "colors": [
+      { "name": "Titânio Deserto", "hex": "#c2b29f" },
+      { "name": "Titânio Concreto", "hex": "#8c8d90" },
+      { "name": "Preto Espacial", "hex": "#1c1d21" },
+      { "name": "Prata", "hex": "#e3e4e5" }
+    ],
+    "storages": [
+      { "name": "128GB", "offset": 0 },
+      { "name": "256GB", "offset": 600 },
+      { "name": "512GB", "offset": 1400 },
+      { "name": "1TB", "offset": 2600 }
+    ]
+  },
+  {
+    "id": "ipad",
+    "title": "Linha iPad Pro",
+    "category": "iPads",
+    "badge": "ULTRA FINO",
+    "desc": "O design mais fino já criado com o poder absurdo do chip M4. Tela Ultra Retina XDR espetacular.",
+    "originalPrice": 6323.85,
+    "basePrice": 5499.00,
+    "img": "assets/categorias/ipad.png",
+    "specs": {
+      "Processador": "Apple M4 (Até 10 núcleos)",
+      "Tela": "Tandem OLED Liquid Retina XDR",
+      "Gráficos": "GPU de 10 núcleos"
+    },
+    "boxItems": [
+      "iPad com iPadOS",
+      "Cabo de carregamento USB-C (1m)",
+      "Manuais"
+    ],
+    "gift": "Capa Magnética Smart Folio com imagem inteligente + Película Protetora Fosca",
+    "models": [
+      { "name": "iPad Air M2", "price": 5499, "img": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=800&auto=format&fit=crop" },
+      { "name": "iPad Pro M4", "price": 7999, "img": "assets/categorias/ipad.png" }
+    ],
+    "colors": [
+      { "name": "Cinza Espacial", "hex": "#4b4c4e" },
+      { "name": "Estelar", "hex": "#dfdcd4" },
+      { "name": "Prata", "hex": "#e3e4e5" }
+    ],
+    "storages": [
+      { "name": "128GB", "offset": 0 },
+      { "name": "256GB", "offset": 600 },
+      { "name": "512GB", "offset": 1400 },
+      { "name": "1TB", "offset": 2600 }
+    ]
+  },
+  {
+    "id": "macbook",
+    "title": "Linha MacBook Pro",
+    "category": "MacBooks",
+    "badge": "MÁXIMO PODER",
+    "desc": "Desempenho monstruoso para quem trabalha pesado. Bateria para o dia todo e tela Liquid Retina XDR.",
+    "originalPrice": 12648.85,
+    "basePrice": 10999.00,
+    "img": "assets/categorias/macbook.png",
+    "specs": {
+      "Processador": "Chip Apple M3 ou M4 Pro/Max",
+      "Tela": "13.6\" ou 15.3\" Liquid Retina",
+      "Bateria": "Até 22 horas de autonomia"
+    },
+    "boxItems": [
+      "MacBook Pro",
+      "Cabo MagSafe 3 (2m)",
+      "Adaptador de energia USB-C",
+      "Manuais"
+    ],
+    "gift": "Hub Adaptador USB-C Multiportas de Alumínio (HDMI, USB 3.0, SD/MicroSD)",
+    "models": [
+      { "name": "MacBook Air M3", "price": 10999, "img": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop" },
+      { "name": "MacBook Pro M4", "price": 14999, "img": "assets/categorias/macbook.png" }
+    ],
+    "colors": [
+      { "name": "Preto Espacial", "hex": "#1d1e22" },
+      { "name": "Prata", "hex": "#e3e4e5" },
+      { "name": "Cinza Espacial", "hex": "#4b4c4e" }
+    ],
+    "storages": [
+      { "name": "256GB", "offset": 0 },
+      { "name": "512GB", "offset": 1200 },
+      { "name": "1TB", "offset": 2400 },
+      { "name": "2TB", "offset": 4400 }
+    ],
+    "screens": [
+      { "name": "13.6\"", "offset": 0 },
+      { "name": "15.3\"", "offset": 1500 }
+    ]
+  },
+  {
+    "id": "watch",
+    "title": "Linha Apple Watch",
+    "category": "Smartwatches",
+    "badge": "SAÚDE E ESPORTE",
+    "desc": "O parceiro definitivo para monitorar sua saúde e superar limites. Resistência extrema.",
+    "originalPrice": 4138.85,
+    "basePrice": 3599.00,
+    "img": "assets/categorias/smartwatch.png",
+    "specs": {
+      "Processador": "Chip S9 SiP ou S10",
+      "Sensores": "ECG, Oxigênio e Temperatura",
+      "Construção": "Alumínio ou Titânio Aeroespacial"
+    },
+    "boxItems": [
+      "Caixa do Apple Watch",
+      "Pulseira do modelo correspondente",
+      "Cabo magnético de carregamento rápido USB-C"
+    ],
+    "gift": "Pulseira Milanese Metálica Extra de Aço Inoxidável com fecho magnético",
+    "models": [
+      { "name": "Apple Watch Series 9", "price": 3599, "img": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?q=80&w=800&auto=format&fit=crop" },
+      { "name": "Apple Watch Ultra 2", "price": 5999, "img": "assets/categorias/smartwatch.png" }
+    ],
+    "colors": [
+      { "name": "Estelar", "hex": "#dfdcd4" },
+      { "name": "Preto Espacial", "hex": "#232426" },
+      { "name": "Titânio Natural", "hex": "#c2b29f" }
+    ],
+    "cases": [
+      { "name": "41mm", "offset": 0 },
+      { "name": "45mm", "offset": 400 },
+      { "name": "49mm", "offset": 0 }
+    ],
+    "straps": [
+      { "name": "Pulseira Esportiva" },
+      { "name": "Pulseira Trail" },
+      { "name": "Pulseira Oceano" }
+    ]
+  },
+  {
+    "id": "airpods",
+    "title": "Linha AirPods",
+    "category": "Fones de Ouvido",
+    "badge": "ÁUDIO IMERSIVO",
+    "desc": "Som de altíssima fidelidade, cancelamento ativo de ruído superior e bateria de longa duração.",
+    "originalPrice": 1493.85,
+    "basePrice": 1299.00,
+    "img": "assets/categorias/airpods.png",
+    "specs": {
+      "Drivers": "Dinâmicos projetados pela Apple",
+      "Cancelamento": "Ativo de Ruído (ANC) / Modo Ambiente",
+      "Processamento": "Chip H1 ou H2 de alta fidelidade"
+    },
+    "boxItems": [
+      "AirPods",
+      "Estojo de Carga correspondente",
+      "Cabo de Lightning ou USB-C"
+    ],
+    "gift": "Estojo Protetor de Silicone Hipoalergênico com gancho de fixação",
+    "models": [
+      { "name": "AirPods 3", "price": 1299, "img": "https://images.unsplash.com/photo-1588449668365-d15e397f6787?q=80&w=800&auto=format&fit=crop" },
+      { "name": "AirPods Pro 2", "price": 1899, "img": "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=800&auto=format&fit=crop" },
+      { "name": "AirPods Max", "price": 5499, "img": "assets/categorias/airpods.png" }
+    ],
+    "colors": [
+      { "name": "Branco Clássico", "hex": "#ffffff" },
+      { "name": "Preto Espacial", "hex": "#232426" },
+      { "name": "Prata", "hex": "#e3e4e5" }
+    ]
+  }
+]

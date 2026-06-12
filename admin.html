@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barbieri Tech | Painel de Controle Autônomo</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-primary: #08080a;
+      --bg-secondary: #121216;
+      --bg-card: rgba(255, 255, 255, 0.02);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
+      --text-muted: #52525b;
+      --accent: #0071e3;
+      --accent-neon: #00e5ff;
+      --accent-glow: rgba(0, 229, 255, 0.15);
+      --success: #30d158;
+      --error: #ff453a;
+      --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-fast: all 0.15s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* --- SIDEBAR --- */
+    .admin-sidebar {
+      width: 300px;
+      background-color: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      padding: 2rem 1.5rem;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .logo i {
+      color: #fff;
+    }
+
+    .logo span {
+      color: var(--accent-neon);
+      text-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .sidebar-section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
+    }
+
+    .sidebar-menu {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar-item-btn {
+      width: 100%;
+      background: none;
+      border: 1px solid transparent;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      color: var(--text-secondary);
+      text-align: left;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: var(--transition-fast);
+    }
+
+    .sidebar-item-btn:hover {
+      background-color: rgba(255, 255, 255, 0.03);
+      color: #fff;
+    }
+
+    .sidebar-item-btn.active {
+      background-color: rgba(0, 113, 227, 0.1);
+      border-color: rgba(0, 113, 227, 0.25);
+      color: var(--accent-neon);
+    }
+
+    /* --- GITHUB SETUP FORM IN SIDEBAR --- */
+    .github-setup-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.25rem;
+      margin-top: auto;
+    }
+
+    .form-group-sm {
+      margin-bottom: 0.85rem;
+    }
+
+    .form-group-sm label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.25rem;
+    }
+
+    .input-sm {
+      width: 100%;
+      background-color: rgba(0,0,0,0.2);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 0.45rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      outline: none;
+      transition: var(--transition-fast);
+    }
+
+    .input-sm:focus {
+      border-color: var(--accent);
+    }
+
+    .btn-save-settings {
+      width: 100%;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 0.5rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition-fast);
+    }
+
+    .btn-save-settings:hover {
+      background: #0077ed;
+    }
+
+    /* --- MAIN EDITOR --- */
+    .admin-main {
+      flex-grow: 1;
+      padding: 2.5rem 3rem;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1.5rem;
+    }
+
+    .editor-title-box h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .editor-title-box p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+
+    .editor-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-action {
+      padding: 0.75rem 1.25rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition-smooth);
+      border: 1px solid transparent;
+    }
+
+    .btn-secondary {
+      background: none;
+      border-color: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.04);
+      border-color: var(--text-secondary);
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background-color: #007af5;
+      box-shadow: 0 4px 15px rgba(0, 113, 227, 0.3);
+    }
+
+    .btn-accent {
+      background: linear-gradient(135deg, var(--accent-neon), var(--accent));
+      color: #fff;
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    .btn-accent:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 229, 255, 0.35);
+    }
+
+    /* --- EDITOR GRID --- */
+    .editor-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding-bottom: 5rem;
+    }
+
+    .editor-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2rem;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      padding-bottom: 0.75rem;
+    }
+
+    .card-title i {
+      color: var(--accent-neon);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .input-field {
+      background-color: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      outline: none;
+      font-size: 0.9rem;
+      transition: var(--transition-fast);
+    }
+
+    .input-field:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 8px rgba(0, 113, 227, 0.15);
+    }
+
+    textarea.input-field {
+      resize: vertical;
+      min-height: 80px;
+      font-family: inherit;
+      line-height: 1.5;
+    }
+
+    /* --- SPECIFIC ROW EDITORS (BOX, SPECS, TABLES) --- */
+    .row-editor-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .row-item {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn-icon-danger {
+      background: rgba(255, 69, 58, 0.1);
+      border: 1px solid rgba(255, 69, 58, 0.2);
+      color: var(--error);
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      flex-shrink: 0;
+    }
+
+    .btn-icon-danger:hover {
+      background: var(--error);
+      color: #fff;
+    }
+
+    .btn-add-row {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed var(--border-color);
+      color: var(--text-secondary);
+      padding: 0.75rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      transition: var(--transition-fast);
+    }
+
+    .btn-add-row:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--text-secondary);
+      color: #fff;
+    }
+
+    /* --- MODEL/COLOR TABLES --- */
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+
+    .admin-table th {
+      text-align: left;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .admin-table td {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.02);
+      vertical-align: middle;
+    }
+
+    .color-picker-box {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .color-picker-input {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      background: none;
+      cursor: pointer;
+      outline: none;
+      overflow: hidden;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .color-picker-input::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    .color-picker-input::-webkit-color-swatch {
+      border: none;
+      border-radius: 50%;
+    }
+
+    /* --- STATUS NOTIFICATION OVERLAY --- */
+    .status-toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      padding: 1.25rem 2rem;
+      border-radius: 16px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      transform: translateY(150%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 999;
+    }
+
+    .status-toast.active {
+      transform: translateY(0);
+    }
+
+    .status-toast.success {
+      background-color: var(--success);
+      border: 1px solid rgba(48, 209, 88, 0.2);
+    }
+
+    .status-toast.error {
+      background-color: var(--error);
+      border: 1px solid rgba(255, 69, 58, 0.2);
+    }
+
+    .status-toast.info {
+      background-color: var(--accent);
+      border: 1px solid rgba(0, 113, 227, 0.2);
+    }
+
+    .spinner {
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top: 3px solid #fff;
+      width: 1.25rem;
+      height: 1.25rem;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* --- MOBILE RESPONSIVE --- */
+    @media (max-width: 1024px) {
+      body {
+        flex-direction: column;
+      }
+      .admin-sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        position: static;
+      }
+      .admin-main {
+        height: auto;
+        padding: 2rem 1.5rem;
+      }
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR PANEL -->
+  <aside class="admin-sidebar">
+    <div class="logo">
+      <i class="fab fa-apple"></i> Barbieri <span>Admin</span>
+    </div>
+    
+    <div class="sidebar-section-title">Categorias</div>
+    <ul class="sidebar-menu" id="sidebar-products-list">
+      <!-- Dynamic menu items will load here -->
+    </ul>
+    
+    <!-- GITHUB CONFIGURATION PANEL -->
+    <div class="github-setup-card">
+      <div class="sidebar-section-title" style="padding-left: 0; margin-bottom: 0.5rem;">GitHub Serverless API</div>
+      
+      <div class="form-group-sm">
+        <label for="gh-owner">Usuário do GitHub</label>
+        <input type="text" id="gh-owner" class="input-sm" placeholder="JuMariane">
+      </div>
+      
+      <div class="form-group-sm">
+        <label for="gh-repo">Nome do Repositório</label>
+        <input type="text" id="gh-repo" class="input-sm" placeholder="E-commerce-intuitivo-1">
+      </div>
+      
+      <div class="form-group-sm">
+        <label for="gh-branch">Branch</label>
+        <input type="text" id="gh-branch" class="input-sm" placeholder="main" value="main">
+      </div>
+      
+      <div class="form-group-sm">
+        <label for="gh-token">GitHub Token (PAT)</label>
+        <input type="password" id="gh-token" class="input-sm" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+      </div>
+      
+      <button class="btn-save-settings" onclick="saveGitHubSettings()">
+        <i class="fas fa-save"></i> Salvar Acesso
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN EDITOR AREA -->
+  <main class="admin-main">
+    <div class="editor-header">
+      <div class="editor-title-box">
+        <h1 id="active-product-title">Carregando catálogo...</h1>
+        <p id="active-product-subtitle">Selecione uma categoria ao lado para gerenciar especificações e preços.</p>
+      </div>
+      
+      <div class="editor-actions">
+        <button class="btn-action btn-secondary" onclick="downloadCatalogJSON()">
+          <i class="fas fa-download"></i> Baixar products.json
+        </button>
+        <button class="btn-action btn-accent" onclick="publishCatalogToGitHub()">
+          <i class="fab fa-github"></i> Publicar no GitHub
+        </button>
+      </div>
+    </div>
+
+    <!-- DYNAMIC EDITOR FORM GRID -->
+    <div class="editor-grid" id="editor-form-grid" style="display: none;">
+      
+      <!-- CARD 1: GENERAL INFO -->
+      <section class="editor-card">
+        <h3 class="card-title"><i class="fas fa-info-circle"></i> Informações Gerais</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="p-title">Título do Bloco</label>
+            <input type="text" id="p-title" class="input-field" oninput="updateGeneralField('title', this.value)">
+          </div>
+          <div class="form-group">
+            <label for="p-badge">Badge de Destaque</label>
+            <input type="text" id="p-badge" class="input-field" oninput="updateGeneralField('badge', this.value)">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="p-category">Nome da Categoria</label>
+            <input type="text" id="p-category" class="input-field" oninput="updateGeneralField('category', this.value)">
+          </div>
+          <div class="form-group">
+            <label for="p-img">Imagem Principal Fallback (Caminho ou URL)</label>
+            <input type="text" id="p-img" class="input-field" oninput="updateGeneralField('img', this.value)">
+          </div>
+        </div>
+        <div class="form-group full-width" style="margin-bottom: 1.5rem;">
+          <label for="p-desc">Descrição Principal</label>
+          <textarea id="p-desc" class="input-field" oninput="updateGeneralField('desc', this.value)"></textarea>
+        </div>
+        <div class="form-group full-width">
+          <label for="p-gift">Brinde Exclusivo Barbieri Tech</label>
+          <input type="text" id="p-gift" class="input-field" oninput="updateGeneralField('gift', this.value)">
+        </div>
+      </section>
+
+      <!-- CARD 2: BOX ITEMS -->
+      <section class="editor-card">
+        <h3 class="card-title"><i class="fas fa-box-open"></i> Conteúdo da Caixa</h3>
+        <div class="row-editor-list" id="box-items-editor">
+          <!-- Rendered dynamically -->
+        </div>
+        <button class="btn-add-row" onclick="addBoxItemRow()">
+          <i class="fas fa-plus"></i> Adicionar Item na Caixa
+        </button>
+      </section>
+
+      <!-- CARD 3: SPECS -->
+      <section class="editor-card">
+        <h3 class="card-title"><i class="fas fa-microchip"></i> Especificações Técnicas</h3>
+        <div class="row-editor-list" id="specs-editor">
+          <!-- Rendered dynamically -->
+        </div>
+        <button class="btn-add-row" onclick="addSpecRow()">
+          <i class="fas fa-plus"></i> Adicionar Especificação
+        </button>
+      </section>
+
+      <!-- CARD 4: MODELS & PRICES -->
+      <section class="editor-card">
+        <h3 class="card-title"><i class="fas fa-tags"></i> Modelos & Preços Base</h3>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th style="width: 35%;">Nome do Modelo</th>
+              <th style="width: 20%;">Preço (R$)</th>
+              <th style="width: 35%;">URL Imagem (Opcional)</th>
+              <th style="width: 10%;">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="models-editor-body">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+        <button class="btn-add-row" onclick="addModelRow()">
+          <i class="fas fa-plus"></i> Adicionar Novo Modelo
+        </button>
+      </section>
+
+      <!-- CARD 5: COLORS -->
+      <section class="editor-card">
+        <h3 class="card-title"><i class="fas fa-palette"></i> Cores Disponíveis</h3>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th style="width: 45%;">Nome da Cor</th>
+              <th style="width: 45%;">Código Hex / Cor</th>
+              <th style="width: 10%;">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="colors-editor-body">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+        <button class="btn-add-row" onclick="addColorRow()">
+          <i class="fas fa-plus"></i> Adicionar Nova Cor
+        </button>
+      </section>
+
+      <!-- CARD 6: STORAGE CAPACITIES -->
+      <section class="editor-card">
+        <h3 class="card-title"><i class="fas fa-hdd"></i> Capacidades de Armazenamento / Memória</h3>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th style="width: 45%;">Capacidade (Ex: 128GB, 8GB Ram)</th>
+              <th style="width: 45%;">Acréscimo de Preço (Offset R$)</th>
+              <th style="width: 10%;">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="storages-editor-body">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+        <button class="btn-add-row" onclick="addStorageRow()">
+          <i class="fas fa-plus"></i> Adicionar Armazenamento
+        </button>
+      </section>
+
+      <!-- CARD 7: EXTRA SELECTION OPTIONS (DYNAMIC BY SCHEMA) -->
+      <section class="editor-card" id="extra-options-card" style="display: none;">
+        <h3 class="card-title" id="extra-card-title"><i class="fas fa-sliders-h"></i> Opções Adicionais</h3>
+        <table class="admin-table">
+          <thead id="extra-table-header">
+            <!-- Rendered dynamically -->
+          </thead>
+          <tbody id="extra-editor-body">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+        <button class="btn-add-row" id="btn-add-extra" onclick="addExtraRow()">
+          <!-- Rendered dynamically -->
+        </button>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="status-toast" id="toast-overlay">
+    <div id="toast-spinner" class="spinner" style="display: none;"></div>
+    <i id="toast-icon" class="fas"></i>
+    <span id="toast-message">Mensagem de status...</span>
+  </div>
+
+  <!-- DATA & SYNC SCRIPTS -->
+  <script>
+    let products = [];
+    let activeProductId = null;
+
+    const fallbackProducts = [
+      {
+        "id": "iphone",
+        "title": "Linha iPhone 17",
+        "category": "Celulares",
+        "badge": "ÚLTIMO LANÇAMENTO",
+        "desc": "O máximo em performance e design. Processador A19 Pro, estrutura em titânio e sistema de câmeras avançado.",
+        "originalPrice": 8048.85,
+        "basePrice": 6999.00,
+        "img": "assets/categorias/iphone.png",
+        "specs": {
+          "Processador": "A19 Pro Neural Core",
+          "Câmera": "48MP Fusion principal",
+          "Tela": "Super Retina XDR",
+          "Construção": "Titânio Aeroespacial"
+        },
+        "boxItems": [
+          "iPhone com iOS 19",
+          "Cabo USB-C Premium trançado (1m)",
+          "Manuais de Instrução"
+        ],
+        "gift": "Capa Protetora MagSafe Slim Clear + Película de Privacidade em Cerâmica Aplicada",
+        "models": [
+          { "name": "iPhone 17", "price": 6999, "img": "https://images.unsplash.com/photo-1696446701796-da61225697cc?q=80&w=800&auto=format&fit=crop" },
+          { "name": "iPhone 17 Plus", "price": 7599, "img": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop" },
+          { "name": "iPhone 17 Pro", "price": 8599, "img": "https://images.unsplash.com/photo-1726058428469-8041065f02bc?q=80&w=800&auto=format&fit=crop" },
+          { "name": "iPhone 17 Pro Max", "price": 9399, "img": "assets/categorias/iphone.png" }
+        ],
+        "colors": [
+          { "name": "Titânio Deserto", "hex": "#c2b29f" },
+          { "name": "Titânio Concreto", "hex": "#8c8d90" },
+          { "name": "Preto Espacial", "hex": "#1c1d21" },
+          { "name": "Prata", "hex": "#e3e4e5" }
+        ],
+        "storages": [
+          { "name": "128GB", "offset": 0 },
+          { "name": "256GB", "offset": 600 },
+          { "name": "512GB", "offset": 1400 },
+          { "name": "1TB", "offset": 2600 }
+        ]
+      },
+      {
+        "id": "ipad",
+        "title": "Linha iPad Pro",
+        "category": "iPads",
+        "badge": "ULTRA FINO",
+        "desc": "O design mais fino já criado com o poder absurdo do chip M4. Tela Ultra Retina XDR espetacular.",
+        "originalPrice": 6323.85,
+        "basePrice": 5499.00,
+        "img": "assets/categorias/ipad.png",
+        "specs": {
+          "Processador": "Apple M4 (Até 10 núcleos)",
+          "Tela": "Tandem OLED Liquid Retina XDR",
+          "Gráficos": "GPU de 10 núcleos"
+        },
+        "boxItems": [
+          "iPad com iPadOS",
+          "Cabo de carregamento USB-C (1m)",
+          "Manuais"
+        ],
+        "gift": "Capa Magnética Smart Folio com imagem inteligente + Película Protetora Fosca",
+        "models": [
+          { "name": "iPad Air M2", "price": 5499, "img": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=800&auto=format&fit=crop" },
+          { "name": "iPad Pro M4", "price": 7999, "img": "assets/categorias/ipad.png" }
+        ],
+        "colors": [
+          { "name": "Cinza Espacial", "hex": "#4b4c4e" },
+          { "name": "Estelar", "hex": "#dfdcd4" },
+          { "name": "Prata", "hex": "#e3e4e5" }
+        ],
+        "storages": [
+          { "name": "128GB", "offset": 0 },
+          { "name": "256GB", "offset": 600 },
+          { "name": "512GB", "offset": 1400 },
+          { "name": "1TB", "offset": 2600 }
+        ]
+      },
+      {
+        "id": "macbook",
+        "title": "Linha MacBook Pro",
+        "category": "MacBooks",
+        "badge": "MÁXIMO PODER",
+        "desc": "Desempenho monstruoso para quem trabalha pesado. Bateria para o dia todo e tela Liquid Retina XDR.",
+        "originalPrice": 12648.85,
+        "basePrice": 10999.00,
+        "img": "assets/categorias/macbook.png",
+        "specs": {
+          "Processador": "Chip Apple M3 ou M4 Pro/Max",
+          "Tela": "13.6\" ou 15.3\" Liquid Retina",
+          "Bateria": "Até 22 horas de autonomia"
+        },
+        "boxItems": [
+          "MacBook Pro",
+          "Cabo MagSafe 3 (2m)",
+          "Adaptador de energia USB-C",
+          "Manuais"
+        ],
+        "gift": "Hub Adaptador USB-C Multiportas de Alumínio (HDMI, USB 3.0, SD/MicroSD)",
+        "models": [
+          { "name": "MacBook Air M3", "price": 10999, "img": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop" },
+          { "name": "MacBook Pro M4", "price": 14999, "img": "assets/categorias/macbook.png" }
+        ],
+        "colors": [
+          { "name": "Preto Espacial", "hex": "#1d1e22" },
+          { "name": "Prata", "hex": "#e3e4e5" },
+          { "name": "Cinza Espacial", "hex": "#4b4c4e" }
+        ],
+        "storages": [
+          { "name": "256GB", "offset": 0 },
+          { "name": "512GB", "offset": 1200 },
+          { "name": "1TB", "offset": 2400 },
+          { "name": "2TB", "offset": 4400 }
+        ],
+        "screens": [
+          { "name": "13.6\"", "offset": 0 },
+          { "name": "15.3\"", "offset": 1500 }
+        ]
+      },
+      {
+        "id": "watch",
+        "title": "Linha Apple Watch",
+        "category": "Smartwatches",
+        "badge": "SAÚDE E ESPORTE",
+        "desc": "O parceiro definitivo para monitorar sua saúde e superar limites. Resistência extrema.",
+        "originalPrice": 4138.85,
+        "basePrice": 3599.00,
+        "img": "assets/categorias/smartwatch.png",
+        "specs": {
+          "Processador": "Chip S9 SiP ou S10",
+          "Sensores": "ECG, Oxigênio e Temperatura",
+          "Construção": "Alumínio ou Titânio Aeroespacial"
+        },
+        "boxItems": [
+          "Caixa do Apple Watch",
+          "Pulseira do modelo correspondente",
+          "Cabo magnético de carregamento rápido USB-C"
+        ],
+        "gift": "Pulseira Milanese Metálica Extra de Aço Inoxidável com fecho magnético",
+        "models": [
+          { "name": "Apple Watch Series 9", "price": 3599, "img": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?q=80&w=800&auto=format&fit=crop" },
+          { "name": "Apple Watch Ultra 2", "price": 5999, "img": "assets/categorias/smartwatch.png" }
+        ],
+        "colors": [
+          { "name": "Estelar", "hex": "#dfdcd4" },
+          { "name": "Preto Espacial", "hex": "#232426" },
+          { "name": "Titânio Natural", "hex": "#c2b29f" }
+        ],
+        "cases": [
+          { "name": "41mm", "offset": 0 },
+          { "name": "45mm", "offset": 400 },
+          { "name": "49mm", "offset": 0 }
+        ],
+        "straps": [
+          { "name": "Pulseira Esportiva" },
+          { "name": "Pulseira Trail" },
+          { "name": "Pulseira Oceano" }
+        ]
+      },
+      {
+        "id": "airpods",
+        "title": "Linha AirPods",
+        "category": "Fones de Ouvido",
+        "badge": "ÁUDIO IMERSIVO",
+        "desc": "Som de altíssima fidelidade, cancelamento ativo de ruído superior e bateria de longa duração.",
+        "originalPrice": 1493.85,
+        "basePrice": 1299.00,
+        "img": "assets/categorias/airpods.png",
+        "specs": {
+          "Drivers": "Dinâmicos projetados pela Apple",
+          "Cancelamento": "Ativo de Ruído (ANC) / Modo Ambiente",
+          "Processamento": "Chip H1 ou H2 de alta fidelidade"
+        },
+        "boxItems": [
+          "AirPods",
+          "Estojo de Carga correspondente",
+          "Cabo de Lightning ou USB-C"
+        ],
+        "gift": "Estojo Protetor de Silicone Hipoalergênico com gancho de fixação",
+        "models": [
+          { "name": "AirPods 3", "price": 1299, "img": "https://images.unsplash.com/photo-1588449668365-d15e397f6787?q=80&w=800&auto=format&fit=crop" },
+          { "name": "AirPods Pro 2", "price": 1899, "img": "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=800&auto=format&fit=crop" },
+          { "name": "AirPods Max", "price": 5499, "img": "assets/categorias/airpods.png" }
+        ],
+        "colors": [
+          { "name": "Branco Clássico", "hex": "#ffffff" },
+          { "name": "Preto Espacial", "hex": "#232426" },
+          { "name": "Prata", "hex": "#e3e4e5" }
+        ]
+      }
+    ];
+
+    // --- INITIALIZATION ---
+    document.addEventListener('DOMContentLoaded', () => {
+      loadGitHubSettings();
+      fetchCatalog();
+    });
+
+    // --- TOAST NOTIFICATIONS ---
+    function showToast(message, type = 'info', persist = false) {
+      const toast = document.getElementById('toast-overlay');
+      const icon = document.getElementById('toast-icon');
+      const text = document.getElementById('toast-message');
+      const spinner = document.getElementById('toast-spinner');
+
+      text.textContent = message;
+      toast.className = 'status-toast active ' + type;
+      spinner.style.display = type === 'loading' ? 'block' : 'none';
+
+      icon.className = 'fas';
+      if (type === 'success') icon.classList.add('fa-check-circle');
+      else if (type === 'error') icon.classList.add('fa-exclamation-triangle');
+      else if (type === 'info') icon.classList.add('fa-info-circle');
+
+      if (!persist) {
+        setTimeout(() => {
+          toast.classList.remove('active');
+        }, 4000);
+      }
+    }
+
+    function hideToast() {
+      document.getElementById('toast-overlay').classList.remove('active');
+    }
+
+    // --- FETCH CATALOG DATABASE ---
+    async function fetchCatalog() {
+      showToast('Carregando catálogo...', 'loading', true);
+      try {
+        const res = await fetch('products.json');
+        if (!res.ok) throw new Error('Não foi possível ler o arquivo local.');
+        products = await res.json();
+        showToast('Catálogo carregado com sucesso!', 'success');
+      } catch (err) {
+        console.warn('Erro ao ler products.json, usando backup local:', err);
+        products = JSON.parse(JSON.stringify(fallbackProducts));
+        showToast('Carregado catálogo de fallback offline.', 'info');
+      }
+
+      renderSidebar();
+      if (products.length > 0) {
+        selectProduct(products[0].id);
+      }
+    }
+
+    // --- RENDER SIDEBAR ---
+    function renderSidebar() {
+      const list = document.getElementById('sidebar-products-list');
+      list.innerHTML = '';
+      
+      products.forEach(p => {
+        const li = document.createElement('li');
+        
+        let icon = 'fa-tag';
+        if (p.id === 'iphone') icon = 'fa-mobile-alt';
+        else if (p.id === 'ipad') icon = 'fa-tablet-alt';
+        else if (p.id === 'macbook') icon = 'fa-laptop';
+        else if (p.id === 'watch') icon = 'fa-clock';
+        else if (p.id === 'airpods') icon = 'fa-headphones';
+        
+        li.innerHTML = `
+          <button class="sidebar-item-btn ${p.id === activeProductId ? 'active' : ''}" onclick="selectProduct('${p.id}')">
+            <i class="fas ${icon}"></i> ${p.title}
+          </button>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    // --- SELECT PRODUCT IN EDITOR ---
+    function selectProduct(id) {
+      activeProductId = id;
+      
+      // Update sidebar active highlights
+      document.querySelectorAll('.sidebar-item-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      renderSidebar();
+      
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+
+      // Update header info
+      document.getElementById('active-product-title').textContent = product.title;
+      document.getElementById('active-product-subtitle').textContent = `ID do Produto: ${product.id} • Categoria: ${product.category}`;
+
+      // Populate general fields
+      document.getElementById('p-title').value = product.title || '';
+      document.getElementById('p-badge').value = product.badge || '';
+      document.getElementById('p-category').value = product.category || '';
+      document.getElementById('p-img').value = product.img || '';
+      document.getElementById('p-desc').value = product.desc || '';
+      document.getElementById('p-gift').value = product.gift || '';
+
+      // Render other sections
+      renderBoxItems();
+      renderSpecs();
+      renderModels();
+      renderColors();
+      renderStorages();
+      renderExtraOptions();
+
+      // Show the editor grid
+      document.getElementById('editor-form-grid').style.display = 'grid';
+    }
+
+    // --- SYNC FIELD INPUTS WITH DATA STATE ---
+    function updateGeneralField(field, value) {
+      const product = products.find(p => p.id === activeProductId);
+      if (!product) return;
+      
+      if (field === 'basePrice' || field === 'originalPrice') {
+        product[field] = parseFloat(value) || 0;
+      } else {
+        product[field] = value;
+      }
+
+      // Update active title in header if editing title
+      if (field === 'title') {
+        document.getElementById('active-product-title').textContent = value;
+      }
+    }
+
+    // --- BOX ITEMS SECTION ---
+    function renderBoxItems() {
+      const container = document.getElementById('box-items-editor');
+      container.innerHTML = '';
+      const product = products.find(p => p.id === activeProductId);
+      if (!product) return;
+
+      if (!product.boxItems) product.boxItems = [];
+
+      product.boxItems.forEach((item, idx) => {
+        const row = document.createElement('div');
+        row.className = 'row-item';
+        row.innerHTML = `
+          <input type="text" class="input-field" style="flex-grow: 1;" value="${item}" oninput="updateBoxItem(${idx}, this.value)">
+          <button class="btn-icon-danger" onclick="deleteBoxItem(${idx})"><i class="fas fa-trash-alt"></i></button>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function updateBoxItem(idx, val) {
+      const product = products.find(p => p.id === activeProductId);
+      if (product) product.boxItems[idx] = val;
+    }
+
+    function addBoxItemRow() {
+      const product = products.find(p => p.id === activeProductId);
+      if (product) {
+        product.boxItems.push('Novo Item');
+        renderBoxItems();
+      }
+    }
+
+    function deleteBoxItem(idx) {
+      const product = products.find(p => p.id === activeProductId);
+      if (product) {
+        product.boxItems.splice(idx, 1);
+        renderBoxItems();
+      }
+    }
+
+    // --- TECHNICAL SPECS SECTION ---
+    function renderSpecs() {
+      const container = document.getElementById('specs-editor');
+      container.innerHTML = '';
+      const product = products.find(p => p.id === activeProductId);
+      if (!product) return;
+
+      if (!product.specs) product.specs = {};
+
+      Object.entries(product.specs).forEach(([key, val], idx) => {
+        const row = document.createElement('div');
+        row.className = 'row-item';
+        row.innerHTML = `
+          <input type="text" class="input-field" style="width: 30%;" value="${key}" onchange="renameSpecKey('${key}', this.value)">
+          <input type="text" class="input-field" style="flex-grow: 1;" value="${val}" oninput="updateSpecValue('${key}', this.value)">
+          <button class="btn-icon-danger" onclick="deleteSpec('${key}')"><i class="fas fa-trash-alt"></i></button>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function renameSpecKey(oldKey, newKey) {
+      const product = products.find(p => p.id === activeProductId);
+      if (!product || !newKey || oldKey === newKey) return;
+
+      product.specs[newKey] = product.specs[oldKey];
+      delete product.specs[oldKey];
+      renderSpecs();
+    }
+
+    function updateSpecValue(key, val) {
+      const product = products.find(p => p.id === activeProductId);
+      if (product) product.specs[key] = val;
+    }
+
+    function addSpecRow() {
+      const product = products.find(p => p.id === activeProductId);
+      if (product) {
+        let uniqueKey = 'Nova Especificação';
+        let counter = 1;
+        while (product.specs[uniqueKey]) {
+          uniqueKey = `Nova Especificação (${counter++})`;
+        }
+        product.specs[uniqueKey] = 'Valor';
+        renderSpecs();
+      }
+    }
+
+    function deleteSpec(key) {
+      const product = products.find(p => p.id === activeProductId);
+      if (product) {
+        delete product.specs[key];
+        renderSpecs();
+      }
+    }
+
+    // --- MODELS & PRICES ---
+    function renderModels() {
+      const body = document.getElementById('models-editor-body');
+      body.innerHTML = '';
+      const product = products.find(p => p.id === activeProductId);
+      if (!product) return;
+
+      if (!product.models) product.models = [];
+
+      product.models.forEach((m, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><input type="text" class="input-field" style="width: 95%;" value="${m.name}" oninput="updateModelField(${idx}, 'name', this.value)"></td>
+          <td><input type="number" class="input-field" style="width: 90%;" value="${m.price}" oninput="updateModelField(${idx}, 'price', this.value)"></td>
+          <td><input type="text" class="input-field" style="width: 95%;" value="${m.img || ''}" oninput="updateModelField(${idx}, 'img', this.value)"></td>
+          <td>
+            <button class="btn-icon-danger" onclick="deleteModel(${idx})"><i class="fas fa-trash-alt"></i></button>
+          </td>
+        `;
+        body.appendChild(tr);
+      });
+    }
+
+    function updateModelField(idx, field, val) {
+      const product = products.find(p => p.id === activeProductId);
+      if (!product) return;
+      if (field === 'price') {
+        product.models[idx][field] = parseFloat(val) || 0;
+      } else {
+        product.models[idx][field] = val;
+      }
+    }
+
+    function addModelRow() {
+      const product = products.find(p => p.id === activeProductId);
+      if (product) {
+        product.models.push({ name: 'Novo Modelo', price: 999, img: '' });
+        renderModels();
+      }
+    }
+
+    function deleteModel(idx) {
+      const product = products.find(p => p.id === activeProductId);
+      if (product) {
+        product.models.splice(idx, 1);
+        renderModels();
+      }
+    }
+
+    // --- COLORS ---
+    function renderColors() {
+      const body = document.getElementById('colors-editor-body');
+      body.innerHTML = '';
+      const product = products.find(p => p.id === activeProductId);
+      if (!product) return;
+
+      if (!product.colors) product.colors = [];
+
+      product.colors.forEach((c, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><input type="text" class="input-field" style="width: 90%;" value="${c.name}" oninput="updateColorField(${idx}, 'name', this.value)"></td>
+          <td>
+            <div class="color-picker-box">
+              <input type="color" class="color-picker-input" value="${c.hex}" onchange="updateColorField(${idx}, 'hex', this.value); this.nextElementSibling.value = this.value">
+              <input type="text" class="input-field" style="width: 60%;" value="${c.hex}" oninput="updateColorField(${idx}, 'hex', this.value); this.previousElementSibling.value = this.value">
+            </div>
+          </td>
+          <td>
+            <button class="btn-icon-danger" onclick="deleteColor(${idx})"><i class="fas fa-trash-alt"></i></button>
+          </td>
+        `;
+        body.appendChild(tr);
+      });
+    }
+
+    function updateColorField(idx, field, val) {
+      const product = products.find(p => p.id === activeProductId);
+      if (product) product.colors[idx][field] = val;
+    }
+
+    function addColorRow() {
+      const product = products.find(p => p.id === activeProductId);
+      if (product) {
+        product.colors.push({ name: 'Nova Cor', hex: '#ffffff' });
+        renderColors();
+      }
+    }
+
+    function deleteColor(idx) {
+      const product = products.find(p => p.id === activeProductId);
+      if (product) {
+        product.colors.splice(idx, 1);
+        renderColors();
+      }
+    }
+
+    // --- STORAGE CAPACITIES ---
+    function renderStorages() {
+      const body = document.getElementById('storages-editor-body');
+      body.innerHTML = '';
+      const product = products.find(p => p.id === activeProductId);
+      if (!product) return;
+
+      if (!product.storages) product.storages = [];
+
+      product.storages.forEach((s, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><input type="text" class="input-field" style="width: 90%;" value="${s.name}" oninput="updateStorageField(${idx}, 'name', this.value)"></td>
+          <td><input type="number" class="input-field" style="width: 90%;" value="${s.offset}" oninput="updateStorageField(${idx}, 'offset', this.value)"></td>
+          <td>
+            <button class="btn-icon-danger" onclick="deleteStorage(${idx})"><i class="fas fa-trash-alt"></i></button>
+          </td>
+        `;
+        body.appendChild(tr);
+      });
+    }
+
+    function updateStorageField(idx, field, val) {
+      const product = products.find(p => p.id === activeProductId);
+      if (!product) return;
+      if (field === 'offset') {
+        product.storages[idx][field] = parseFloat(val) || 0;
+      } else {
+        product.storages[idx][field] = val;
+      }
+    }
+
+    function addStorageRow() {
+      const product = products.find(p => p.id === activeProductId);
+      if (product) {
+        product.storages.push({ name: '256GB', offset: 500 });
+        renderStorages();
+      }
+    }
+
+    function deleteStorage(idx) {
+      const product = products.find(p => p.id === activeProductId);
+      if (product) {
+        product.storages.splice(idx, 1);
+        renderStorages();
+      }
+    }
+
+    // --- EXTRA OPTIONS (SCREENS, CASES, STRAPS) ---
+    let extraType = null; // 'screens' | 'cases' | 'straps' | null
+
+    function renderExtraOptions() {
+      const card = document.getElementById('extra-options-card');
+      const title = document.getElementById('extra-card-title');
+      const header = document.getElementById('extra-table-header');
+      const body = document.getElementById('extra-editor-body');
+      const btnAdd = document.getElementById('btn-add-extra');
+      
+      const product = products.find(p => p.id === activeProductId);
+      if (!product) return;
+
+      // Determine which extra field is used by schema
+      if (product.screens) {
+        extraType = 'screens';
+        title.innerHTML = `<i class="fas fa-desktop"></i> Tamanhos de Tela`;
+        header.innerHTML = `
+          <tr>
+            <th style="width: 45%;">Tamanho de Tela (Ex: 13.6")</th>
+            <th style="width: 45%;">Preço Adicional (Offset R$)</th>
+            <th style="width: 10%;">Ações</th>
+          </tr>
+        `;
+        btnAdd.innerHTML = `<i class="fas fa-plus"></i> Adicionar Tamanho de Tela`;
+      } else if (product.cases) {
+        extraType = 'cases';
+        title.innerHTML = `<i class="fas fa-mobile-alt"></i> Tamanhos de Caixa`;
+        header.innerHTML = `
+          <tr>
+            <th style="width: 45%;">Tamanho de Caixa (Ex: 41mm)</th>
+            <th style="width: 45%;">Preço Adicional (Offset R$)</th>
+            <th style="width: 10%;">Ações</th>
+          </tr>
+        `;
+        btnAdd.innerHTML = `<i class="fas fa-plus"></i> Adicionar Tamanho de Caixa`;
+      } else if (product.straps) {
+        extraType = 'straps';
+        title.innerHTML = `<i class="fas fa-clock"></i> Opções de Pulseiras`;
+        header.innerHTML = `
+          <tr>
+            <th style="width: 90%;">Nome da Pulseira (Ex: Pulseira Trail)</th>
+            <th style="width: 10%;">Ações</th>
+          </tr>
+        `;
+        btnAdd.innerHTML = `<i class="fas fa-plus"></i> Adicionar Pulseira`;
+      } else {
+        extraType = null;
+        card.style.display = 'none';
+        return;
+      }
+
+      card.style.display = 'block';
+      body.innerHTML = '';
+
+      const list = product[extraType];
+      list.forEach((item, idx) => {
+        const tr = document.createElement('tr');
+        if (extraType === 'straps') {
+          tr.innerHTML = `
+            <td><input type="text" class="input-field" style="width: 95%;" value="${item.name}" oninput="updateExtraField(${idx}, 'name', this.value)"></td>
+            <td>
+              <button class="btn-icon-danger" onclick="deleteExtraRow(${idx})"><i class="fas fa-trash-alt"></i></button>
+            </td>
+          `;
+        } else {
+          tr.innerHTML = `
+            <td><input type="text" class="input-field" style="width: 90%;" value="${item.name}" oninput="updateExtraField(${idx}, 'name', this.value)"></td>
+            <td><input type="number" class="input-field" style="width: 90%;" value="${item.offset}" oninput="updateExtraField(${idx}, 'offset', this.value)"></td>
+            <td>
+              <button class="btn-icon-danger" onclick="deleteExtraRow(${idx})"><i class="fas fa-trash-alt"></i></button>
+            </td>
+          `;
+        }
+        body.appendChild(tr);
+      });
+    }
+
+    function updateExtraField(idx, field, val) {
+      const product = products.find(p => p.id === activeProductId);
+      if (!product || !extraType) return;
+      
+      if (field === 'offset') {
+        product[extraType][idx][field] = parseFloat(val) || 0;
+      } else {
+        product[extraType][idx][field] = val;
+      }
+    }
+
+    function addExtraRow() {
+      const product = products.find(p => p.id === activeProductId);
+      if (!product || !extraType) return;
+
+      if (extraType === 'straps') {
+        product[extraType].push({ name: 'Nova Pulseira' });
+      } else {
+        product[extraType].push({ name: 'Novo Tamanho', offset: 0 });
+      }
+      renderExtraOptions();
+    }
+
+    function deleteExtraRow(idx) {
+      const product = products.find(p => p.id === activeProductId);
+      if (product && extraType) {
+        product[extraType].splice(idx, 1);
+        renderExtraOptions();
+      }
+    }
+
+    // --- CLIENT SIDE JSON DOWNLOAD ---
+    function downloadCatalogJSON() {
+      try {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(products, null, 2));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", "products.json");
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+        showToast('Download do products.json iniciado!', 'success');
+      } catch (err) {
+        showToast('Erro ao baixar arquivo JSON: ' + err.message, 'error');
+      }
+    }
+
+    // --- LOCAL STORAGE GITHUB SETTINGS HANDLERS ---
+    function saveGitHubSettings() {
+      const owner = document.getElementById('gh-owner').value.trim();
+      const repo = document.getElementById('gh-repo').value.trim();
+      const branch = document.getElementById('gh-branch').value.trim();
+      const token = document.getElementById('gh-token').value.trim();
+
+      if (!owner || !repo || !branch) {
+        showToast('Por favor, preencha Usuário, Repositório e Branch.', 'error');
+        return;
+      }
+
+      localStorage.setItem('gh_owner', owner);
+      localStorage.setItem('gh_repo', repo);
+      localStorage.setItem('gh_branch', branch);
+      if (token) {
+        localStorage.setItem('gh_token', token);
+      }
+
+      showToast('Dados de conexão salvos no navegador!', 'success');
+    }
+
+    function loadGitHubSettings() {
+      document.getElementById('gh-owner').value = localStorage.getItem('gh_owner') || '';
+      document.getElementById('gh-repo').value = localStorage.getItem('gh_repo') || '';
+      document.getElementById('gh-branch').value = localStorage.getItem('gh_branch') || 'main';
+      document.getElementById('gh-token').value = localStorage.getItem('gh_token') || '';
+    }
+
+    // --- SERVERLESS PUBLISHING ON GITHUB VIA REST API ---
+    // Safe Base64 encoding supporting accents (Unicode UTF-8)
+    function utoa(str) {
+      return btoa(unescape(encodeURIComponent(str)));
+    }
+
+    async function publishCatalogToGitHub() {
+      const owner = document.getElementById('gh-owner').value.trim();
+      const repo = document.getElementById('gh-repo').value.trim();
+      const branch = document.getElementById('gh-branch').value.trim();
+      const token = document.getElementById('gh-token').value.trim();
+
+      if (!owner || !repo || !branch || !token) {
+        showToast('Preencha todas as credenciais do GitHub (incluindo o token PAT)!', 'error');
+        return;
+      }
+
+      showToast('Publicando base no GitHub...', 'loading', true);
+
+      const filePath = 'products.json';
+      const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+      const headers = {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      };
+
+      try {
+        // Step 1: Fetch the file reference from GitHub to get current SHA
+        let sha = null;
+        try {
+          const checkRes = await fetch(`${url}?ref=${branch}`, { headers });
+          if (checkRes.ok) {
+            const fileData = await checkRes.json();
+            sha = fileData.sha;
+          } else if (checkRes.status !== 404) {
+            throw new Error(`Erro de resposta: Código ${checkRes.status}`);
+          }
+        } catch (fetchErr) {
+          console.warn('Erro ao verificar arquivo existente no GitHub. Criando novo.', fetchErr);
+        }
+
+        // Step 2: Make the PUT request with base64 encoded catalog JSON
+        const payload = {
+          message: 'Update products.json dynamically via Barbieri Tech Admin Panel',
+          content: utoa(JSON.stringify(products, null, 2)),
+          branch: branch
+        };
+
+        if (sha) {
+          payload.sha = sha;
+        }
+
+        const putRes = await fetch(url, {
+          method: 'PUT',
+          headers: headers,
+          body: JSON.stringify(payload)
+        });
+
+        if (!putRes.ok) {
+          const errData = await putRes.json();
+          throw new Error(errData.message || `Código ${putRes.status}`);
+        }
+
+        showToast('Catálogo publicado com sucesso! As mudanças estarão ativas em segundos.', 'success');
+      } catch (err) {
+        console.error('Falha na publicação para o GitHub:', err);
+        showToast(`Falha ao salvar no GitHub: ${err.message}`, 'error');
+      }
+    }
+  </script>
+</body>
+</html>
